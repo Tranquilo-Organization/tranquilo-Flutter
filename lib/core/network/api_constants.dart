@@ -1,0 +1,8 @@
+class ApiConstants {
+
+
+}
+
+class ApiErrors {
+  
+}
