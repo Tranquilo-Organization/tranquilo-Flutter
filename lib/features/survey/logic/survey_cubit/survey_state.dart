@@ -1,5 +1,5 @@
-part of 'home_cubit.dart';
+part of 'survey_cubit.dart';
 
-sealed class HomeState {}
+sealed class SurveyState {}
 
-final class HomeInitial extends HomeState {}
+final class SurveyInitial extends SurveyState {}

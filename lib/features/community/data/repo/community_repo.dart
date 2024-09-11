@@ -1,3 +1,3 @@
-class DashboardRepo{
+class CommunityRepo{
 
 }

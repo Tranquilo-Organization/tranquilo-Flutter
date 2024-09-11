@@ -1,5 +1,5 @@
-part of 'forget_password_cubit.dart';
+part of 'login_cubit.dart';
 
-sealed class ForgetPasswordState {}
+sealed class LoginState {}
 
-final class ForgetPasswordInitial extends ForgetPasswordState {}
+final class LoginInitial extends LoginState {}

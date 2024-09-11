@@ -1,3 +1,3 @@
-class LoginRepo{
+class SignUpRepo{
 
 }

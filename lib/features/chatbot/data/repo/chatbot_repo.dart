@@ -1,3 +1,3 @@
-class CommunityRepo{
+class ChatbotRepo{
 
 }

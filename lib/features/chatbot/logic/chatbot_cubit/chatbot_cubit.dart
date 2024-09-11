@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'community_state.dart';
+part 'chatbot_state.dart';
 
-class CommunityCubit extends Cubit<CommunityState> {
-  CommunityCubit() : super(CommunityInitial());
+class ChatbotCubit extends Cubit<ChatbotState> {
+  ChatbotCubit() : super(ChatbotInitial());
 }

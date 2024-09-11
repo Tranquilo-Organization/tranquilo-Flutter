@@ -1,3 +1,3 @@
-class ForgetPasswordModel{
+class LoginModel{
 
 }

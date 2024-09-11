@@ -1,5 +1,5 @@
-part of 'home_cubit.dart';
+part of 'dashboard_cubit.dart';
 
-sealed class HomeState {}
+sealed class DashboardState {}
 
-final class HomeInitial extends HomeState {}
+final class DashboardInitial extends DashboardState {}

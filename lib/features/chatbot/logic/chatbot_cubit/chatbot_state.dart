@@ -1,5 +1,5 @@
-part of 'community_cubit.dart';
+part of 'chatbot_cubit.dart';
 
-sealed class CommunityState {}
+sealed class ChatbotState {}
 
-final class CommunityInitial extends CommunityState {}
+final class ChatbotInitial extends ChatbotState {}

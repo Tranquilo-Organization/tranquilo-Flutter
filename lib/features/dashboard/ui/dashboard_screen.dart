@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/home/ui/widgets/home_screen_body.dart';
+import 'package:tranquilo_app/features/dashboard/ui/widgets/dashboard_screen_body.dart';
 
-class HomeScreen extends StatelessWidget{
-  const HomeScreen({super.key});
+class DashboardScreen extends StatelessWidget{
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: HomeScreenBody(),
+      body: DashboardScreenBody(),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/auth/login/ui/widgets/login_screen_body.dart';
+import 'package:tranquilo_app/features/auth/sign_up/ui/widgets/sign_up_screen_body.dart';
 
-class LoginScreen extends StatelessWidget{
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget{
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: LoginScreenBody(),
+      body: SignUpScreenBody(),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'home_state.dart';
+part 'dashboard_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+class DashboardCubit extends Cubit<DashboardState> {
+  DashboardCubit() : super(DashboardInitial());
 }

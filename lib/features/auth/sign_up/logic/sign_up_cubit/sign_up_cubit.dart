@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'login_state.dart';
+part 'sign_up_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(LoginInitial());
+class SignUpCubit extends Cubit<SignUpState> {
+  SignUpCubit() : super(SignUpInitial());
 }

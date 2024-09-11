@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreenBody extends StatelessWidget{
-  const HomeScreenBody({super.key});
+class SurveyScreenBody extends StatelessWidget{
+  const SurveyScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {

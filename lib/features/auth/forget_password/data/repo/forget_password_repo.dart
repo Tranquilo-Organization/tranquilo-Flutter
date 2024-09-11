@@ -1,3 +1,3 @@
-class ChatbotRepo{
+class ForgetPasswordRepo{
 
 }

@@ -1,5 +1,5 @@
-part of 'login_cubit.dart';
+part of 'sign_up_cubit.dart';
 
-sealed class LoginState {}
+sealed class SignUpState {}
 
-final class LoginInitial extends LoginState {}
+final class SignUpInitial extends SignUpState {}

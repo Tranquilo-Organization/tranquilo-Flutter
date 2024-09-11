@@ -1,5 +1,5 @@
-part of 'chatbot_cubit.dart';
+part of 'forget_password_cubit.dart';
 
-sealed class ChatbotState {}
+sealed class ForgetPasswordState {}
 
-final class ChatbotInitial extends ChatbotState {}
+final class ForgetPasswordInitial extends ForgetPasswordState {}

@@ -1,3 +1,3 @@
-class DashboardModel{
+class ChatbotModel{
 
 }

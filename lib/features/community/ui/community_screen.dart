@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/dashboard_screen_body.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/community_screen_body.dart';
 
 class CommunityScreen extends StatelessWidget{
   const CommunityScreen({super.key});

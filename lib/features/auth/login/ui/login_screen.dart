@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/auth/forget_password/ui/widgets/forget_password_screen_body.dart';
+import 'package:tranquilo_app/features/auth/login/ui/widgets/login_screen_body.dart';
 
-class ForgetPasswordScreen extends StatelessWidget{
-  const ForgetPasswordScreen({super.key});
+class LoginScreen extends StatelessWidget{
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: ForgetPasswordScreenBody(),
+      body: LoginScreenBody(),
     );
   }
 }

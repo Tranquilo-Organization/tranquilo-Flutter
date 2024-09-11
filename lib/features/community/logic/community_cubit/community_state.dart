@@ -1,5 +1,5 @@
-part of 'dashboard_cubit.dart';
+part of 'community_cubit.dart';
 
-sealed class DashboardState {}
+sealed class CommunityState {}
 
-final class DashboardInitial extends DashboardState {}
+final class CommunityInitial extends CommunityState {}

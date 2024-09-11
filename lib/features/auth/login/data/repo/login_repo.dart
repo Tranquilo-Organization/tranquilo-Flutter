@@ -1,3 +1,3 @@
-class ForgetPasswordRepo{
+class LoginRepo{
 
 }

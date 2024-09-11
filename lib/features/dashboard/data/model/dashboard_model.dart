@@ -1,3 +1,3 @@
-class HomeModel{
+class DashboardModel{
 
 }

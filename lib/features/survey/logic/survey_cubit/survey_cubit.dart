@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'home_state.dart';
+part 'survey_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+class SurveyCubit extends Cubit<SurveyState> {
+  SurveyCubit() : super(SurveyInitial());
 }

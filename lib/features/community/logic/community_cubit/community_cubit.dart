@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'dashboard_state.dart';
+part 'community_state.dart';
 
-class DashboardCubit extends Cubit<DashboardState> {
-  DashboardCubit() : super(DashboardInitial());
+class CommunityCubit extends Cubit<CommunityState> {
+  CommunityCubit() : super(CommunityInitial());
 }

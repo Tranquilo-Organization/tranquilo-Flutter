@@ -1,3 +1,3 @@
-class ChatbotModel{
+class ForgetPasswordModel{
 
 }

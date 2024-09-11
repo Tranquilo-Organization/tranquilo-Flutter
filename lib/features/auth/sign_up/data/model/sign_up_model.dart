@@ -1,3 +1,3 @@
-class LoginModel{
+class SignUpModel{
 
 }
