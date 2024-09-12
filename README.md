@@ -39,6 +39,8 @@ Regular surveys to help users self-assess their anxiety levels. The results are 
 
 ## 🧩  Dependencies
 
+The project utilizes various dependencies to enhance functionality and streamline development. These dependencies may be expanded as the project evolves:
+
 - build_runner: Build System for Dart code generation and modular compilation.
 - flutter_bloc: State Management.
 - freezed, freezed_annotation: Code Generation.
