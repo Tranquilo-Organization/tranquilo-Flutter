@@ -16,6 +16,18 @@ By using Clean Architecture, the project achieves a clear separation between bus
 
 ![system design](https://github.com/user-attachments/assets/6388c2d4-1253-456d-b9f2-12285a8b2cba)
 
+## 📥  Installation
+
+1. **Clone the Repo:**
+
+   Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/Tranquilo-Organization/tranquilo-Flutter.git
+
+2. **Install Dependencies:**
+   ```bash
+   flutter pub get
 
 ## 📚  Features
 
