@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TranquiloApp extends StatelessWidget{
+class TranquiloApp extends StatelessWidget {
   const TranquiloApp({super.key});
 
   @override
