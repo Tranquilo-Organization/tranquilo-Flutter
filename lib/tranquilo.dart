@@ -21,7 +21,7 @@ class TranquiloApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: Routes.signIn,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
