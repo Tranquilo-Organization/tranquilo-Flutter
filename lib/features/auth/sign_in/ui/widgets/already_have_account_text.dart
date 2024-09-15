@@ -16,7 +16,7 @@ class AlreadyHaveAccountText extends StatelessWidget {
           ),
           TextSpan(
             text: ' Sign Up',
-            style: TextStyles.font24OceanBlueSemiBold,
+            style: TextStyles.font12OceanBlueSemiBold,
           ),
         ],
       ),

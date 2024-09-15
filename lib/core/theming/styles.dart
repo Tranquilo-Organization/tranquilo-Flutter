@@ -3,10 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 
-
 class TextStyles {
   static TextStyle font24OceanBlueSemiBold = TextStyle(
     fontSize: 24.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.oceanBlue,
+  );
+
+  static TextStyle font12OceanBlueSemiBold = TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.oceanBlue,
   );
