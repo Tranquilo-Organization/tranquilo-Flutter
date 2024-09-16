@@ -11,6 +11,12 @@ class TextStyles {
     color: ColorsManager.oceanBlue,
   );
 
+  static TextStyle font20OceanBlueSemiBold = GoogleFonts.poppins(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.oceanBlue,
+  );
+
   static TextStyle font12OceanBlueSemiBold = GoogleFonts.poppins(
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.semiBold,

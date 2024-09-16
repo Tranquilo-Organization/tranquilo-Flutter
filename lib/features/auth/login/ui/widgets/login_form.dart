@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/helpers/app_regex.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
@@ -90,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-
+                  context.pushNamed(Routes.forgetPasswordScreen);
                 },
                 child: Text(
                   "Forgot Password?",
