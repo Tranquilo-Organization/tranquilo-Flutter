@@ -94,7 +94,10 @@ class AppTextFormField extends StatelessWidget {
         hintStyle: hintStyle ?? TextStyles.font12LightSilverMedium,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
+        prefixIcon: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: prefixIcon,
+        ),
         fillColor: backgroundColor ?? ColorsManager.white,
         filled: true,
       ),

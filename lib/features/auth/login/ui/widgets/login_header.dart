@@ -11,7 +11,10 @@ class LoginHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("Sign in", style: TextStyles.font24OceanBlueSemiBold,),
+        Text(
+          "Sign in",
+          style: TextStyles.font24OceanBlueSemiBold,
+        ),
         verticalSpace(16),
         const Divider(
           color: ColorsManager.lightGreyBlue,
