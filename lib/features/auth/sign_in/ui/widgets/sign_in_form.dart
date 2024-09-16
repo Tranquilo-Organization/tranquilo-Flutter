@@ -4,7 +4,6 @@ import 'package:tranquilo_app/core/helpers/app_regex.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/app_form_field.dart';
 
-
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
 
@@ -14,9 +13,16 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   bool _isPasswordHidden = true;
-  String? email;
-  String? password;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +31,7 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         children: [
           AppTextFormField(
+            controller: emailController, // Attach controller to the field
             hintText: 'Email',
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12),
@@ -37,11 +44,11 @@ class _SignInFormState extends State<SignInForm> {
                 return 'Please enter a valid email address';
               }
               return null;
-            },
-            onSaved: (value) => email = value,
+            }, onSaved: (value) {  },
           ),
           verticalSpace(16),
           AppTextFormField(
+            controller: passwordController, // Attach controller to the field
             hintText: 'Password',
             isObscureText: _isPasswordHidden,
             prefixIcon: Padding(
@@ -66,8 +73,7 @@ class _SignInFormState extends State<SignInForm> {
                 return 'Password must be at least 8 characters long, include an upper case letter, a number, and a special character';
               }
               return null;
-            },
-            onSaved: (value) => password = value,
+            }, onSaved: (value) {  },
           ),
           verticalSpace(8),
           Align(
@@ -91,7 +97,10 @@ class _SignInFormState extends State<SignInForm> {
 
   void _submitForm() {
     if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
+      // Use the controllers to access the input values
+      final String email = emailController.text;
+      final String password = passwordController.text;
+
       print('Email: $email');
       print('Password: $password');
     }
