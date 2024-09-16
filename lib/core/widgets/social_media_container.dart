@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../../core/theming/colors_manger.dart';
+import '../theming/colors_manger.dart';
 
 class SocialMediaContainer extends StatelessWidget {
   final String iconImage;

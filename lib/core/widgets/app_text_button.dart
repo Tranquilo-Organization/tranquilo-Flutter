@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
+import '../theming/colors_manger.dart';
+import '../theming/styles.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+class AppTextButton extends StatelessWidget {
+  final String textButton;
+  final VoidCallback onPressed;
+
+  const AppTextButton({
+    super.key,
+    required this.onPressed,
+    required this.textButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +21,7 @@ class LoginButton extends StatelessWidget {
         width: double.infinity,
         height: 48.h,
         child: ElevatedButton(
-          onPressed: () {
-            // Handle sign in
-            final formState = Form.of(context);
-            if (formState.validate() ?? false) {
-              formState.save();
-              // Perform sign-in logic
-            }
-          },
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorsManager.oceanBlue,
             padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -30,8 +30,8 @@ class LoginButton extends StatelessWidget {
             ),
           ),
           child: Text(
-            'Sign in',
-            style: TextStyles.font16WhiteSemiBold
+            textButton,
+            style: TextStyles.font16WhiteSemiBold,
           ),
         ),
       ),

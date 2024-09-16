@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/auth/login/ui/widgets/social_media_container.dart';
+import 'package:tranquilo_app/core/widgets/social_media_container.dart';
 
 class SocialMediaButtons extends StatelessWidget {
   const SocialMediaButtons({super.key});

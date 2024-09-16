@@ -3,51 +3,44 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/helpers/app_regex.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
-
+import '../../../../../core/theming/colors_manger.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  const LoginForm({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+  });
 
   @override
-  State<LoginForm> createState() => _SignInFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-class _SignInFormState extends State<LoginForm> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _LoginFormState extends State<LoginForm> {
   bool _isPasswordHidden = true;
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           children: [
             AppTextFormField(
-              controller: emailController,
+              controller: widget.emailController,
               hintText: 'Email',
-              prefixIcon: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/email_icon.svg',
-                  height: 22,
-                  width: 22,
-                ),
+              prefixIcon: SvgPicture.asset(
+                'assets/svgs/email_icon.svg',
+                height: 22,
+                width: 22,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -61,16 +54,13 @@ class _SignInFormState extends State<LoginForm> {
             ),
             verticalSpace(24),
             AppTextFormField(
-              controller: passwordController,
+              controller: widget.passwordController,
               hintText: 'Password',
               isObscureText: _isPasswordHidden,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(12),
-                child: SvgPicture.asset(
-                  'assets/svgs/lock.svg',
-                  height: 22,
-                  width: 22,
-                ),
+              prefixIcon: SvgPicture.asset(
+                'assets/svgs/lock.svg',
+                height: 22,
+                width: 22,
               ),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -89,7 +79,7 @@ class _SignInFormState extends State<LoginForm> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password';
                 } else if (!AppRegex.isPasswordValid(value)) {
-                  return 'Password must be at least 8 characters long, include\nan upper case letter, a number, and a special character';
+                  return 'Password must be at least 8 characters long, include:\nan upper case letter, a number, and a special character';
                 }
                 return null;
               },
@@ -100,11 +90,11 @@ class _SignInFormState extends State<LoginForm> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  // Handle forgot password
+
                 },
-                child:Text(
+                child: Text(
                   "Forgot Password?",
-                  style: TextStyles.font12JetBlackMedium
+                  style: TextStyles.font12JetBlackMedium,
                 ),
               ),
             ),
@@ -112,16 +102,5 @@ class _SignInFormState extends State<LoginForm> {
         ),
       ),
     );
-  }
-
-  void _submitForm() {
-    if (formKey.currentState!.validate()) {
-      // Use the controllers to access the input values
-      final String email = emailController.text;
-      final String password = passwordController.text;
-
-      print('Email: $email');
-      print('Password: $password');
-    }
   }
 }
