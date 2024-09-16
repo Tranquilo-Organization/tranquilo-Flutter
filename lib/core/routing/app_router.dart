@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
-import 'package:tranquilo_app/features/auth/sign_in/ui/sign_in.dart';
+import 'package:tranquilo_app/features/auth/sign_in/ui/sign_in._screendart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
@@ -14,7 +14,7 @@ class AppRouter {
       // );
       case Routes.signIn:
         return MaterialPageRoute(
-          builder: (_) => const SignIn(),
+          builder: (_) => const SignInScreen(),
         );
       default:
         return MaterialPageRoute(
