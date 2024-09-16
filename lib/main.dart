@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'core/di/dependency_injection.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/tranquilo.dart';
-import 'package:tranquilo_app/core/routing/app_router.dart';
-
+import 'core/di/dependency_injection.dart';
 
 void main() async {
   setupGetIt();
-
+  await ScreenUtil.ensureScreenSize();
   runApp(
-    TranquiloApp(appRouter: AppRouter()),
+    const TranquiloApp(),
   );
 }
