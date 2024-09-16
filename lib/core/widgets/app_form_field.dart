@@ -56,6 +56,7 @@ class AppTextFormField extends StatelessWidget {
     this.autofillHints,
     this.maxLines,
     this.minLines,
+    required Function(dynamic value) onSaved,
   });
 
   @override

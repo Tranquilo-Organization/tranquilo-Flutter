@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 
 class SignInButton extends StatelessWidget {
@@ -13,15 +11,23 @@ class SignInButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           // Handle sign in
+          final formState = Form.of(context);
+          if (formState.validate() ?? false) {
+            formState.save();
+            // Perform sign-in logic
+          }
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorsManager.oceanBlue,
-          padding: EdgeInsets.symmetric(vertical: 14.h),
+          padding: EdgeInsets.symmetric(vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
         ),
-        child: Text("Sign in", style: TextStyles.font16WhiteSemiBold),
+        child: const Text(
+          'Sign in',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

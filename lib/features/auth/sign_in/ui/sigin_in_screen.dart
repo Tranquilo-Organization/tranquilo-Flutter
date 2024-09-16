@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/widgets/sign_in_button.dart';
 import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/or_divder.dart';
 import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/sign_in_form.dart';
+import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/sign_in_button.dart';
 import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/sign_in_header.dart';
 import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/social_media_buttons.dart';
 import 'package:tranquilo_app/features/auth/sign_in/ui/widgets/already_have_account_text.dart';
