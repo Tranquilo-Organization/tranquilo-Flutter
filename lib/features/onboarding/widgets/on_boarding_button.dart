@@ -9,12 +9,12 @@ class FillableButton extends StatefulWidget {
   final double progress;
 
   const FillableButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.fillColor,
     required this.textColor,
     required this.progress,
-  }) : super(key: key);
+  });
 
   @override
   _FillableButtonState createState() => _FillableButtonState();
@@ -37,7 +37,7 @@ class _FillableButtonState extends State<FillableButton> {
                 color: widget.fillColor,
                 progress: widget.progress,
               ),
-              size: Size(100.0, 100.0), // Adjust size to match button
+              size: const Size(100.0, 100.0), // Adjust size to match button
             ),
             // Circular button with SVG icon
             Container(
@@ -50,9 +50,10 @@ class _FillableButtonState extends State<FillableButton> {
               child: Center(
                 child: SvgPicture.asset(
                   'assets/svgs/arrow.svg',
+                  // ignore: deprecated_member_use
                   color: widget.textColor,
-                  width: 24.0, // Adjust size as needed
-                  height: 24.0, // Adjust size as needed
+                  width: 24.0,
+                  height: 24.0,
                 ),
               ),
             ),
