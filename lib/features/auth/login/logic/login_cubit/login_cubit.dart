@@ -17,8 +17,8 @@ class LoginCubit extends Cubit<LoginState> {
 
     final response = await _loginRepo.login(
       LoginRequestBody(
-        email: email, // Use the passed email
-        password: password, // Use the passed password
+        email: email,
+        password: password,
       ),
     );
 
@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginState.success(loginResponse));
       },
       failure: (error) {
-        emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+        emit(LoginState.error(error: error.apiErrorModel));
       },
     );
   }

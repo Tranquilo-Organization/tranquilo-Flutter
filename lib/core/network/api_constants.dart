@@ -2,6 +2,7 @@ class ApiConstants {
   static const String apiBaseUrl = "http://tranquiloapp.runasp.net/api/";
 
   static const String login = "account/login";
+  static const String signUp = "account/register";
 }
 
 class ApiErrors {
