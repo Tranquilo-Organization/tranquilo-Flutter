@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/features/onboarding/model/on_boarding_model.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_logo.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_borading_list.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/onboarding_page_view.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_indicator.dart';
-import 'package:tranquilo_app/features/onboarding/widgets/on_boardinf_navigation.dart';
-
+import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_navigation.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -27,7 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.ease,
       );
     } else {
-      // Navigate to the next screen
+      context.pushNamed(Routes.loginScreen);
     }
   }
 

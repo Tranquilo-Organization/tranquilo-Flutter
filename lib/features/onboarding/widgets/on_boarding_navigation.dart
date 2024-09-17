@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_button.dart';
 
@@ -24,11 +26,7 @@ class OnBoardingNavigation extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            controller.animateToPage(
-              length - 1,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
+            context.pushNamed(Routes.loginScreen); // Navigate to login screen
           },
           child: Text(
             'Skip',
