@@ -14,7 +14,7 @@ class _ApiService implements ApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://tranquiloapp.runasp.net/api/';
+    baseUrl ??= 'http://tranquiloapplication.runasp.net/api/';
   }
 
   final Dio _dio;
