@@ -1,5 +1,5 @@
 class OnBoardingModel {
-  final String imagePath; // Change this to String
+  final String imagePath;
   final String title;
   final String body;
 

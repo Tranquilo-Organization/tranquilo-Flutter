@@ -27,8 +27,9 @@ class OnBoardingContent extends StatelessWidget {
           verticalSpace(30.h),
           Text(
             model.title,
+            textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
               color: ColorsManager.jetBlack,
             ),
@@ -38,7 +39,7 @@ class OnBoardingContent extends StatelessWidget {
             model.body,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 15.sp,
               fontWeight: FontWeight.w400,
               color: ColorsManager.jetBlack,
             ),

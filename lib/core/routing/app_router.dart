@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
+import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import '../../features/auth/login/ui/login_screen.dart';
 import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
@@ -20,14 +21,19 @@ class AppRouter {
         );
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) => const SignUpScreen(),
+          builder: (_) =>
+              BlocProvider(
+                create: (context) => getIt<SignUpCubit>(),
+                child: const SignUpScreen(),
+              ),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
-            child: const LoginScreen(),
-          ),
+          builder: (_) =>
+              BlocProvider(
+                create: (context) => getIt<LoginCubit>(),
+                child: const LoginScreen(),
+              ),
         );
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
@@ -39,11 +45,12 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
+          builder: (_) =>
+              Scaffold(
+                body: Center(
+                  child: Text('No route defined for ${settings.name}'),
+                ),
+              ),
         );
     }
   }

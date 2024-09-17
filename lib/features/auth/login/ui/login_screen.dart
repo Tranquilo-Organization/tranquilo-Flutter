@@ -37,7 +37,13 @@ class LoginScreen extends StatelessWidget {
               error: (errorState) {
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(errorState.error)),
+                  SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text(
+                      errorState.error.message ?? 'An unexpected error occurred',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
                 );
               },
             );
