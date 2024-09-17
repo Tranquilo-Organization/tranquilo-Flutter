@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import '../../../../../core/helpers/app_validation.dart';
 import '../../../../../core/helpers/spacing.dart';
@@ -27,6 +29,7 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final String email = _emailController.text;
+      context.pushNamed(Routes.otpScreen);
       print('Email: $email');
     }
   }

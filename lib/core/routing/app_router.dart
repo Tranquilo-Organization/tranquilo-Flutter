@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
+import 'package:tranquilo_app/features/otp/ui/otp_screen.dart';
 import '../../features/auth/login/ui/login_screen.dart';
 import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
@@ -41,7 +42,11 @@ class AppRouter {
         );
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => OnBoardingScreen(),
+          builder: (_) => const OnBoardingScreen(),
+        );
+      case Routes.otpScreen:
+        return MaterialPageRoute(
+          builder: (_) => const OtpScreen(),
         );
       default:
         return MaterialPageRoute(
