@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../../core/theming/styles.dart';
 
 class OtpTextField extends StatefulWidget {
   final int index;
@@ -61,6 +61,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
         style: TextStyles.font16JetBlackMedium,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(1),
         ],
         decoration: InputDecoration(
           border: InputBorder.none,

@@ -32,7 +32,10 @@ class SignUpScreen extends StatelessWidget {
               },
               signupSuccess: (_) {
                 Navigator.of(context).pop();
-                context.pushNamed(Routes.loginScreen);
+                context.pushNamedAndRemoveUntil(
+                  Routes.homeScreen,
+                  predicate: (Route<dynamic> route) => false,
+                );
               },
               signupError: (errorState) {
                 Navigator.of(context).pop();

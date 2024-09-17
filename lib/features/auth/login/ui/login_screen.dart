@@ -32,7 +32,10 @@ class LoginScreen extends StatelessWidget {
               },
               success: (_) {
                 Navigator.of(context).pop();
-                context.pushNamed(Routes.homeScreen);
+                context.pushNamedAndRemoveUntil(
+                  Routes.homeScreen,
+                  predicate: (Route<dynamic> route) => false,
+                );
               },
               error: (errorState) {
                 Navigator.of(context).pop();
@@ -40,7 +43,8 @@ class LoginScreen extends StatelessWidget {
                   SnackBar(
                     backgroundColor: Colors.red,
                     content: Text(
-                      errorState.error.message ?? 'An unexpected error occurred',
+                      errorState.error.message ??
+                          'An unexpected error occurred',
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
