@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-import '../../../../../core/helpers/spacing.dart';
 import 'login_form.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 
 class LoginFormWithButton extends StatefulWidget {
   const LoginFormWithButton({super.key});
@@ -24,11 +26,9 @@ class _LoginFormWithButtonState extends State<LoginFormWithButton> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      final String email = _emailController.text;
-      final String password = _passwordController.text;
-
-      print('Email: $email');
-      print('Password: $password');
+      final email = _emailController.text;
+      final password = _passwordController.text;
+      context.read<LoginCubit>().emitLoginStates(email, password);
     }
   }
 
@@ -42,7 +42,7 @@ class _LoginFormWithButtonState extends State<LoginFormWithButton> {
           passwordController: _passwordController,
         ),
         verticalSpace(21),
-        AppTextButton(onPressed: _submitForm, textButton: 'Sign in')
+        AppTextButton(onPressed: _submitForm, textButton: 'Sign in'),
       ],
     );
   }

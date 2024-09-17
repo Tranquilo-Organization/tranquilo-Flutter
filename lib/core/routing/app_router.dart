@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
+import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/onboarding/onboading_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
@@ -13,6 +14,10 @@ class AppRouter {
     final arguments = settings.arguments;
 
     switch (settings.name) {
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        );
       case Routes.signUpScreen:
         return MaterialPageRoute(
           builder: (_) => const SignUpScreen(),
