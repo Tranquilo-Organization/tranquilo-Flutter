@@ -5,11 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/onboarding/model/on_boarding_model.dart';
 
-
 class OnBoardingContent extends StatelessWidget {
   final OnBoardingModel model;
 
-  OnBoardingContent(this.model);
+  const OnBoardingContent(this.model, {super.key});
 
   @override
   Widget build(BuildContext context) {
