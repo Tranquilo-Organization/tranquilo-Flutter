@@ -11,11 +11,10 @@ class RingIndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double strokeWidth =
+    const double strokeWidth =
         5.0; // Increase stroke width to make it more visible
-    final double padding =
+    const double padding =
         12.0; // Increased padding to move the ring farther from the edges
-    final double radius = size.width / 2;
     final Rect rect = Rect.fromLTWH(
       padding,
       padding,

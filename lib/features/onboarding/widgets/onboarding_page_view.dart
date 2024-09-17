@@ -8,6 +8,7 @@ class OnBoardingPageView extends StatelessWidget {
   final Function(int) onPageChanged;
 
   const OnBoardingPageView({
+    super.key,
     required this.controller,
     required this.onboardingList,
     required this.onPageChanged,

@@ -24,7 +24,7 @@ class OnBoardingIndicator extends StatelessWidget {
         dotWidth: 8.w,
         expansionFactor: 3,
         spacing: 8.w,
-        dotColor: ColorsManager.oceanBlue,
+        dotColor: ColorsManager.lighterSilver,
       ),
     );
   }
