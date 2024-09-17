@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
-import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
-import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
 import '../../features/auth/login/ui/login_screen.dart';
+import 'package:tranquilo_app/features/onboarding/onboading_screen.dart';
+import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
+import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
@@ -20,6 +21,10 @@ class AppRouter {
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => const ForgetPasswordScreen(),
+        );
+        case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+          builder: (_) => OnBoardingScreen(),
         );
       default:
         return MaterialPageRoute(

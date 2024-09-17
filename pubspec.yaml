@@ -72,6 +72,8 @@ dependencies:
   shimmer: ^3.0.0
   # package to use fonts from fonts.google.com.
   google_fonts: ^6.2.1
+    # package to Customizable animated page indicator with a set of built-in effects.
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
