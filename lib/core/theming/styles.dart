@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 
@@ -32,6 +32,11 @@ class TextStyles {
   static TextStyle font14JetBlackMedium = GoogleFonts.poppins(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.jetBlack,
+  );
+  static TextStyle font20JetBlackSemiBold = GoogleFonts.poppins(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.jetBlack,
   );
 
