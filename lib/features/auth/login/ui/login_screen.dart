@@ -23,7 +23,6 @@ class LoginScreen extends StatelessWidget {
             state.map(
               initial: (_) {},
               loading: (_) {
-                // Show loading indicator
                 showDialog(
                   context: context,
                   barrierDismissible: false,
@@ -32,11 +31,11 @@ class LoginScreen extends StatelessWidget {
                 );
               },
               success: (_) {
-                Navigator.of(context).pop(); // Close the loading dialog
+                Navigator.of(context).pop();
                 context.pushNamed(Routes.homeScreen);
               },
               error: (errorState) {
-                Navigator.of(context).pop(); // Close the loading dialog
+                Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(errorState.error)),
                 );
