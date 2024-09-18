@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/layout/app_layout.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
@@ -24,7 +25,6 @@ import 'package:tranquilo_app/features/auth/forget_password/logic/forget_passwor
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     final arguments = settings.arguments;
-
     switch (settings.name) {
       case Routes.homeScreen:
         return MaterialPageRoute(
@@ -86,6 +86,10 @@ class AppRouter {
       case Routes.surveyResult:
         return MaterialPageRoute(
           builder: (_) => const SurveyResult(),
+        );
+      case Routes.appLayout:
+        return MaterialPageRoute(
+          builder: (_) => const AppLayout(),
         );
       default:
         return MaterialPageRoute(

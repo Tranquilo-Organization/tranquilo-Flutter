@@ -41,10 +41,6 @@ class SurveyStarting extends StatelessWidget {
               AppTextButton(
                 textButton: 'Start',
                 onPressed: () {
-                  // context.pushNamedAndRemoveUntil(
-                  //   Routes.surveyScreens,
-                  //   predicate: (Route<dynamic> route) => false,
-                  // );
                   context.pushNamed(Routes.surveyScreens);
                 },
               ),
