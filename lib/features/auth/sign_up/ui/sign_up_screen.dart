@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
               signupSuccess: (_) {
                 Navigator.of(context).pop();
                 context.pushNamedAndRemoveUntil(
-                  Routes.homeScreen,
+                  Routes.surveyStarting,
                   predicate: (Route<dynamic> route) => false,
                 );
               },

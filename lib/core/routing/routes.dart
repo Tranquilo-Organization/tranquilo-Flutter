@@ -10,4 +10,5 @@ class Routes {
   static const String surveyScreens = '/surveyScreens';
   static const String surveyCompleted = '/surveyCompleted';
   static const String surveyResult = '/surveyResult';
+  static const String appLayout = '/appLayout';
 }

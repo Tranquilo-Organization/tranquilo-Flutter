@@ -20,7 +20,7 @@ void main() async {
       initialRoute: isFirstLaunch
           ? Routes.onBoardingScreen
           : (isLoggedIn
-          ? (isSurveyCompleted ? Routes.homeScreen : Routes.surveyStarting)
+          ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
           : Routes.loginScreen),
     ),
   );
