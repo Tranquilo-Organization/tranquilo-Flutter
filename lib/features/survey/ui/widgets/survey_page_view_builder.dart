@@ -150,16 +150,11 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                             null) {
                           showSnackBar(
                             context,
-                            'Please select an answer before proceeding',
+                            'Please select an answer before finishing',
                             ColorsManager.oceanBlue,
                           );
                         } else {
                           await SharedPrefHelper.setSurveyCompleted(true);
-                          showSnackBar(
-                            context,
-                            'Please select an answer before finishing',
-                            ColorsManager.oceanBlue,
-                          );
                           context.pushNamedAndRemoveUntil(
                             Routes.surveyCompleted,
                             predicate: (Route<dynamic> route) => false,
