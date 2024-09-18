@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
-import 'package:tranquilo_app/core/routing/routes.dart';
-import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-import '../../../../../core/helpers/app_validation.dart';
-import '../../../../../core/helpers/spacing.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theming/styles.dart';
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/helpers/app_validation.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 class ForgetPasswordForm extends StatefulWidget {
   const ForgetPasswordForm({super.key});
@@ -29,8 +29,8 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final String email = _emailController.text;
-      context.pushNamed(Routes.otpScreen);
-      print('Email: $email');
+      // Call the cubit to send the forget password request
+      context.read<ForgetPasswordCubit>().resetPassword(email);
     }
   }
 
