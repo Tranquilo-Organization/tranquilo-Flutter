@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
@@ -9,6 +12,7 @@ import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_starting.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
@@ -66,6 +70,22 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
+        );
+      case Routes.surveyStarting:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyStarting(),
+        );
+      case Routes.surveyScreens:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyScreen(),
+        );
+      case Routes.surveyCompleted:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyCompleted(),
+        );
+      case Routes.surveyResult:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyResult(),
         );
       default:
         return MaterialPageRoute(

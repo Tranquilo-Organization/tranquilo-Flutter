@@ -9,12 +9,15 @@ import 'package:tranquilo_app/features/onboarding/widgets/on_borading_list.dart'
 import 'package:tranquilo_app/features/onboarding/widgets/onboarding_page_view.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_indicator.dart';
 import 'package:tranquilo_app/features/onboarding/widgets/on_boarding_navigation.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
+
+import '../../core/helpers/constants.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
   @override
-  _OnBoardingScreenState createState() => _OnBoardingScreenState();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
@@ -28,8 +31,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.ease,
       );
     } else {
-      context.pushNamed(Routes.loginScreen);
+      // Call completeOnboarding when user reaches the last onboarding page
+      completeOnboarding(context);
     }
+  }
+
+  Future<void> completeOnboarding(BuildContext context) async {
+    // Set isFirstLaunch to false after the onboarding is completed
+    await SharedPrefHelper.setData(SharedPrefKeys.isFirstLaunch, false);
+
+    // Ensure the token is cleared (optional, in case there was a bad state)
+    await SharedPrefHelper.clearAllSecuredData();
+
+    // Navigate to the login screen after onboarding
+    context.pushNamed(Routes.loginScreen);
   }
 
   @override

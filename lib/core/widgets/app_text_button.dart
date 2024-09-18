@@ -6,11 +6,17 @@ import '../theming/styles.dart';
 class AppTextButton extends StatelessWidget {
   final String textButton;
   final VoidCallback onPressed;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? textColor;
 
   const AppTextButton({
     super.key,
     required this.onPressed,
     required this.textButton,
+    this.backgroundColor,
+    this.borderColor,
+    this.textColor,
   });
 
   @override
@@ -23,18 +29,24 @@ class AppTextButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: ColorsManager.oceanBlue,
+            backgroundColor: backgroundColor ?? ColorsManager.oceanBlue,
             padding: EdgeInsets.symmetric(vertical: 12.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.r),
+              side: BorderSide(
+                color: borderColor ?? ColorsManager.oceanBlue,
+              ),
             ),
           ),
           child: Text(
             textButton,
-            style: TextStyles.font16WhiteSemiBold,
+            style: TextStyles.font16WhiteSemiBold.copyWith(
+              color: textColor ?? ColorsManager.white,
+            ),
           ),
         ),
       ),
     );
   }
 }
+

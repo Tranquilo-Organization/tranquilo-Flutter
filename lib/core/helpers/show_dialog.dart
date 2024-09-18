@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+
+import '../../features/auth/login/logic/login_cubit/login_cubit.dart';
+import '../../features/auth/login/ui/login_screen.dart';
+import '../di/dependency_injection.dart';
 
 void showSuccessDialog(BuildContext context) {
   showDialog(
@@ -34,9 +37,14 @@ void showSuccessDialog(BuildContext context) {
           ),
           TextButton(
             onPressed: () {
-              context.pushNamedAndRemoveUntil(
-                Routes.loginScreen,
-                predicate: (Route<dynamic> route) => false,
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => getIt<LoginCubit>(),
+                    child: const LoginScreen(),
+                  ),
+                ),
               );
             },
             child: Text(

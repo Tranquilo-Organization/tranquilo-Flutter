@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/helpers/show_dialog.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
@@ -68,8 +69,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
     return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
       listener: (context, state) {
         if (state is ResetPasswordSuccess) {
-          // Navigate to the home screen on success
-          Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+          showSuccessDialog(context);
         } else if (state is ResetPasswordError) {
           // Show an error message on failure
           ScaffoldMessenger.of(context).showSnackBar(
