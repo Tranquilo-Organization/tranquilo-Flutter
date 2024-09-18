@@ -9,6 +9,7 @@ import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_starting.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
@@ -66,6 +67,10 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
+        );
+              case Routes.surveyStarting:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyStarting(),
         );
       default:
         return MaterialPageRoute(
