@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -26,6 +26,7 @@ class AppTextFormField extends StatelessWidget {
   final String? initialValue;
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
   final Iterable<String>? autofillHints;
   final int? maxLines;
   final int? minLines;
@@ -54,10 +55,10 @@ class AppTextFormField extends StatelessWidget {
     this.initialValue,
     this.onChanged,
     this.onFieldSubmitted,
+    this.onSaved,
     this.autofillHints,
     this.maxLines,
     this.minLines,
-    required Function(dynamic value) onSaved,
   });
 
   @override
@@ -77,6 +78,7 @@ class AppTextFormField extends StatelessWidget {
       initialValue: initialValue,
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
+      onSaved: onSaved, // Now correctly wired to handle saving the form's state
       maxLines: maxLines ?? 1,
       minLines: minLines ?? 1,
       style: inputTextStyle ?? TextStyles.font12JetBlackMedium,
@@ -84,20 +86,19 @@ class AppTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: 16.h),
-        enabledBorder: enabledBorder ??
-            buildOutlineInputBorder(color: ColorsManager.lightSilver),
-        focusedBorder: focusedBorder ??
-            buildOutlineInputBorder(color: ColorsManager.oceanBlue),
-
+        enabledBorder: enabledBorder ?? buildOutlineInputBorder(color: ColorsManager.lightSilver),
+        focusedBorder: focusedBorder ?? buildOutlineInputBorder(color: ColorsManager.oceanBlue),
         focusedErrorBorder: buildOutlineInputBorder(color: Colors.red),
         errorBorder: buildOutlineInputBorder(color: Colors.red),
         hintStyle: hintStyle ?? TextStyles.font12LightSilverMedium,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        prefixIcon: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: prefixIcon,
-        ),
+        prefixIcon: prefixIcon != null
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: prefixIcon,
+              )
+            : null,
         fillColor: backgroundColor ?? ColorsManager.white,
         filled: true,
       ),

@@ -1,17 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/network/api_result.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/app_validation.dart';
-import 'package:tranquilo_app/core/helpers/show_dialog.dart';
-
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/colors_manger.dart';
-import '../../../../../core/theming/styles.dart';
-import '../../../../../core/widgets/app_text_button.dart';
-import '../../../../../core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
+import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_state.dart';
+import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_request_model.dart';
 
 class ResetPasswordForm extends StatefulWidget {
-  const ResetPasswordForm({super.key});
+  final String email;
+  final String otp; // OTP passed from OtpForm
+
+  const ResetPasswordForm({super.key, required this.email, required this.otp});
 
   @override
   State<ResetPasswordForm> createState() => _ResetPasswordFormState();
@@ -41,92 +48,116 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
     if (_formKey.currentState!.validate()) {
       final String newPassword = _newPasswordController.text;
       final String confirmPassword = _confirmPasswordController.text;
-      showSuccessDialog(context);
+      final String email = widget.email;
+      final String otp = widget.otp; // Get OTP passed from OtpForm
 
+      final requestModel = ResetPasswordRequestModel(
+        email: email,
+        otp: otp, // Include OTP in request
+        password: newPassword,
+        confirmPassword: confirmPassword,
+      );
+
+      // Call the cubit to handle reset password logic
+      context.read<ResetPasswordCubit>().resetPassword(requestModel);
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Text(
-              'New Password',
-              style: TextStyles.font16JetBlackMedium,
-            ),
-          ),
-          verticalSpace(10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: AppTextFormField(
-              controller: _newPasswordController,
-              hintText: 'Password',
-              isObscureText: _isPasswordHidden,
-              prefixIcon: SvgPicture.asset(
-                'assets/svgs/lock.svg',
-                height: 22,
-                width: 22,
-              ),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _isPasswordHidden
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: ColorsManager.lightSilver,
+    return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+      listener: (context, state) {
+        if (state is ResetPasswordSuccess) {
+          // Navigate to the home screen on success
+          Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+        } else if (state is ResetPasswordError) {
+          // Show an error message on failure
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to reset password: ${state.error}')),
+          );
+        }
+      },
+      builder: (context, state) {
+        return Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Text(
+                  'New Password',
+                  style: TextStyles.font16JetBlackMedium,
                 ),
-                onPressed: togglePasswordVisibility,
               ),
-              validator: validatePassword,
-              onSaved: (value) {},
-            ),
-          ),
-          verticalSpace(25),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Text(
-              'New Password',
-              style: TextStyles.font16JetBlackMedium,
-            ),
-          ),
-          verticalSpace(10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: AppTextFormField(
-              controller: _confirmPasswordController,
-              hintText: 'Confirm Password',
-              isObscureText: _isConfirmPasswordHidden,
-              prefixIcon: SvgPicture.asset(
-                'assets/svgs/lock.svg',
-                height: 22,
-                width: 22,
-              ),
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _isConfirmPasswordHidden
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: ColorsManager.lightSilver,
+              verticalSpace(10),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: AppTextFormField(
+                  controller: _newPasswordController,
+                  hintText: 'Password',
+                  isObscureText: _isPasswordHidden,
+                  prefixIcon: SvgPicture.asset(
+                    'assets/svgs/lock.svg',
+                    height: 22,
+                    width: 22,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordHidden
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: ColorsManager.lightSilver,
+                    ),
+                    onPressed: togglePasswordVisibility,
+                  ),
+                  validator: validatePassword,
+                  onSaved: (value) {},
                 ),
-                onPressed: toggleConfirmPasswordVisibility,
               ),
-              validator: (value) =>
-                  validateConfirmPassword(value,_newPasswordController.text),
-              onSaved: (value) {},
-            ),
+              verticalSpace(25),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Text(
+                  'Confirm Password',
+                  style: TextStyles.font16JetBlackMedium,
+                ),
+              ),
+              verticalSpace(10),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: AppTextFormField(
+                  controller: _confirmPasswordController,
+                  hintText: 'Confirm Password',
+                  isObscureText: _isConfirmPasswordHidden,
+                  prefixIcon: SvgPicture.asset(
+                    'assets/svgs/lock.svg',
+                    height: 22,
+                    width: 22,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isConfirmPasswordHidden
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: ColorsManager.lightSilver,
+                    ),
+                    onPressed: toggleConfirmPasswordVisibility,
+                  ),
+                  validator: (value) => validateConfirmPassword(
+                      value, _newPasswordController.text),
+                  onSaved: (value) {},
+                ),
+              ),
+              verticalSpace(68),
+              AppTextButton(
+                onPressed: _submitForm,
+                textButton: 'Confirm',
+              ),
+            ],
           ),
-          verticalSpace(68),
-          AppTextButton(
-            onPressed: _submitForm,
-            textButton: 'Confirm',
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

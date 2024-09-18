@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SharedPrefHelper {
   // private constructor as I don't want to allow creating an instance of this class itself.
@@ -21,7 +21,7 @@ class SharedPrefHelper {
   }
 
   /// Saves a [value] with a [key] in the SharedPreferences.
-  static setData(String key, value) async {
+  static setData(String key, dynamic value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
     switch (value.runtimeType) {
@@ -42,18 +42,18 @@ class SharedPrefHelper {
     }
   }
 
+  /// Gets a String value from SharedPreferences with given [key].
+  static getString(String key) async {
+    debugPrint('SharedPrefHelper : getString with key : $key');
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString(key) ?? '';
+  }
+
   /// Gets a bool value from SharedPreferences with given [key].
   static getBool(String key) async {
     debugPrint('SharedPrefHelper : getBool with key : $key');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getBool(key) ?? false;
-  }
-
-  /// Gets a double value from SharedPreferences with given [key].
-  static getDouble(String key) async {
-    debugPrint('SharedPrefHelper : getDouble with key : $key');
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getDouble(key) ?? 0.0;
   }
 
   /// Gets an int value from SharedPreferences with given [key].
@@ -63,11 +63,11 @@ class SharedPrefHelper {
     return sharedPreferences.getInt(key) ?? 0;
   }
 
-  /// Gets an String value from SharedPreferences with given [key].
-  static getString(String key) async {
-    debugPrint('SharedPrefHelper : getString with key : $key');
+  /// Gets a double value from SharedPreferences with given [key].
+  static getDouble(String key) async {
+    debugPrint('SharedPrefHelper : getDouble with key : $key');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(key) ?? '';
+    return sharedPreferences.getDouble(key) ?? 0.0;
   }
 
   /// Saves a [value] with a [key] in the FlutterSecureStorage.
@@ -78,10 +78,10 @@ class SharedPrefHelper {
     await flutterSecureStorage.write(key: key, value: value);
   }
 
-  /// Gets an String value from FlutterSecureStorage with given [key].
+  /// Gets a String value from FlutterSecureStorage with given [key].
   static getSecuredString(String key) async {
     const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
+    debugPrint('FlutterSecureStorage : getSecuredString with key : $key');
     return await flutterSecureStorage.read(key: key) ?? '';
   }
 
@@ -91,4 +91,40 @@ class SharedPrefHelper {
     const flutterSecureStorage = FlutterSecureStorage();
     await flutterSecureStorage.deleteAll();
   }
+
+  /// Saves the user's email in SharedPreferences
+  static saveEmail(String email) async {
+    debugPrint('SharedPrefHelper : Saving email : $email');
+    await setData('email', email);
+  }
+
+  /// Retrieves the saved email from SharedPreferences
+  static Future<String> getEmail(String s) async {
+    debugPrint('SharedPrefHelper : Retrieving email');
+    return await getString('email');
+  }
+
+  /// Saves the OTP securely in FlutterSecureStorage
+  static saveOtp(String otp) async {
+    debugPrint('SharedPrefHelper : Saving OTP');
+    await setSecuredString('otp', otp);
+  }
+
+  /// Retrieves the saved OTP from FlutterSecureStorage
+  static Future<String> getOtp() async {
+    debugPrint('SharedPrefHelper : Retrieving OTP');
+    return await getSecuredString('otp');
+  }
+
+  /// Removes email from SharedPreferences
+  static removeEmail() async {
+    debugPrint('SharedPrefHelper : Removing email');
+    await removeData('email');
+  }
+
+  // /// Removes OTP from FlutterSecureStorage
+  // static removeOtp() async {
+  //   debugPrint('SharedPrefHelper : Removing OTP');
+  //   await FlutterSecureStorage.delete(key: 'otp');
+  // }
 }
