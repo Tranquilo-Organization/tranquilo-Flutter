@@ -11,6 +11,7 @@ import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
+import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart'; // Add import for VerifyOtpCubit
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 class AppRouter {
@@ -43,18 +44,20 @@ class AppRouter {
             child: const ForgetPasswordScreen(),
           ),
         );
-
-      case Routes.onBoardingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const OnBoardingScreen(),
-        );
       case Routes.otpScreen:
         return MaterialPageRoute(
-          builder: (_) => const OtpScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<VerifyOtpCubit>(), // Register VerifyOtpCubit
+            child: const OtpScreen(),
+          ),
         );
       case Routes.resetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => const ResetPasswordScreen(),
+        );
+      case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+          builder: (_) => const OnBoardingScreen(),
         );
       default:
         return MaterialPageRoute(
