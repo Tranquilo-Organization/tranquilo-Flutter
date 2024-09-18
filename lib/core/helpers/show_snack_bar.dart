@@ -7,7 +7,7 @@ void showSnackBar(BuildContext context, String text, Color? backgroundColor){
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        'Please select an answer before finishing',
+        text,
         style: TextStyles.font16WhiteSemiBold.copyWith(
           fontSize: 14,
         ),
