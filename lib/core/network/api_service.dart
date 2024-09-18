@@ -5,6 +5,8 @@ import 'package:tranquilo_app/features/auth/login/data/model/login_request_body.
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_response.dart';
 import 'package:tranquilo_app/features/auth/login/data/model/login_response_body.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_request_body.dart';
+import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_request_model.dart';
+import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_response_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_request_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_response_model.dart';
 
@@ -27,5 +29,10 @@ abstract class ApiService {
   @POST(ApiConstants.forgetPassword)
   Future<ForgetPasswordResponseModel> forgetPassword(
     @Body() ForgetPasswordRequestModel forgetPasswordRequestModel,
+  );
+
+  @POST(ApiConstants.verifyOtp)
+  Future<VerifyOtpResponseModel> verifyOtp(
+    @Body() VerifyOtpRequestModel verifyOtpRequestModel,
   );
 }
