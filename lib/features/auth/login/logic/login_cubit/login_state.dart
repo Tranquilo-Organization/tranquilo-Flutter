@@ -12,3 +12,4 @@ class LoginState<T> with _$LoginState<T> {
   const factory LoginState.success(T data) = Success<T>;
   const factory LoginState.error({required ApiErrorModel error}) = Error;
 }
+

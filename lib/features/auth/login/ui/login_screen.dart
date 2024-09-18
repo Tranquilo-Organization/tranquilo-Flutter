@@ -31,9 +31,8 @@ class LoginScreen extends StatelessWidget {
                 );
               },
               success: (_) {
-                Navigator.of(context).pop();
                 context.pushNamedAndRemoveUntil(
-                  Routes.homeScreen,
+                  Routes.surveyStarting,
                   predicate: (Route<dynamic> route) => false,
                 );
               },
@@ -78,3 +77,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+

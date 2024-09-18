@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/helpers/spacing.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/widgets/app_text_button.dart';
-import '../../../../core/network/api_error_model.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/features/auth/otp/ui/widgets/otp_form.dart';
@@ -23,10 +22,11 @@ class OtpScreen extends StatelessWidget {
         child: BlocConsumer<VerifyOtpCubit, VerifyOtpState>(
           listener: (context, state) {
             if (state is VerifyOtpSuccess) {
-              // OTP verified, navigate to ResetPasswordScreen
-              Navigator.pushNamed(context, Routes.resetPasswordScreen);
+              context.pushNamedAndRemoveUntil(
+                Routes.resetPasswordScreen,
+                predicate: (Route<dynamic> route) => false,
+              );
             } else if (state is VerifyOtpError) {
-              // Show error message from the API
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: ColorsManager.oceanBlue,
@@ -52,7 +52,7 @@ class OtpScreen extends StatelessWidget {
                     height: 56.h,
                   ),
                   verticalSpace(64),
-                  const OtpForm(), // Updated OtpForm
+                  const OtpForm(),
                   verticalSpace(20),
                   const ResendOtp(),
                 ],

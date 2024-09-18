@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'constants.dart';
+
 class SharedPrefHelper {
   // private constructor as I don't want to allow creating an instance of this class itself.
   SharedPrefHelper._();
@@ -122,9 +124,38 @@ class SharedPrefHelper {
     await removeData('email');
   }
 
+  /// Check if the app is launched for the first time
+  static Future<bool> isFirstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(SharedPrefKeys.isFirstLaunch) ?? true;
+  }
+
+  static Future<void> setFirstLaunch(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstLaunch', value);
+  }
+
+  static Future<bool?> getSecuredBool(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(key);
+  }
+
+  static Future<bool> isSurveyCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(SharedPrefKeys.isSurveyCompleted) ?? false;
+  }
+
+  static Future<void> setSurveyCompleted(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SharedPrefKeys.isSurveyCompleted, value);
+  }
+
+
+}
+
   // /// Removes OTP from FlutterSecureStorage
   // static removeOtp() async {
   //   debugPrint('SharedPrefHelper : Removing OTP');
   //   await FlutterSecureStorage.delete(key: 'otp');
   // }
-}
+

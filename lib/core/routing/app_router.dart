@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
@@ -68,9 +71,21 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
         );
-              case Routes.surveyStarting:
+      case Routes.surveyStarting:
         return MaterialPageRoute(
           builder: (_) => const SurveyStarting(),
+        );
+      case Routes.surveyScreens:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyScreen(),
+        );
+      case Routes.surveyCompleted:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyCompleted(),
+        );
+      case Routes.surveyResult:
+        return MaterialPageRoute(
+          builder: (_) => const SurveyResult(),
         );
       default:
         return MaterialPageRoute(

@@ -4,6 +4,9 @@ import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/model/login_request_body.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_state.dart';
 
+import '../../../../../core/helpers/constants.dart';
+import '../../../../../core/helpers/shared_pref_helper.dart';
+
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
   LoginCubit(this._loginRepo) : super(const LoginState.initial());
@@ -23,7 +26,8 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     response.when(
-      success: (loginResponse) {
+      success: (loginResponse) async {
+        await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, loginResponse.token);
         emit(LoginState.success(loginResponse));
       },
       failure: (error) {
@@ -32,3 +36,4 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 }
+

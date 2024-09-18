@@ -69,9 +69,21 @@ class TextStyles {
     color: ColorsManager.lightSilver,
   );
 
+  static TextStyle font12DarkGreyLight = GoogleFonts.poppins(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.light,
+    color: ColorsManager.darkGrey,
+  );
+
   static TextStyle font12JetBlackMedium = GoogleFonts.poppins(
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.jetBlack,
+  );
+
+  static TextStyle font12JetBlackRegular = GoogleFonts.poppins(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
     color: ColorsManager.jetBlack,
   );
 
@@ -79,5 +91,11 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.white,
+  );
+
+  static TextStyle font16BlackRegular = GoogleFonts.poppins(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.black,
   );
 }
