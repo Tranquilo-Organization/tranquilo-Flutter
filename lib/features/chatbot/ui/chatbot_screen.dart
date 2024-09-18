@@ -10,65 +10,55 @@ class ChatbotScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.lighterSilver,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            SizedBox(height: 50.h),
-            // Header with Chatbot title and bot icon
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'ChatBot',
-                  style: TextStyles.font20OceanBlueSemiBold,
-                ),
-                SizedBox(width: 8.w),
-                SvgPicture.asset('assets/svgs/logo chatbot.svg', height: 32.h),
-              ],
-            ),
-            SizedBox(height: 40.h),
-            
-            // Bot icon in circle container
-            Container(
-              padding: EdgeInsets.all(12.w),
+      backgroundColor: ColorsManager.oceanBlue,
+      body: Stack(
+        children: [
+          // White Container filling most of the screen
+          Positioned(
+            top: 120.h,
+            left: 24.w,
+            right: 24.w,
+            bottom: 100.h, // leaving space for the floating message bar
+            child: Container(
+              padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
                 color: ColorsManager.white,
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(24.r),
                 boxShadow: [
                   BoxShadow(
                     color: ColorsManager.jetBlack.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(0, 2),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
-              child: SvgPicture.asset(
-                'assets/svgs/logo chatbot.svg',
-                height: 40.h,
-              ),
-            ),
-            
-            SizedBox(height: 40.h),
-            
-            // Question cards
-            Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text(
+                    'ChatBot',
+                    style: TextStyles.font20OceanBlueSemiBold,
+                  ),
+                  SizedBox(height: 8.h),
+                  SvgPicture.asset('assets/svgs/logo_chatbot.svg',
+                      height: 32.h),
+                  SizedBox(height: 40.h),
+
+                  // Identical Suggestion Containers
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // First Suggestion - Same size as the second
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: ColorsManager.white,
-                            borderRadius: BorderRadius.circular(12.r),
+                            borderRadius: BorderRadius.circular(16.r),
                             boxShadow: [
                               BoxShadow(
-                                color: ColorsManager.black.withOpacity(0.1),
+                                color: ColorsManager.jetBlack.withOpacity(0.1),
                                 spreadRadius: 2,
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
@@ -77,7 +67,7 @@ class ChatbotScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'What do you want to talk about?',
+                              'What\'s on your mind?',
                               textAlign: TextAlign.center,
                               style: TextStyles.font14JetBlackRegular,
                             ),
@@ -85,15 +75,16 @@ class ChatbotScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 16.w),
+                      // Second Suggestion - Same size as the first
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: ColorsManager.white,
-                            borderRadius: BorderRadius.circular(12.r),
+                            borderRadius: BorderRadius.circular(16.r),
                             boxShadow: [
                               BoxShadow(
-                                color: ColorsManager.black.withOpacity(0.1),
+                                color: ColorsManager.jetBlack.withOpacity(0.1),
                                 spreadRadius: 2,
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
@@ -102,7 +93,7 @@ class ChatbotScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'How you feel now?',
+                              'How are you feeling today?',
                               textAlign: TextAlign.center,
                               style: TextStyles.font14JetBlackRegular,
                             ),
@@ -111,47 +102,52 @@ class ChatbotScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40.h),
-                  
-                  // Input field with message and send button
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    decoration: BoxDecoration(
-                      color: ColorsManager.white,
-                      borderRadius: BorderRadius.circular(24.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: ColorsManager.black.withOpacity(0.1),
-                          spreadRadius: 2,
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                ],
+              ),
+            ),
+          ),
+
+          // Floating message bar closer to the bottom of the screen
+          Positioned(
+            bottom: 24.h, // moved closer to the bottom
+            left: 24.w,
+            right: 24.w,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                color: ColorsManager.white,
+                borderRadius: BorderRadius.circular(24.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorsManager.black.withOpacity(0.1),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Message Chatbot',
+                        border: InputBorder.none,
+                        hintStyle: TextStyles.font14JetBlackRegular,
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Message Chatbot',
-                              border: InputBorder.none,
-                              hintStyle: TextStyles.font14JetBlackRegular,
-                            ),
-                          ),
-                        ),
-                        // Replacing the IconButton with SVG button
-                        SvgPicture.asset(
-                          'assets/svgs/chatbot_button.svg',
-                          height: 32.h,
-                        ),
-                      ],
-                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  // Replacing the IconButton with SVG button for sending messages
+                  SvgPicture.asset(
+                    'assets/svgs/chatbot_button.svg',
+                    height: 32.h,
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
