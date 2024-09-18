@@ -23,10 +23,10 @@ class OtpScreen extends StatelessWidget {
         child: BlocConsumer<VerifyOtpCubit, VerifyOtpState>(
           listener: (context, state) {
             if (state is VerifyOtpSuccess) {
-              // Handle success, maybe navigate to the next screen
+              // OTP verified, navigate to ResetPasswordScreen
               Navigator.pushNamed(context, Routes.resetPasswordScreen);
             } else if (state is VerifyOtpError) {
-              // Handle error, show a snack bar or other UI feedback
+              // Show error message from the API
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: ColorsManager.oceanBlue,
@@ -52,7 +52,7 @@ class OtpScreen extends StatelessWidget {
                     height: 56.h,
                   ),
                   verticalSpace(64),
-                  const OtpForm(),
+                  const OtpForm(), // Updated OtpForm
                   verticalSpace(20),
                   const ResendOtp(),
                 ],

@@ -1,17 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/app_validation.dart';
-import 'package:tranquilo_app/core/helpers/show_dialog.dart';
+import 'package:tranquilo_app/core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
+import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_request_model.dart';
 
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/colors_manger.dart';
-import '../../../../../core/theming/styles.dart';
-import '../../../../../core/widgets/app_text_button.dart';
-import '../../../../../core/widgets/app_text_form_field.dart';
 
 class ResetPasswordForm extends StatefulWidget {
-  const ResetPasswordForm({super.key});
+  final String email;
+  final String otp; // OTP passed from OtpForm
+
+  const ResetPasswordForm({super.key, required this.email, required this.otp});
 
   @override
   State<ResetPasswordForm> createState() => _ResetPasswordFormState();
@@ -20,8 +25,7 @@ class ResetPasswordForm extends StatefulWidget {
 class _ResetPasswordFormState extends State<ResetPasswordForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool _isPasswordHidden = true;
   bool _isConfirmPasswordHidden = true;
 
@@ -41,11 +45,20 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
     if (_formKey.currentState!.validate()) {
       final String newPassword = _newPasswordController.text;
       final String confirmPassword = _confirmPasswordController.text;
-      showSuccessDialog(context);
+      final String email = widget.email;
+      final String otp = widget.otp; // Get OTP passed from OtpForm
 
+      final requestModel = ResetPasswordRequestModel(
+        email: email,
+        otp: otp, // Include OTP in request
+        password: newPassword,
+        confirmPassword: confirmPassword,
+      );
+
+      // Call the cubit to handle reset password logic
+      context.read<ResetPasswordCubit>().resetPassword(requestModel);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +103,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              'New Password',
+              'Confirm Password',
               style: TextStyles.font16JetBlackMedium,
             ),
           ),
@@ -115,8 +128,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                 ),
                 onPressed: toggleConfirmPasswordVisibility,
               ),
-              validator: (value) =>
-                  validateConfirmPassword(value,_newPasswordController.text),
+              validator: (value) => validateConfirmPassword(value, _newPasswordController.text),
               onSaved: (value) {},
             ),
           ),

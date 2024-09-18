@@ -1,12 +1,13 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/theming/styles.dart';
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/helpers/app_validation.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/core/helpers/app_validation.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
+import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 class ForgetPasswordForm extends StatefulWidget {
@@ -26,9 +27,11 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final String email = _emailController.text;
+      // Save email using SharedPreferences
+      await SharedPrefHelper.setData('email', email);
       // Call the cubit to send the forget password request
       context.read<ForgetPasswordCubit>().resetPassword(email);
     }
