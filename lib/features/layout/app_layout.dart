@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/features/chatbot/ui/chatbot_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/profile_screen.dart';
 import 'package:tranquilo_app/features/community/ui/community_screen.dart';
 import 'package:tranquilo_app/features/dashboard/ui/dashboard_screen.dart';
-import 'package:tranquilo_app/features/home/ui/home_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/profile_screen.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({super.key});

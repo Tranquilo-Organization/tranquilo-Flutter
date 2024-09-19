@@ -1,12 +1,15 @@
 class ApiConstants {
   static const String apiBaseUrl =
       "http://tranquiloapplication.runasp.net/api/";
+  static const String chatbotApiUrl =
+      "https://tranquilo-chatbot-production.up.railway.app/";
 
   static const String login = "account/login";
   static const String signUp = "account/register";
   static const String forgetPassword = "account/forgot-password";
   static const String verifyOtp = "account/verify-otp";
   static const String resetPassword = "account/reset-password";
+  static const String chatbot = "chatbot";
 }
 
 class ApiErrors {
