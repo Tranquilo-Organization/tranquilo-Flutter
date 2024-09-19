@@ -53,10 +53,6 @@ class _SignUpFormWithButtonState extends State<SignUpFormWithButton> {
         confirmPassword: confirmPassword,
       );
 
-      print('Name: $name');
-      print('Email: $email');
-      print('Password: $password');
-      print('Confirm Password: $confirmPassword');
     }
   }
 

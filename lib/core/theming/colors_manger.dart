@@ -11,4 +11,7 @@ class ColorsManager {
   static const Color containerSilver = Color(0xFFD7D7D7);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+  static const Color morningBorder = Color(0xFFE9D5A7);
+  static const Color afternoonBorder = Color(0xFFE9A7BA);
+  static const Color nightBorder = Color(0xFF868686);
 }
