@@ -37,3 +37,4 @@ class ChatbotSuggestion extends StatelessWidget {
     );
   }
 }
+

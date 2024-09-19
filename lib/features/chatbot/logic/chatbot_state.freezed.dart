@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChatbotState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(bool showSuggestions) initial,
     required TResult Function() loading,
     required TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)
@@ -28,7 +28,7 @@ mixin _$ChatbotState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(bool showSuggestions)? initial,
     TResult? Function()? loading,
     TResult? Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -38,7 +38,7 @@ mixin _$ChatbotState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(bool showSuggestions)? initial,
     TResult Function()? loading,
     TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -100,6 +100,8 @@ abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool showSuggestions});
 }
 
 /// @nodoc
@@ -112,57 +114,84 @@ class __$$InitialImplCopyWithImpl<$Res>
 
   /// Create a copy of ChatbotState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? showSuggestions = null,
+  }) {
+    return _then(_$InitialImpl(
+      showSuggestions: null == showSuggestions
+          ? _value.showSuggestions
+          : showSuggestions // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+  const _$InitialImpl({this.showSuggestions = true});
+
+  @override
+  @JsonKey()
+  final bool showSuggestions;
 
   @override
   String toString() {
-    return 'ChatbotState.initial()';
+    return 'ChatbotState.initial(showSuggestions: $showSuggestions)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$InitialImpl &&
+            (identical(other.showSuggestions, showSuggestions) ||
+                other.showSuggestions == showSuggestions));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, showSuggestions);
+
+  /// Create a copy of ChatbotState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(bool showSuggestions) initial,
     required TResult Function() loading,
     required TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)
         success,
     required TResult Function(ApiErrorModel error) error,
   }) {
-    return initial();
+    return initial(showSuggestions);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(bool showSuggestions)? initial,
     TResult? Function()? loading,
     TResult? Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
         success,
     TResult? Function(ApiErrorModel error)? error,
   }) {
-    return initial?.call();
+    return initial?.call(showSuggestions);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(bool showSuggestions)? initial,
     TResult Function()? loading,
     TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -171,7 +200,7 @@ class _$InitialImpl implements _Initial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(showSuggestions);
     }
     return orElse();
   }
@@ -215,7 +244,15 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements ChatbotState {
-  const factory _Initial() = _$InitialImpl;
+  const factory _Initial({final bool showSuggestions}) = _$InitialImpl;
+
+  bool get showSuggestions;
+
+  /// Create a copy of ChatbotState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -259,7 +296,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(bool showSuggestions) initial,
     required TResult Function() loading,
     required TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)
@@ -272,7 +309,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(bool showSuggestions)? initial,
     TResult? Function()? loading,
     TResult? Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -285,7 +322,7 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(bool showSuggestions)? initial,
     TResult Function()? loading,
     TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -418,7 +455,7 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(bool showSuggestions) initial,
     required TResult Function() loading,
     required TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)
@@ -431,7 +468,7 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(bool showSuggestions)? initial,
     TResult? Function()? loading,
     TResult? Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -444,7 +481,7 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(bool showSuggestions)? initial,
     TResult Function()? loading,
     TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -579,7 +616,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(bool showSuggestions) initial,
     required TResult Function() loading,
     required TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)
@@ -592,7 +629,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(bool showSuggestions)? initial,
     TResult? Function()? loading,
     TResult? Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?
@@ -605,7 +642,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(bool showSuggestions)? initial,
     TResult Function()? loading,
     TResult Function(
             ChatbotRequestModel request, ChatbotResponseModel response)?

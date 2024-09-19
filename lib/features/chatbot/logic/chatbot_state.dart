@@ -6,11 +6,10 @@ part 'chatbot_state.freezed.dart';
 
 @freezed
 class ChatbotState with _$ChatbotState {
-  const factory ChatbotState.initial() = _Initial;
+  const factory ChatbotState.initial({bool showSuggestions}) = _Initial;
 
   const factory ChatbotState.loading() = Loading;
 
-  // Updated success factory to take both request and response arguments
   const factory ChatbotState.success({
     required ChatbotRequestModel request,
     required ChatbotResponseModel response,
@@ -18,3 +17,4 @@ class ChatbotState with _$ChatbotState {
 
   const factory ChatbotState.error({required ApiErrorModel error}) = Error;
 }
+
