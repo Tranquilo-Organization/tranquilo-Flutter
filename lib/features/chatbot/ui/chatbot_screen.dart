@@ -11,19 +11,21 @@ class ChatbotScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.oceanBlue,
-      body: Stack(
+      body: Column(
         children: [
-          // White Container filling most of the screen
-          Positioned(
-            top: 120.h,
-            left: 24.w,
-            right: 24.w,
-            bottom: 100.h, // leaving space for the floating message bar
+          SizedBox(height: 120.h), // Spacing from top
+
+          // White Container that fills two-thirds of the screen
+          Expanded(
+            flex: 2, // Fill two-thirds of the screen
             child: Container(
-              padding: EdgeInsets.all(24.w),
+              margin: EdgeInsets.only(top: 0.h), // Removed horizontal padding
               decoration: BoxDecoration(
                 color: ColorsManager.white,
-                borderRadius: BorderRadius.circular(24.r),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.r),
+                  topRight: Radius.circular(24.r),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: ColorsManager.jetBlack.withOpacity(0.1),
@@ -33,25 +35,30 @@ class ChatbotScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              padding:
+                  EdgeInsets.symmetric(vertical: 24.h), // Only vertical padding
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // ChatBot title and bigger logo
                   Text(
                     'ChatBot',
                     style: TextStyles.font20OceanBlueSemiBold,
                   ),
                   SizedBox(height: 8.h),
-                  SvgPicture.asset('assets/svgs/logo_chatbot.svg',
-                      height: 32.h),
-                  SizedBox(height: 40.h),
+                  SvgPicture.asset(
+                    'assets/svgs/logo_chatbot.svg',
+                    height: 64.h, // Increased size of logo
+                  ),
+                  SizedBox(height: 32.h),
 
                   // Identical Suggestion Containers
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // First Suggestion - Same size as the second
                       Expanded(
                         child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 8.w),
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: ColorsManager.white,
@@ -74,10 +81,9 @@ class ChatbotScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 16.w),
-                      // Second Suggestion - Same size as the first
                       Expanded(
                         child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 8.w),
                           padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: ColorsManager.white,
@@ -102,46 +108,54 @@ class ChatbotScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-          ),
 
-          // Floating message bar closer to the bottom of the screen
-          Positioned(
-            bottom: 24.h, // moved closer to the bottom
-            left: 24.w,
-            right: 24.w,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              decoration: BoxDecoration(
-                color: ColorsManager.white,
-                borderRadius: BorderRadius.circular(24.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorsManager.black.withOpacity(0.1),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Message Chatbot',
-                        border: InputBorder.none,
-                        hintStyle: TextStyles.font14JetBlackRegular,
+                  Spacer(), // Spacer to push message bar to the bottom
+
+                  // Message input inside the white container with more horizontal padding
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 24
+                            .w), // Added padding from the sides (left & right)
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h), // Padding inside the container
+                      decoration: BoxDecoration(
+                        color: ColorsManager.white,
+                        borderRadius: BorderRadius.circular(24.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorsManager.black.withOpacity(0.1),
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8
+                                      .w), // Added padding to the message input field
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Message Chatbot',
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyles.font14JetBlackRegular,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          SvgPicture.asset(
+                            'assets/svgs/chatbt_sending_button.svg',
+                            height: 32.h,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(width: 8.w),
-                  // Replacing the IconButton with SVG button for sending messages
-                  SvgPicture.asset(
-                    'assets/svgs/chatbot_button.svg',
-                    height: 32.h,
                   ),
                 ],
               ),
