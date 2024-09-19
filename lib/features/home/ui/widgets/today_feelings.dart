@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:tranquilo_app/features/home/ui/widgets/emoji_container.dart';
+import 'emoji_container.dart';
 
 class TodayFeelings extends StatefulWidget {
   const TodayFeelings({super.key});
 
   @override
-  _TodayFeelingsState createState() => _TodayFeelingsState();
+  State<TodayFeelings> createState() => _TodayFeelingsState();
 }
 
 class _TodayFeelingsState extends State<TodayFeelings> {
