@@ -11,6 +11,7 @@ class RoutineAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       backgroundColor: ColorsManager.white,
       leading: GestureDetector(
         onTap: (){
