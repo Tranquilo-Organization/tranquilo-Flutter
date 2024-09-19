@@ -4,8 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
+
+import '../../../../../core/theming/colors_manger.dart';
+import '../../../../../core/theming/styles.dart';
 
 class PersonalizedRoutines extends StatelessWidget {
   final String imagePath;
@@ -17,6 +18,7 @@ class PersonalizedRoutines extends StatelessWidget {
   final double? rightPosition;
   final double? leftPosition;
   final AlignmentGeometry? alignment;
+  final void Function() onPressed;
 
   const PersonalizedRoutines({
     super.key,
@@ -29,6 +31,7 @@ class PersonalizedRoutines extends StatelessWidget {
     this.leftPosition,
     this.alignment,
     this.imageHeight,
+    required this.onPressed,
   });
 
   @override
@@ -63,7 +66,7 @@ class PersonalizedRoutines extends StatelessWidget {
                   ),
                   verticalSpace(16),
                   AppTextButton(
-                    onPressed: () {},
+                    onPressed: onPressed,
                     textButton: 'Start',
                     padding: EdgeInsets.symmetric(vertical: 2.5.h),
                     fontSize: 14,

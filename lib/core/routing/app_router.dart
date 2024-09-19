@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
+import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
+import 'package:tranquilo_app/features/home/ui/night_routine.dart';
 import 'package:tranquilo_app/features/layout/app_layout.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
@@ -90,6 +93,18 @@ class AppRouter {
       case Routes.appLayout:
         return MaterialPageRoute(
           builder: (_) => const AppLayout(),
+        );
+      case Routes.morningScreen:
+        return MaterialPageRoute(
+          builder: (_) => const MorningRoutine(),
+        );
+      case Routes.afternoonScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AfternoonRoutine(),
+        );
+      case Routes.nightScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NightRoutine(),
         );
       default:
         return MaterialPageRoute(

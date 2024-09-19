@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/support_container.dart';
-
-import '../../../../core/theming/styles.dart';
+import '../../../../../core/theming/styles.dart';
 
 class CarouselSliderContainers extends StatelessWidget {
   const CarouselSliderContainers({super.key});

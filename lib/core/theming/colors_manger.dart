@@ -14,4 +14,8 @@ class ColorsManager {
   static const Color morningBorder = Color(0xFFE9D5A7);
   static const Color afternoonBorder = Color(0xFFE9A7BA);
   static const Color nightBorder = Color(0xFF868686);
+  static const Color firstTaskContainer = Color(0xFFFFF4DF);
+  static const Color secondTaskContainer = Color(0xFFF7E9E3);
+  static const Color thirdTaskContainer = Color(0xFFE8EBF4);
+
 }
