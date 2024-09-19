@@ -3,7 +3,9 @@ import 'package:retrofit/retrofit.dart';
 import 'package:tranquilo_app/core/network/api_constants.dart';
 import 'package:tranquilo_app/features/auth/login/data/model/login_request_body.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_response.dart';
+import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
 import 'package:tranquilo_app/features/auth/login/data/model/login_response_body.dart';
+import 'package:tranquilo_app/features/chatbot/data/model/chatbot_response_model.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_request_body.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_request_model.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_response_model.dart';
@@ -12,12 +14,14 @@ import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_pa
 import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_response_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_response_model.dart';
 
+
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
+  // Authentication APIs
   @POST(ApiConstants.login)
   Future<LoginResponseBody> login(
     @Body() LoginRequestBody loginRequestBody,
@@ -41,5 +45,11 @@ abstract class ApiService {
   @POST(ApiConstants.resetPassword)
   Future<ResetPasswordResponseModel> resetPassword(
     @Body() ResetPasswordRequestModel resetPasswordRequestModel,
+  );
+
+  // Chatbot API
+  @POST(ApiConstants.chatbotApiUrl)
+  Future<ChatbotResponseModel> getChatbotResponse(
+    @Body() ChatbotRequestModel chatbotRequestModel,
   );
 }
