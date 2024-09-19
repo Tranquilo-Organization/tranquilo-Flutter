@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
+import 'package:tranquilo_app/features/chatbot/logic/chatbot_state.dart';
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
-import 'package:tranquilo_app/features/chatbot/logic/chatbot_state.dart'; // Import ChatbotRequestModel
 
 class MessageInput extends StatefulWidget {
   const MessageInput({super.key});
@@ -42,7 +41,6 @@ class _MessageInputState extends State<MessageInput> {
             ),
             child: Row(
               children: [
-                // Expanded input to avoid overflow
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -52,9 +50,10 @@ class _MessageInputState extends State<MessageInput> {
                         hintText:
                             isLoading ? 'Loading...' : 'Type your message...',
                         border: InputBorder.none,
-                        hintStyle: TextStyles.font14JetBlackRegular,
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: ColorsManager.jetBlack),
                       ),
-                      enabled: !isLoading, // Disable input when loading
+                      enabled: !isLoading,
                     ),
                   ),
                 ),
@@ -62,14 +61,10 @@ class _MessageInputState extends State<MessageInput> {
                   onTap: () {
                     final message = _controller.text;
                     if (message.isNotEmpty && !isLoading) {
-                      // Create a ChatbotRequestModel with the user's message
                       final requestModel = ChatbotRequestModel(msg: message);
-
-                      // Call the cubit's getChatbotResponse method
                       context
                           .read<ChatbotCubit>()
                           .getChatbotResponse(requestModel);
-
                       _controller.clear(); // Clear the input after sending
                     }
                   },

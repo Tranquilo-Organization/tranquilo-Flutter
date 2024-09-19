@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/network/error_util.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_state.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/message_input.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/chatbot_suggestion.dart';
+import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_response_model.dart';
+import 'package:tranquilo_app/core/network/api_error_model.dart'; // Import ApiErrorModel
+import 'package:tranquilo_app/core/network/api_error_handler.dart'; // Import error handler
+import 'package:tranquilo_app/core/theming/styles.dart'; // Updated to reflect new TextStyles
 
 class ChatbotScreen extends StatelessWidget {
   const ChatbotScreen({super.key});
@@ -46,7 +50,6 @@ class ChatbotScreen extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(vertical: 24.h),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // ChatBot title and bigger logo
                     Text(
@@ -61,9 +64,9 @@ class ChatbotScreen extends StatelessWidget {
                     verticalSpace(32),
 
                     // Suggestion Container
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
+                      children: [
                         ChatbotSuggestion(text: "What's on your mind?"),
                         ChatbotSuggestion(text: 'How are you feeling today?'),
                       ],
@@ -74,20 +77,87 @@ class ChatbotScreen extends StatelessWidget {
                         builder: (context, state) {
                           List<Widget> messages = [];
 
-                          if (state is Success<ChatbotResponseModel>) {
-                            messages.addAll([
-                              Text(
-                                'Bot: ${state.data.response}', // Display bot's response
-                                style: TextStyles.font16JetBlackRegular,
+                          if (state is Loading) {
+                            messages.add(
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.h, horizontal: 16.w),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 8.w),
+                                  decoration: BoxDecoration(
+                                    color: ColorsManager.lighterSilver,
+                                    borderRadius: BorderRadius.circular(16.r),
+                                  ),
+                                  child: Text(
+                                    'Loading...',
+                                    style: TextStyles.font16JetBlackRegular,
+                                  ),
+                                ),
                               ),
-                            ]);
+                            );
+                          } else if (state is Success) {
+                            // Display user message (request) and bot response
+                            messages.add(
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.h, horizontal: 16.w),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 8.w),
+                                  decoration: BoxDecoration(
+                                    color: ColorsManager.oceanBlue,
+                                    borderRadius: BorderRadius.circular(16.r),
+                                  ),
+                                  child: Text(
+                                    'You: ${state.request.msg}', // Display user message
+                                    style: TextStyles.font16WhiteSemiBold,
+                                  ),
+                                ),
+                              ),
+                            );
+
+                            messages.add(
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.h, horizontal: 16.w),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 8.w),
+                                  decoration: BoxDecoration(
+                                    color: ColorsManager.lightGreyBlue,
+                                    borderRadius: BorderRadius.circular(16.r),
+                                  ),
+                                  child: Text(
+                                    'Bot: ${state.response.response}', // Display bot response
+                                    style: TextStyles.font16JetBlackRegular,
+                                  ),
+                                ),
+                              ),
+                            );
                           } else if (state is Error) {
-                            messages.addAll([
-                              Text(
-                                'Error: ${state.error.message}', // Show error message
-                                style: const TextStyle(color: Colors.red),
+                            messages.add(
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.h, horizontal: 16.w),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 4.h, horizontal: 8.w),
+                                  decoration: BoxDecoration(
+                                    color: Colors.redAccent,
+                                    borderRadius: BorderRadius.circular(16.r),
+                                  ),
+                                  child: Text(
+                                    'Error: ${getErrorMessage(state.error)}', // Use getErrorMessage
+                                    style: TextStyles.font16WhiteSemiBold,
+                                  ),
+                                ),
                               ),
-                            ]);
+                            );
                           }
 
                           return Column(
@@ -96,13 +166,8 @@ class ChatbotScreen extends StatelessWidget {
                               Expanded(
                                 child: ListView(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 24.w),
-                                  children: messages.isEmpty
-                                      ? [
-                                          Text(
-                                              'Start a conversation with the bot')
-                                        ]
-                                      : messages,
+                                      EdgeInsets.symmetric(horizontal: 16.w),
+                                  children: messages,
                                 ),
                               ),
 
