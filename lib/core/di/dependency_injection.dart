@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
+import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
+import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
+import 'package:tranquilo_app/features/chatbot/data/api/chat_bot_api_call.dart';
 import 'package:tranquilo_app/features/auth/otp/data/repo/verify_otp_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
@@ -19,6 +22,7 @@ Future<void> setupGetIt() async {
   // Dio & ApiService
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
+  getIt.registerLazySingleton<ChatbotApiService>(() => ChatbotApiService(dio));
 
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
@@ -40,4 +44,7 @@ Future<void> setupGetIt() async {
     // reset password
   getIt.registerLazySingleton<ResetPasswordRepo>(() => ResetPasswordRepo(getIt()));
   getIt.registerLazySingleton<ResetPasswordCubit>(() => ResetPasswordCubit(getIt()));
+      // chatbot
+  getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));
+  getIt.registerLazySingleton<ChatbotCubit>(() => ChatbotCubit(getIt()));
 }

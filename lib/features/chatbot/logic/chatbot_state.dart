@@ -1,6 +1,5 @@
 import '../../../../../core/network/api_error_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tranquilo_app/features/chatbot/data/model/chatbot_response_model.dart';
 
 part 'chatbot_state.freezed.dart';
 

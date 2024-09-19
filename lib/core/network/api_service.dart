@@ -14,7 +14,6 @@ import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_pa
 import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_response_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_response_model.dart';
 
-
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -45,11 +44,5 @@ abstract class ApiService {
   @POST(ApiConstants.resetPassword)
   Future<ResetPasswordResponseModel> resetPassword(
     @Body() ResetPasswordRequestModel resetPasswordRequestModel,
-  );
-
-  // Chatbot API
-  @POST(ApiConstants.chatbotApiUrl)
-  Future<ChatbotResponseModel> getChatbotResponse(
-    @Body() ChatbotRequestModel chatbotRequestModel,
   );
 }
