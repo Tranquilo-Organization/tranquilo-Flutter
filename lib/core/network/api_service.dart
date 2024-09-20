@@ -13,6 +13,7 @@ import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_pas
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_request_model.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_response_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_response_model.dart';
+import 'package:tranquilo_app/features/community/data/model/post_response.dart';
 
 part 'api_service.g.dart';
 
@@ -45,4 +46,8 @@ abstract class ApiService {
   Future<ResetPasswordResponseModel> resetPassword(
     @Body() ResetPasswordRequestModel resetPasswordRequestModel,
   );
+
+  @GET(ApiConstants.communityPosts)
+  Future<GetPostsResponseBody> communityPosts();
 }
+

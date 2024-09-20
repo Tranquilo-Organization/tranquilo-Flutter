@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/features/community/data/model/post.dart';
+import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/filter_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_widget.dart';
-
-import '../widgets/post_widget.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/posts_bloc_builder.dart';
+import '../../../../core/di/dependency_injection.dart';
 
 class CommunityPostScreen extends StatefulWidget {
   const CommunityPostScreen({super.key});
@@ -18,51 +19,46 @@ class CommunityPostScreen extends StatefulWidget {
 class _CommunityPostScreenState extends State<CommunityPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    verticalSpace(20),
-                    Text(
-                      'Community',
-                      style: TextStyles.font20OceanBlueSemiBold,
-                      textAlign: TextAlign.center,
-                    ),
-                    verticalSpace(20),
-                    Row(
-                      children: [
-                        const CreatePostWidget(),
-                        horizontalSpace(5),
-                        const Expanded(
-                          flex: 1,
-                          child: FilterWidget(),
-                        ),
-                      ],
-                    ),
-                    verticalSpace(20),
-                  ],
+    return BlocProvider(
+      create: (context) => getIt<PostsCubit>()..fetchPosts(),
+      child: Scaffold(
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                sliver: SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      verticalSpace(20),
+                      Text(
+                        'Community',
+                        style: TextStyles.font20OceanBlueSemiBold,
+                        textAlign: TextAlign.center,
+                      ),
+                      verticalSpace(20),
+                      Row(
+                        children: [
+                          const CreatePostWidget(),
+                          horizontalSpace(5),
+                          const Expanded(
+                            flex: 1,
+                            child: FilterWidget(),
+                          ),
+                        ],
+                      ),
+                      verticalSpace(20),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: posts.length,
-                  (context, index) {
-                    final post = posts[index];
-                    return PostWidget(post: post);
-                  },
-                ),
+              SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                sliver: const PostsBlocBuilder(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -15,6 +15,8 @@ import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_
 import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/repo/forget_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
+import 'package:tranquilo_app/features/community/data/repo/post_repo.dart';
+import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -47,4 +49,7 @@ Future<void> setupGetIt() async {
       // chatbot
   getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));
   getIt.registerLazySingleton<ChatbotCubit>(() => ChatbotCubit(getIt()));
+   // Posts
+  getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
+  getIt.registerLazySingleton<PostsCubit>(() => PostsCubit(getIt()));
 }

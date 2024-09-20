@@ -10,6 +10,7 @@ class ApiConstants {
   static const String verifyOtp = "account/verify-otp";
   static const String resetPassword = "account/reset-password";
   static const String chatbot = "chatbot";
+  static const String communityPosts = "Post";
 }
 
 class ApiErrors {
