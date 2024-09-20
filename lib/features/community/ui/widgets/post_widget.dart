@@ -31,7 +31,7 @@ class PostWidget extends StatelessWidget {
                 radius: 20.r,
                 backgroundColor: ColorsManager.white,
                 child: SvgPicture.asset(
-                    'assets/svgs/anonymous.svg'), // Updated avatar
+                    'assets/svgs/anomymous.svg'), // Updated avatar
               ),
               SizedBox(width: 12.w),
               Column(
