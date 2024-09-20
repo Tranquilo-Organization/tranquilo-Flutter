@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/features/community/data/model/post.dart';
+import 'package:tranquilo_app/features/community/data/model/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/screens/comments_bottom_sheet.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -10,7 +10,6 @@ import '../../../../core/theming/styles.dart';
 
 class PostCommentsButton extends StatelessWidget {
   final Post post;
-
   const PostCommentsButton({super.key, required this.post});
 
   @override
@@ -55,7 +54,7 @@ class PostCommentsButton extends StatelessWidget {
           ),
           horizontalSpace(4),
           Text(
-            '${post.comments}',
+            post.commentsCount.toString(),
             style: TextStyles.font12JetBlackRegular,
           ),
         ],
@@ -63,3 +62,4 @@ class PostCommentsButton extends StatelessWidget {
     );
   }
 }
+

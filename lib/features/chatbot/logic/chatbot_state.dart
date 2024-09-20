@@ -6,7 +6,7 @@ part 'chatbot_state.freezed.dart';
 
 @freezed
 class ChatbotState with _$ChatbotState {
-  const factory ChatbotState.initial({bool showSuggestions}) = _Initial;
+  const factory ChatbotState.initial({@Default(true) bool showSuggestions}) = _Initial;
 
   const factory ChatbotState.loading() = Loading;
 

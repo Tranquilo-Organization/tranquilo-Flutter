@@ -21,3 +21,4 @@ class LoginResponseBody {
   /// (which will be serialized into JSON).
   Map<String, dynamic> toJson() => _$LoginResponseBodyToJson(this);
 }
+

@@ -4,9 +4,10 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/features/community/data/model/post.dart';
+import 'package:tranquilo_app/features/community/data/model/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_comments_button.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_votes.dart';
+import '../../../../core/helpers/format_date.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
@@ -41,14 +42,14 @@ class PostWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(post.author, style: TextStyles.font14JetBlackMedium),
-                  Text(post.date, style: TextStyles.font12DarkGreyLight),
+                  Text(post.userName, style: TextStyles.font14JetBlackMedium),
+                  Text(formatDate(post.date), style: TextStyles.font12DarkGreyLight),
                 ],
               ),
             ],
           ),
           verticalSpace(8),
-          Text(post.content, style: TextStyles.font16JetBlackRegular),
+          Text(post.postText, style: TextStyles.font16JetBlackRegular),
           verticalSpace(16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
