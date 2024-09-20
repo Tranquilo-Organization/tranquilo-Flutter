@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({Key? key}) : super(key: key);
+  const CreatePostScreen({super.key});
 
   @override
-  _CreatePostScreenState createState() => _CreatePostScreenState();
+  State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
@@ -16,109 +18,87 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      // Wrapping the widget in SafeArea
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpace(16), // Space at the top after SafeArea
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.close, color: ColorsManager.jetBlack),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  Text(
-                    'Create Post',
-                    style: TextStyles.font20OceanBlueSemiBold,
-                  ),
-                  SizedBox(
-                    width: 66.w,
-                    height: 37.h,
-                    child: TextButton(
-                      onPressed: () {
-                        // Post action goes here
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            verticalSpace(16),
+            const CreatePostAppBar(),
+            verticalSpace(16),
+            Container(
+              width: double.infinity,
+              height: 47.h,
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              decoration: BoxDecoration(
+                color: ColorsManager.oceanBlue.withOpacity(0.14),
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Post anonymously',
+                      style: TextStyles.font14OceanBlueRegular,
+                    ),
+                    Switch(
+                      value: isAnonymous,
+                      onChanged: (value) {
+                        setState(() {
+                          isAnonymous = value;
+                        });
                       },
-                      child:
-                          Text('Post', style: TextStyles.font16WhiteSemiBold),
-                      style: TextButton.styleFrom(
-                        backgroundColor: ColorsManager.oceanBlue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
+                      activeColor: ColorsManager.white,
+                      activeTrackColor: ColorsManager.oceanBlue,
+                      inactiveThumbColor: ColorsManager.white,
+                      inactiveTrackColor: ColorsManager.inActiveSwitch,
+                      trackOutlineColor: const WidgetStatePropertyAll<Color>(
+                          ColorsManager.inActiveSwitch),
                     ),
-                  ),
-                ],
-              ),
-              verticalSpace(16),
-              // Circular Container with given dimensions and full border-radius
-              Container(
-                width: 327.w,
-                height: 47.h,
-                decoration: BoxDecoration(
-                  color: ColorsManager.lighterSilver
-                      .withOpacity(1.0), // Ensure it's visible
-                  borderRadius: BorderRadius.circular(
-                      8.r), // All corners are circular now
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Post anonymously',
-                          style: TextStyles.font14OceanBlueMedium),
-                      Switch(
-                        value: isAnonymous,
-                        onChanged: (value) {
-                          setState(() {
-                            isAnonymous = value;
-                          });
-                        },
-                        activeColor: ColorsManager
-                            .oceanBlue, // Change the indicator color when active
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
-              verticalSpace(20),
-              Row(
+            ),
+            verticalSpace(20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(
-                      isAnonymous
-                          ? 'assets/images/logo.png'
-                          : 'assets/svgs/second_morning_task.svg',
+                  ClipOval(
+                    child: Container(
+                      width: 40.w,  // Adjust to match the diameter you want for the avatar
+                      height: 40.w,
+                      color: Colors.transparent, // Set background color if needed
+                      child: SvgPicture.asset(
+                        isAnonymous
+                            ? 'assets/svgs/anonymous.svg'
+                            : 'assets/svgs/default_profile.svg',
+                        fit: BoxFit.cover,  // Ensure the SVG scales properly
+                      ),
                     ),
-                    radius: 24.w,
                   ),
                   horizontalSpace(12),
                   Text(
-                    isAnonymous ? 'Anonymous' : 'Esraa Morsii',
+                    isAnonymous ? 'Anonymous' : 'Guest',
                     style: TextStyles.font16JetBlackMedium,
                   ),
                 ],
               ),
-              verticalSpace(20),
-              TextField(
+            ),
+            verticalSpace(20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: TextField(
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: "What's on your mind?",
+                  hintText: isAnonymous ? 'Submit an anonymous post...' : "What's on your mind?",
                   hintStyle: TextStyles.font14JetBlackRegular,
                   border: InputBorder.none,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

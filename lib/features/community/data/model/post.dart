@@ -1,18 +1,17 @@
-// lib/models/post_model.dart
 class Post {
   final String author;
   final String date;
   final String content;
-  final int upvotes;
-  final int downvotes;
+  final int upVotes;
+  final int downVotes;
   final int comments;
 
   Post({
     required this.author,
     required this.date,
     required this.content,
-    required this.upvotes,
-    required this.downvotes,
+    required this.upVotes,
+    required this.downVotes,
     required this.comments,
   });
 }
@@ -25,8 +24,9 @@ final List<Post> posts = List.generate(50, (index) {
     content: "This is a sample post content for user $index. "
         "It is a bit longer to test the scrolling behavior "
         "when there are many posts in the feed.",
-    upvotes: 10 + index,
-    downvotes: index,
+    upVotes: 10 + index,
+    downVotes: index,
     comments: 5 + index,
   );
 });
+

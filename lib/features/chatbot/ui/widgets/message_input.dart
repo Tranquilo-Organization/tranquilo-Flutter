@@ -67,7 +67,7 @@ class _MessageInputState extends State<MessageInput> {
                   }
                 },
                 child: SvgPicture.asset(
-                  'assets/svgs/chatbt_sending_button.svg',
+                  'assets/svgs/chatbot_sending_button.svg',
                   height: 32.h,
                 ),
               ),

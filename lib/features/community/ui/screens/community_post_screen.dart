@@ -3,10 +3,10 @@ import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/features/community/data/model/post.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/post.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/filter_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_widget.dart';
-// lib/screens/community_post_screen.dart
 
+import '../widgets/post_widget.dart';
 
 class CommunityPostScreen extends StatefulWidget {
   const CommunityPostScreen({super.key});
@@ -20,31 +20,49 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Community',
-                  style: TextStyles.font20OceanBlueSemiBold,
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    verticalSpace(20),
+                    Text(
+                      'Community',
+                      style: TextStyles.font20OceanBlueSemiBold,
+                      textAlign: TextAlign.center,
+                    ),
+                    verticalSpace(20),
+                    Row(
+                      children: [
+                        const CreatePostWidget(),
+                        horizontalSpace(5),
+                        const Expanded(
+                          flex: 1,
+                          child: FilterWidget(),
+                        ),
+                      ],
+                    ),
+                    verticalSpace(20),
+                  ],
                 ),
               ),
-              verticalSpace(20),
-              const CreatePostWidget(),
-              verticalSpace(20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: posts.length,
-                  itemBuilder: (context, index) {
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: posts.length,
+                  (context, index) {
                     final post = posts[index];
                     return PostWidget(post: post);
                   },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
