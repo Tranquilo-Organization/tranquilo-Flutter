@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/community/data/model/post.dart';
-// lib/widgets/post_widget.dart
 
 class PostWidget extends StatelessWidget {
   final Post post;
@@ -25,13 +23,16 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Post Header
           Row(
             children: [
               CircleAvatar(
                 radius: 20.r,
                 backgroundColor: ColorsManager.white,
                 child: SvgPicture.asset(
-                    'assets/svgs/anomymous.svg'), // Updated avatar
+                    'assets/svgs/apple.svg', // Ensure path is correct
+                    width: 24.w,
+                    height: 24.h), // Adjust size of the icon if needed
               ),
               SizedBox(width: 12.w),
               Column(
@@ -44,53 +45,45 @@ class PostWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8.h),
+
+          // Post Content
           Text(post.content, style: TextStyles.font16JetBlackRegular),
           SizedBox(height: 16.h),
+
+          // Action Row (Upvote/Downvote and Comments)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                    decoration: BoxDecoration(
-                      color: ColorsManager.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: ColorsManager.containerSilver),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset('assets/svgs/upvote.svg'),
-                        SizedBox(width: 4.w),
-                        Text(post.upvotes.toString(),
-                            style: TextStyles.font14JetBlackRegular),
-                        SizedBox(width: 8.w),
-                        Container(
-                          height: 16.h,
-                          width: 1.w,
-                          color: Colors.grey.shade400, // Vertical divider line
-                        ),
-                        SizedBox(width: 8.w),
-                        SvgPicture.asset('assets/svgs/downvote.svg'),
-                        SizedBox(width: 4.w),
-                        Text(post.downvotes.toString(),
-                            style: TextStyles.font14JetBlackRegular),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: ColorsManager.white,
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: ColorsManager.containerSilver),
-                ),
+              // Upvote/Downvote Capsule
+              _buildCapsuleButton(
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/svgs/comment.svg'),
+                    SvgPicture.asset('assets/svgs/upvote.svg',
+                        width: 16.w, height: 16.h),
+                    SizedBox(width: 4.w),
+                    Text(post.upvotes.toString(),
+                        style: TextStyles.font14JetBlackRegular),
+                    Container(
+                      height: 20.h,
+                      width: 1.w,
+                      color: Colors.grey.shade400,
+                      margin: EdgeInsets.symmetric(horizontal: 8.w),
+                    ),
+                    SvgPicture.asset('assets/svgs/downvote.svg',
+                        width: 16.w, height: 16.h),
+                    SizedBox(width: 4.w),
+                    Text(post.downvotes.toString(),
+                        style: TextStyles.font14JetBlackRegular),
+                  ],
+                ),
+              ),
+
+              // Comment Capsule
+              _buildCapsuleButton(
+                child: Row(
+                  children: [
+                    SvgPicture.asset('assets/svgs/comment.svg',
+                        width: 16.w, height: 16.h),
                     SizedBox(width: 4.w),
                     Text('${post.comments} Comments',
                         style: TextStyles.font14JetBlackRegular),
@@ -101,6 +94,22 @@ class PostWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  // Helper method to build capsule using OutlinedButton
+  Widget _buildCapsuleButton({required Widget child}) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        backgroundColor: Colors.grey.shade200, // Light background color
+        side: BorderSide(color: Colors.grey.shade300), // Border color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r), // Capsule shape
+        ),
+      ),
+      onPressed: () {},
+      child: child,
     );
   }
 }

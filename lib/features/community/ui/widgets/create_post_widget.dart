@@ -33,7 +33,7 @@ class CreatePostWidget extends StatelessWidget {
               radius: 20.r,
               backgroundColor: ColorsManager.white,
               child: SvgPicture.asset(
-                'assets/svgs/anonymous.svg',
+                'assets/svgs/anomymous.svg',
                 fit: BoxFit.cover,
               ),
             ),
