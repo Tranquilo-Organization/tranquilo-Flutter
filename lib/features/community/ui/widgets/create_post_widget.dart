@@ -5,6 +5,7 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
 
 class CreatePostWidget extends StatelessWidget {
   const CreatePostWidget({super.key});
@@ -13,18 +14,17 @@ class CreatePostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to the Create Post Screen
         context.pushNamed(Routes.createPostScreen);
       },
       child: Container(
         height: 58.h,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.only(left: 8.w, right: 63.w),
         decoration: BoxDecoration(
           color: ColorsManager.white,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(8.r),
           border: Border.all(
-            color: Colors.grey.shade400,
-            width: 1.0,
+            color: ColorsManager.containerSilver,
+            width: 1.5.w,
           ),
         ),
         child: Row(
@@ -33,19 +33,14 @@ class CreatePostWidget extends StatelessWidget {
               radius: 20.r,
               backgroundColor: ColorsManager.white,
               child: SvgPicture.asset(
-                'assets/svgs/anomymous.svg',
+                'assets/svgs/default_profile.svg',
                 fit: BoxFit.cover,
               ),
             ),
-            horizontalSpace(12.w),
-            Expanded(
-              child: Text(
-                "What's on your mind?",
-                style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontSize: 16.sp,
-                ),
-              ),
+            horizontalSpace(5.w),
+            Text(
+              "What's on your mind?",
+              style: TextStyles.font14lightGreyRegular,
             ),
           ],
         ),
@@ -53,3 +48,5 @@ class CreatePostWidget extends StatelessWidget {
     );
   }
 }
+
+

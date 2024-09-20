@@ -10,6 +10,7 @@ class ColorsManager {
   static const Color lightSilver = Color(0xFFD9D9D9);
   static const Color lighterSilver = Color(0xFFD1E1F2);
   static const Color containerSilver = Color(0xFFD7D7D7);
+  static const Color lightGrey = Color(0xFFAEAEAE);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color morningBorder = Color(0xFFE9D5A7);
@@ -18,4 +19,5 @@ class ColorsManager {
   static const Color firstTaskContainer = Color(0xFFFFF4DF);
   static const Color secondTaskContainer = Color(0xFFF7E9E3);
   static const Color thirdTaskContainer = Color(0xFFE8EBF4);
+  static const Color inActiveSwitch = Color(0xFFAEB3BE);
 }

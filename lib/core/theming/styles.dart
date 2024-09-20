@@ -29,6 +29,12 @@ class TextStyles {
     color: ColorsManager.oceanBlue,
   );
 
+  static TextStyle font14OceanBlueRegular = GoogleFonts.poppins(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.oceanBlue,
+  );
+
   static TextStyle font14JetBlackMedium = GoogleFonts.poppins(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
@@ -61,6 +67,12 @@ class TextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.lightSilver,
+  );
+
+  static TextStyle font14lightGreyRegular = GoogleFonts.poppins(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.lightGrey,
   );
 
   static TextStyle font16JetBlackMedium = GoogleFonts.poppins(

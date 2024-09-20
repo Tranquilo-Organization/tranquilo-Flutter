@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/community/data/model/post.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/post_comments_button.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/post_votes.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
 
-  const PostWidget({Key? key, required this.post}) : super(key: key);
+  const PostWidget({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +26,18 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Post Header
           Row(
             children: [
               CircleAvatar(
                 radius: 20.r,
                 backgroundColor: ColorsManager.white,
                 child: SvgPicture.asset(
-                    'assets/svgs/apple.svg', // Ensure path is correct
-                    width: 24.w,
-                    height: 24.h), // Adjust size of the icon if needed
+                  'assets/svgs/default_profile.svg',
+                  width: 32.w,
+                  height: 32.h,
+                ),
               ),
-              SizedBox(width: 12.w),
+              horizontalSpace(12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,72 +47,22 @@ class PostWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8.h),
-
-          // Post Content
+          verticalSpace(8),
           Text(post.content, style: TextStyles.font16JetBlackRegular),
-          SizedBox(height: 16.h),
-
-          // Action Row (Upvote/Downvote and Comments)
+          verticalSpace(16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Upvote/Downvote Capsule
-              _buildCapsuleButton(
-                child: Row(
-                  children: [
-                    SvgPicture.asset('assets/svgs/upvote.svg',
-                        width: 16.w, height: 16.h),
-                    SizedBox(width: 4.w),
-                    Text(post.upvotes.toString(),
-                        style: TextStyles.font14JetBlackRegular),
-                    Container(
-                      height: 20.h,
-                      width: 1.w,
-                      color: Colors.grey.shade400,
-                      margin: EdgeInsets.symmetric(horizontal: 8.w),
-                    ),
-                    SvgPicture.asset('assets/svgs/downvote.svg',
-                        width: 16.w, height: 16.h),
-                    SizedBox(width: 4.w),
-                    Text(post.downvotes.toString(),
-                        style: TextStyles.font14JetBlackRegular),
-                  ],
-                ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width*0.5,
+                child: PostVotes(post: post),
               ),
-
-              // Comment Capsule
-              _buildCapsuleButton(
-                child: Row(
-                  children: [
-                    SvgPicture.asset('assets/svgs/comment.svg',
-                        width: 16.w, height: 16.h),
-                    SizedBox(width: 4.w),
-                    Text('${post.comments} Comments',
-                        style: TextStyles.font14JetBlackRegular),
-                  ],
-                ),
-              ),
+              PostCommentsButton(post: post),
             ],
           ),
         ],
       ),
     );
   }
-
-  // Helper method to build capsule using OutlinedButton
-  Widget _buildCapsuleButton({required Widget child}) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-        backgroundColor: Colors.grey.shade200, // Light background color
-        side: BorderSide(color: Colors.grey.shade300), // Border color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.r), // Capsule shape
-        ),
-      ),
-      onPressed: () {},
-      child: child,
-    );
-  }
 }
+
