@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
-import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
-import 'package:tranquilo_app/features/home/ui/night_routine.dart';
-import 'package:tranquilo_app/features/layout/app_layout.dart';
-import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
-import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
-import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
+import 'package:tranquilo_app/features/layout/app_layout.dart';
 import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
+import 'package:tranquilo_app/features/home/ui/night_routine.dart';
+import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
+import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_starting.dart';
+import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
+import 'package:tranquilo_app/features/community/ui/screens/create_post_screen.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
@@ -105,6 +106,10 @@ class AppRouter {
       case Routes.nightScreen:
         return MaterialPageRoute(
           builder: (_) => const NightRoutine(),
+        );
+      case Routes.createPostScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CreatePostScreen(),
         );
       default:
         return MaterialPageRoute(

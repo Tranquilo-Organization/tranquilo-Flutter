@@ -14,4 +14,5 @@ class Routes {
   static const String morningScreen = '/morningScreen';
   static const String afternoonScreen = '/afternoonScreen';
   static const String nightScreen = '/nightScreen';
+  static const String createPostScreen = '/createPostScreen';
 }
