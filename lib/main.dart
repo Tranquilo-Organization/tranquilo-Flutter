@@ -12,24 +12,23 @@ void main() async {
 
   bool isFirstLaunch = await SharedPrefHelper.isFirstLaunch();
   bool isLoggedIn = isFirstLaunch ? false : await checkIfLoggedInUser();
-  bool isSurveyCompleted = isLoggedIn ? await SharedPrefHelper.isSurveyCompleted() : false;
+  bool isSurveyCompleted =
+      isLoggedIn ? await SharedPrefHelper.isSurveyCompleted() : false;
 
   runApp(
     TranquiloApp(
       appRouter: AppRouter(),
-       initialRoute: Routes.appLayout
-      //  isFirstLaunch
-      //     ? Routes.onBoardingScreen
-      //     : (isLoggedIn
-      //     ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
-      //     : Routes.loginScreen),
+      initialRoute: isFirstLaunch
+          ? Routes.onBoardingScreen
+          : (isLoggedIn
+              ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
+              : Routes.loginScreen),
     ),
   );
 }
 
 Future<bool> checkIfLoggedInUser() async {
-  String? userToken = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+  String? userToken =
+      await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   return userToken != null && userToken.isNotEmpty;
 }
-
-
