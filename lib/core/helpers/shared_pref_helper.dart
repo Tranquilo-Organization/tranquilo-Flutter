@@ -148,6 +148,20 @@ class SharedPrefHelper {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(SharedPrefKeys.isSurveyCompleted, value);
   }
+
+  /// Fetch the saved survey result as a String
+  static Future<String?> getSurveyResult() async {
+    debugPrint('SharedPrefHelper : Retrieving survey result');
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString('surveyResult');
+  }
+
+  // Optionally, create a method to save the survey result
+  static Future<void> saveSurveyResult(String value) async {
+    debugPrint('SharedPrefHelper : Saving survey result');
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('surveyResult', value);
+  }
 }
 
   // /// Removes OTP from FlutterSecureStorage

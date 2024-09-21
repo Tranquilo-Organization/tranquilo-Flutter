@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'dart:convert'; // Import to use jsonEncode
 import 'package:tranquilo_app/core/network/api_error_model.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_state.dart';
@@ -17,9 +18,10 @@ class SurveyCubit extends Cubit<SurveyState> {
     final result = await _surveyRepo.getClassificationResponse(requestModel);
 
     result.when(
-      success: (data) {
-        // Save the result to SharedPreferences as a JSON string
-        SharedPrefHelper.setData('surveyResult', data.toJson());
+      success: (data) async {
+        // Convert the data to a JSON string and save it in SharedPreferences
+        String jsonString = jsonEncode(data.toJson());
+        await SharedPrefHelper.setData('surveyResult', jsonString);
         emit(SurveyState.success(data));
       },
       failure: (error) {
@@ -28,8 +30,9 @@ class SurveyCubit extends Cubit<SurveyState> {
     );
   }
 
-  // Method to save survey result to SharedPreferences
+  // Method to save survey result to SharedPreferences (with jsonEncode)
   Future<void> _saveSurveyResult(SurveyResponseModel data) async {
-    await SharedPrefHelper.setData('surveyResult', data.toJson());
+    String jsonString = jsonEncode(data.toJson());
+    await SharedPrefHelper.setData('surveyResult', jsonString);
   }
 }

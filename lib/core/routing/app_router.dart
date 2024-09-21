@@ -96,7 +96,11 @@ class AppRouter {
         );
       case Routes.surveyResult:
         return MaterialPageRoute(
-          builder: (_) => const SurveyResult(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
+            child: const SurveyResult(),
+          ),
         );
       case Routes.appLayout:
         return MaterialPageRoute(

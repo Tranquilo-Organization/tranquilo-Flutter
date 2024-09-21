@@ -5,8 +5,8 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_button.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/survey/ui/widgets/list_tile_recommend.dart';
 import 'package:tranquilo_app/features/survey/data/model/survey_response_model.dart';
@@ -28,10 +28,10 @@ class _SurveyResultState extends State<SurveyResult> {
   }
 
   Future<void> _loadSurveyResult() async {
-    final resultJson = await SharedPrefHelper.getString('surveyResult');
+    final resultJson = await SharedPrefHelper.getSurveyResult(); // Retrieve survey result
     debugPrint('Retrieved JSON string: $resultJson'); // Debugging line
 
-    if (resultJson.isNotEmpty) {
+    if (resultJson != null && resultJson.isNotEmpty) {
       // Convert the JSON string back to a Map
       final Map<String, dynamic> jsonMap = jsonDecode(resultJson);
       // Create a SurveyResponseModel from the JSON Map
@@ -66,14 +66,13 @@ class _SurveyResultState extends State<SurveyResult> {
               ),
               verticalSpace(16),
               Text(
-                'Your Anxiety level is $_anxietyLevel, here\nare some recommendations :',
+                'Your anxiety level is $_anxietyLevel, here\nare some recommendations:',
                 style: TextStyles.font16JetBlackMedium,
               ),
               verticalSpace(12),
               const ListTileRecommend(
                 icon: 'assets/svgs/routine.svg',
-                text:
-                    'Check your personalized routine to manage your anxiety level',
+                text: 'Check your personalized routine to manage your anxiety level',
               ),
               const ListTileRecommend(
                 icon: 'assets/svgs/community.svg',
