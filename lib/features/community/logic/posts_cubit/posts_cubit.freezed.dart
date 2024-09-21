@@ -46,7 +46,7 @@ mixin _$PostsState<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
-    required TResult Function(SignUpError<T> value) postsError,
+    required TResult Function(PostsError<T> value) postsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$PostsState<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
-    TResult? Function(SignUpError<T> value)? postsError,
+    TResult? Function(PostsError<T> value)? postsError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$PostsState<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
-    TResult Function(SignUpError<T> value)? postsError,
+    TResult Function(PostsError<T> value)? postsError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,7 +170,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
-    required TResult Function(SignUpError<T> value) postsError,
+    required TResult Function(PostsError<T> value) postsError,
   }) {
     return initial(this);
   }
@@ -181,7 +181,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
-    TResult? Function(SignUpError<T> value)? postsError,
+    TResult? Function(PostsError<T> value)? postsError,
   }) {
     return initial?.call(this);
   }
@@ -192,7 +192,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
-    TResult Function(SignUpError<T> value)? postsError,
+    TResult Function(PostsError<T> value)? postsError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -287,7 +287,7 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
-    required TResult Function(SignUpError<T> value) postsError,
+    required TResult Function(PostsError<T> value) postsError,
   }) {
     return postsLoading(this);
   }
@@ -298,7 +298,7 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
-    TResult? Function(SignUpError<T> value)? postsError,
+    TResult? Function(PostsError<T> value)? postsError,
   }) {
     return postsLoading?.call(this);
   }
@@ -309,7 +309,7 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
-    TResult Function(SignUpError<T> value)? postsError,
+    TResult Function(PostsError<T> value)? postsError,
     required TResult orElse(),
   }) {
     if (postsLoading != null) {
@@ -439,7 +439,7 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
-    required TResult Function(SignUpError<T> value) postsError,
+    required TResult Function(PostsError<T> value) postsError,
   }) {
     return postsSuccess(this);
   }
@@ -450,7 +450,7 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
-    TResult? Function(SignUpError<T> value)? postsError,
+    TResult? Function(PostsError<T> value)? postsError,
   }) {
     return postsSuccess?.call(this);
   }
@@ -461,7 +461,7 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
-    TResult Function(SignUpError<T> value)? postsError,
+    TResult Function(PostsError<T> value)? postsError,
     required TResult orElse(),
   }) {
     if (postsSuccess != null) {
@@ -485,20 +485,20 @@ abstract class PostsSuccess<T> implements PostsState<T> {
 }
 
 /// @nodoc
-abstract class _$$SignUpErrorImplCopyWith<T, $Res> {
-  factory _$$SignUpErrorImplCopyWith(_$SignUpErrorImpl<T> value,
-          $Res Function(_$SignUpErrorImpl<T>) then) =
-      __$$SignUpErrorImplCopyWithImpl<T, $Res>;
+abstract class _$$PostsErrorImplCopyWith<T, $Res> {
+  factory _$$PostsErrorImplCopyWith(
+          _$PostsErrorImpl<T> value, $Res Function(_$PostsErrorImpl<T>) then) =
+      __$$PostsErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({ApiErrorModel error});
 }
 
 /// @nodoc
-class __$$SignUpErrorImplCopyWithImpl<T, $Res>
-    extends _$PostsStateCopyWithImpl<T, $Res, _$SignUpErrorImpl<T>>
-    implements _$$SignUpErrorImplCopyWith<T, $Res> {
-  __$$SignUpErrorImplCopyWithImpl(
-      _$SignUpErrorImpl<T> _value, $Res Function(_$SignUpErrorImpl<T>) _then)
+class __$$PostsErrorImplCopyWithImpl<T, $Res>
+    extends _$PostsStateCopyWithImpl<T, $Res, _$PostsErrorImpl<T>>
+    implements _$$PostsErrorImplCopyWith<T, $Res> {
+  __$$PostsErrorImplCopyWithImpl(
+      _$PostsErrorImpl<T> _value, $Res Function(_$PostsErrorImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of PostsState
@@ -508,7 +508,7 @@ class __$$SignUpErrorImplCopyWithImpl<T, $Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$SignUpErrorImpl<T>(
+    return _then(_$PostsErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -519,8 +519,8 @@ class __$$SignUpErrorImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$SignUpErrorImpl<T> implements SignUpError<T> {
-  const _$SignUpErrorImpl({required this.error});
+class _$PostsErrorImpl<T> implements PostsError<T> {
+  const _$PostsErrorImpl({required this.error});
 
   @override
   final ApiErrorModel error;
@@ -534,7 +534,7 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignUpErrorImpl<T> &&
+            other is _$PostsErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -546,9 +546,8 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignUpErrorImplCopyWith<T, _$SignUpErrorImpl<T>> get copyWith =>
-      __$$SignUpErrorImplCopyWithImpl<T, _$SignUpErrorImpl<T>>(
-          this, _$identity);
+  _$$PostsErrorImplCopyWith<T, _$PostsErrorImpl<T>> get copyWith =>
+      __$$PostsErrorImplCopyWithImpl<T, _$PostsErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -593,7 +592,7 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
-    required TResult Function(SignUpError<T> value) postsError,
+    required TResult Function(PostsError<T> value) postsError,
   }) {
     return postsError(this);
   }
@@ -604,7 +603,7 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
-    TResult? Function(SignUpError<T> value)? postsError,
+    TResult? Function(PostsError<T> value)? postsError,
   }) {
     return postsError?.call(this);
   }
@@ -615,7 +614,7 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
-    TResult Function(SignUpError<T> value)? postsError,
+    TResult Function(PostsError<T> value)? postsError,
     required TResult orElse(),
   }) {
     if (postsError != null) {
@@ -625,15 +624,15 @@ class _$SignUpErrorImpl<T> implements SignUpError<T> {
   }
 }
 
-abstract class SignUpError<T> implements PostsState<T> {
-  const factory SignUpError({required final ApiErrorModel error}) =
-      _$SignUpErrorImpl<T>;
+abstract class PostsError<T> implements PostsState<T> {
+  const factory PostsError({required final ApiErrorModel error}) =
+      _$PostsErrorImpl<T>;
 
   ApiErrorModel get error;
 
   /// Create a copy of PostsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SignUpErrorImplCopyWith<T, _$SignUpErrorImpl<T>> get copyWith =>
+  _$$PostsErrorImplCopyWith<T, _$PostsErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
