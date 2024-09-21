@@ -16,13 +16,14 @@ void main() async {
       isLoggedIn ? await SharedPrefHelper.isSurveyCompleted() : false;
 
   runApp(
-    TranquiloApp(appRouter: AppRouter(), initialRoute: Routes.surveyStarting
-        // isFirstLaunch
-        //     ? Routes.onBoardingScreen
-        //     : (isLoggedIn
-        //         ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
-        //         : Routes.loginScreen),
-        ),
+    TranquiloApp(
+      appRouter: AppRouter(),
+      initialRoute: isFirstLaunch
+          ? Routes.onBoardingScreen
+          : (isLoggedIn
+              ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
+              : Routes.loginScreen),
+    ),
   );
 }
 

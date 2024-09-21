@@ -19,7 +19,7 @@ class SurveyResult extends StatefulWidget {
 }
 
 class _SurveyResultState extends State<SurveyResult> {
-  String _anxietyLevel = 'unknown'; // Default anxiety level
+  String _anxietyLevel = 'unknown';
 
   @override
   void initState() {
@@ -28,7 +28,8 @@ class _SurveyResultState extends State<SurveyResult> {
   }
 
   Future<void> _loadSurveyResult() async {
-    final resultJson = await SharedPrefHelper.getSurveyResult(); // Retrieve survey result
+    final resultJson =
+        await SharedPrefHelper.getSurveyResult(); // Retrieve survey result
     debugPrint('Retrieved JSON string: $resultJson'); // Debugging line
 
     if (resultJson != null && resultJson.isNotEmpty) {
@@ -72,7 +73,8 @@ class _SurveyResultState extends State<SurveyResult> {
               verticalSpace(12),
               const ListTileRecommend(
                 icon: 'assets/svgs/routine.svg',
-                text: 'Check your personalized routine to manage your anxiety level',
+                text:
+                    'Check your personalized routine to manage your anxiety level',
               ),
               const ListTileRecommend(
                 icon: 'assets/svgs/community.svg',
