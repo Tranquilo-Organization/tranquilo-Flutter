@@ -76,6 +76,8 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   # A carousel slider widget, support infinite scroll and custom child widget.
   carousel_slider: ^5.0.0
+  # Library that allows you to display progress widgets based on percentage.
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
