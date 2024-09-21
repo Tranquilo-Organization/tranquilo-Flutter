@@ -13,24 +13,24 @@ class SurveyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            verticalSpace(40),
-            Text(
-              'GAD Survey',
-              style: TextStyles.font20OceanBlueSemiBold,
-              textAlign: TextAlign.center,
-            ),
-            verticalSpace(32),
-            Text(
-              'Answer the following questions to\nhelp us understand yor anxiety levels',
-              style: TextStyles.font16BlackRegular,
-              textAlign: TextAlign.center,
-            ),
-            verticalSpace(48),
-            Expanded(
-              child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              verticalSpace(40),
+              Text(
+                'GAD Survey',
+                style: TextStyles.font20OceanBlueSemiBold,
+                textAlign: TextAlign.center,
+              ),
+              verticalSpace(32),
+              Text(
+                'Answer the following questions to\nhelp us understand yor anxiety levels',
+                style: TextStyles.font16BlackRegular,
+                textAlign: TextAlign.center,
+              ),
+              verticalSpace(48),
+              Container(
                 margin: EdgeInsets.symmetric(horizontal: 24.w),
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -40,9 +40,9 @@ class SurveyScreen extends StatelessWidget {
                 ),
                 child: const SurveyPageViewBuilder(),
               ),
-            ),
-            verticalSpace(80),
-          ],
+              verticalSpace(80),
+            ],
+          ),
         ),
       ),
     );
