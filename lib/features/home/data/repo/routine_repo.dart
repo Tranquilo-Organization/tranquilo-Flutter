@@ -19,9 +19,13 @@ class RoutineRepo {
         // Log the raw response for debugging
         print('Fetched routines: ${response.toString()}');
 
-        // Return the success result
-        return ApiResult.success(
-            response); // Assuming response is already List<Routine>
+        // Wrap the response in a RoutineResponseModel
+        // Assuming response is a valid JSON and maps correctly
+        final routineResponseModel =
+            RoutineResponseModel.fromJson(response as Map<String, dynamic>);
+
+        // Return the success result with the list of routines
+        return ApiResult.success(routineResponseModel.model);
       } else {
         return ApiResult.failure(
           ErrorHandler.handle(

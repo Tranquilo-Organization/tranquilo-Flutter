@@ -12,9 +12,14 @@ class RoutineCubit extends Cubit<RoutineState> {
     emit(const RoutineState.loading());
 
     final result = await routineRepo.fetchRoutines();
+
+    // Handle the result based on the new RoutineRepo logic
     result.when(
       success: (routines) => emit(RoutineState.success(routines)),
-      failure: (error) => emit(RoutineState.failure(error.apiErrorModel)),
+      failure: (error) {
+        // Emit an error state with the provided error message
+        emit(RoutineState.failure(error.apiErrorModel));
+      },
     );
   }
 }
