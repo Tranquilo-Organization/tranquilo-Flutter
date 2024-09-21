@@ -15,4 +15,8 @@ class Routes {
   static const String afternoonScreen = '/afternoonScreen';
   static const String nightScreen = '/nightScreen';
   static const String createPostScreen = '/createPostScreen';
+  static const String editProfileScreen = '/editProfileScreen';
+  static const String settingsProfileScreen = '/settingsProfileScreen';
+  static const String privacyPolicyScreen = '/privacyPolicyScreen';
+  static const String notificationsSettingsScreen = '/notificationsSettingsScreen';
 }

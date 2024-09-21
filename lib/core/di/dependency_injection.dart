@@ -56,10 +56,8 @@ Future<void> setupGetIt() async {
       () => ResetPasswordCubit(getIt()));
   // chatbot
   getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));
-
   getIt.registerFactory<ChatbotCubit>(() => ChatbotCubit(getIt()));
    // Posts
-
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerFactory<PostsCubit>(() => PostsCubit(getIt()));
   //survey
@@ -67,5 +65,5 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt()));
 //routine
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
-  getIt.registerLazySingleton<RoutineCubit>(() => RoutineCubit(getIt()));
+  getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
 }

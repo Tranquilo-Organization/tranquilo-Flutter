@@ -25,7 +25,7 @@ class _MessageInputState extends State<MessageInput> {
         bool isLoading = state is Loading;
 
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           margin: EdgeInsets.symmetric(horizontal: 12.w,vertical: 15.h),
           decoration: BoxDecoration(
             color: ColorsManager.white,

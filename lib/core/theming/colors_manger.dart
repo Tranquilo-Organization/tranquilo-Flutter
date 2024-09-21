@@ -20,4 +20,5 @@ class ColorsManager {
   static const Color secondTaskContainer = Color(0xFFF7E9E3);
   static const Color thirdTaskContainer = Color(0xFFE8EBF4);
   static const Color inActiveSwitch = Color(0xFFAEB3BE);
+  static const Color red = Color(0xFFB30303);
 }
