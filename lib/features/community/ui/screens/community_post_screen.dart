@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/filter_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/posts_bloc_builder.dart';
-import '../../../../core/di/dependency_injection.dart';
 
 class CommunityPostScreen extends StatefulWidget {
   const CommunityPostScreen({super.key});
