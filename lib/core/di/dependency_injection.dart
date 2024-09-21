@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
+import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/community/data/repo/post_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
@@ -53,4 +55,8 @@ Future<void> setupGetIt() async {
    // Posts
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerLazySingleton<PostsCubit>(() => PostsCubit(getIt()));
+  //survey
+   getIt.registerLazySingleton<SurveyRepo>(() => SurveyRepo(getIt()));
+  getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt()));
+
 }

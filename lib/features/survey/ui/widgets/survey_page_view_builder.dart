@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
-import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/core/routing/routes.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-
-import '../../../../core/helpers/shared_pref_helper.dart';
+import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
+import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
 
 class SurveyPageViewBuilder extends StatefulWidget {
   const SurveyPageViewBuilder({super.key});
@@ -19,44 +16,102 @@ class SurveyPageViewBuilder extends StatefulWidget {
 }
 
 class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
-
   int _currentStep = 0;
   final PageController _controller = PageController();
 
-  /// static data until get API
+  // Controllers for the text input fields
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _bmiController = TextEditingController();
+
+  /// Updated survey questions to fit the request data
   final List<Map<String, dynamic>> _surveyData = [
     {
       'question': 'What is your age?',
-      'answers': ['Under 18', '18-25', '25-35', '35-45'],
+      'type': 'input',
+      'controller': null, // this will use _ageController later
+    },
+    {
+      'question': 'What is your gender?',
+      'type': 'mcq',
+      'answers': ['Male', 'Female', 'Other'],
+      'selectedAnswer': null,
+    },
+    {
+      'question': 'What is your BMI?',
+      'type': 'input',
+      'controller': null, // this will use _bmiController later
+    },
+    {
+      'question': 'WHO BMI classification',
+      'type': 'mcq',
+      'answers': ['Underweight', 'Normal', 'Overweight', 'Obesity'],
+      'selectedAnswer': null,
+    },
+    {
+      'question': 'How often do you feel depressed?',
+      'type': 'mcq',
+      'answers': ['1', '2', '3', '4', '5'],
+      'selectedAnswer': null,
+    },
+    {
+      'question': 'Have you ever been diagnosed with depression?',
+      'type': 'mcq',
+      'answers': ['Yes', 'No'],
+      'selectedAnswer': null,
+    },
+    {
+      'question': 'Are you currently receiving treatment for depression?',
+      'type': 'mcq',
+      'answers': ['Yes', 'No'],
       'selectedAnswer': null,
     },
     {
       'question': 'How often do you feel anxious?',
-      'answers': ['Never', 'Sometimes', 'Often', 'Always'],
+      'type': 'mcq',
+      'answers': ['1', '2', '3', '4', '5'],
       'selectedAnswer': null,
     },
     {
-      'question': 'Do you find it hard to relax?',
-      'answers': ['Not at all', 'A little bit', 'Moderately', 'A lot'],
+      'question': 'Have you ever been diagnosed with anxiety?',
+      'type': 'mcq',
+      'answers': ['Yes', 'No'],
       'selectedAnswer': null,
     },
     {
-      'question': 'Do you experience restlessness?',
-      'answers': ['Never', 'Sometimes', 'Often', 'Always'],
+      'question': 'Are you currently receiving treatment for anxiety?',
+      'type': 'mcq',
+      'answers': ['Yes', 'No', 'Maybe'],
       'selectedAnswer': null,
     },
     {
-      'question': 'How often do you feel worried?',
-      'answers': ['Rarely', 'Occasionally', 'Frequently', 'Constantly'],
+      'question': 'How often do you feel sleepy during the day?',
+      'type': 'mcq',
+      'answers': ['1', '2', '3', '4', '5'],
       'selectedAnswer': null,
     },
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    // Assign controllers for the text input questions
+    _surveyData[0]['controller'] = _ageController;
+    _surveyData[2]['controller'] = _bmiController;
+  }
+
   void _nextPage() {
-    if (_surveyData[_currentStep]['selectedAnswer'] == null) {
+    if (_surveyData[_currentStep]['type'] == 'mcq' &&
+        _surveyData[_currentStep]['selectedAnswer'] == null) {
       showSnackBar(
         context,
         'Please select an answer before proceeding',
+        ColorsManager.oceanBlue,
+      );
+    } else if (_surveyData[_currentStep]['type'] == 'input' &&
+        _surveyData[_currentStep]['controller'].text.isEmpty) {
+      showSnackBar(
+        context,
+        'Please fill in the required field',
         ColorsManager.oceanBlue,
       );
     } else if (_currentStep < _surveyData.length - 1) {
@@ -78,104 +133,113 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _controller,
-      onPageChanged: (index) {
-        setState(() {
-          _currentStep = index;
-        });
-      },
-      itemCount: _surveyData.length,
-      itemBuilder: (context, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            verticalSpace(40),
-            Text(
-              'Step ${index + 1} of ${_surveyData.length}',
-              style: TextStyles.font20OceanBlueSemiBold.copyWith(fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            verticalSpace(32),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Text(
-                _surveyData[index]['question'],
-                style: TextStyles.font16JetBlackMedium.copyWith(
-                  fontWeight: FontWeightHelper.regular,
-                ),
-              ),
-            ),
-            verticalSpace(16),
-            ..._surveyData[index]['answers'].map((answer) {
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: RadioListTile(
-                  title: Text(
-                    answer,
-                    style: TextStyles.font16BlackRegular,
-                  ),
-                  dense: true,
-                  value: answer,
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity(vertical: -2.h, horizontal: -4),
-                  fillColor: WidgetStateProperty.all<Color>(ColorsManager.oceanBlue),
-                  groupValue: _surveyData[index]['selectedAnswer'],
-                  onChanged: (value) {
-                    setState(() {
-                      _surveyData[index]['selectedAnswer'] = value;
-                    });
-                  },
-                ),
-              );
-            }).toList(),
-            verticalSpace(48),
-            Row(
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        child: PageView.builder(
+          controller: _controller,
+          onPageChanged: (index) {
+            setState(() {
+              _currentStep = index;
+            });
+          },
+          itemCount: _surveyData.length,
+          itemBuilder: (context, index) {
+            final questionType = _surveyData[index]['type'];
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (_currentStep > 0)
-                  Expanded(
-                    child: AppTextButton(
-                      onPressed: _prevPage,
-                      textButton: 'Back',
-                      backgroundColor: ColorsManager.white,
-                      textColor: ColorsManager.oceanBlue,
-                      borderColor: ColorsManager.oceanBlue,
+                verticalSpace(40),
+                Text(
+                  'Step ${index + 1} of ${_surveyData.length}',
+                  style:
+                      TextStyles.font20OceanBlueSemiBold.copyWith(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                verticalSpace(32),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Text(
+                    _surveyData[index]['question'],
+                    style: TextStyles.font16JetBlackMedium.copyWith(
+                      fontWeight: FontWeightHelper.regular,
                     ),
                   ),
-                Expanded(
-                  child: AppTextButton(
-                    onPressed: () async {
-                      if (_currentStep == _surveyData.length - 1) {
-                        if (_surveyData[_currentStep]['selectedAnswer'] ==
-                            null) {
-                          showSnackBar(
-                            context,
-                            'Please select an answer before finishing',
-                            ColorsManager.oceanBlue,
-                          );
-                        } else {
-                          await SharedPrefHelper.setSurveyCompleted(true);
-                          context.pushNamedAndRemoveUntil(
-                            Routes.surveyCompleted,
-                            predicate: (Route<dynamic> route) => false,
-                          );
-                        }
-                      } else {
-                        _nextPage();
-                      }
-                    },
-                    textButton: _currentStep == _surveyData.length - 1
-                        ? 'Finish'
-                        : 'Next',
-                  ),
                 ),
+                verticalSpace(16),
+                if (questionType == 'mcq') ...[
+                  ..._surveyData[index]['answers'].map((answer) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: RadioListTile(
+                        selectedTileColor: ColorsManager.oceanBlue,
+                        title: Text(
+                          answer,
+                          style: TextStyles.font16BlackRegular,
+                        ),
+                        dense: true,
+                        value: answer,
+                        groupValue: _surveyData[index]['selectedAnswer'],
+                        onChanged: (value) {
+                          setState(() {
+                            _surveyData[index]['selectedAnswer'] = value;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ],
+                if (questionType == 'input') ...[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: AppTextFormField(
+                      controller: _surveyData[index]['controller'],
+                      hintText: 'Enter your answer',
+                      keyboardType: TextInputType.text,
+                    ),
+                  ),
+                ],
+                verticalSpace(48),
+                Row(
+                  children: [
+                    if (_currentStep > 0)
+                      Expanded(
+                        child: AppTextButton(
+                          onPressed: _prevPage,
+                          textButton: 'Back',
+                          backgroundColor: ColorsManager.white,
+                          textColor: ColorsManager.oceanBlue,
+                          borderColor: ColorsManager.oceanBlue,
+                        ),
+                      ),
+                    Expanded(
+                      child: AppTextButton(
+                        onPressed: () {
+                          if (_currentStep == _surveyData.length - 1) {
+                            // Final submission logic
+                            showSnackBar(
+                              context,
+                              'Survey completed!',
+                              ColorsManager.oceanBlue,
+                            );
+                          } else {
+                            _nextPage();
+                          }
+                        },
+                        textButton: _currentStep == _surveyData.length - 1
+                            ? 'Finish'
+                            : 'Next',
+                      ),
+                    ),
+                  ],
+                ),
+                verticalSpace(40),
               ],
-            ),
-            verticalSpace(40),
-          ],
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }
-

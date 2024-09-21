@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
-import 'package:tranquilo_app/features/survey/ui/widgets/list_tile_recommend.dart';
-import '../../../../core/helpers/spacing.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:tranquilo_app/features/survey/ui/widgets/list_tile_recommend.dart';
 
 class SurveyResult extends StatelessWidget {
   const SurveyResult({super.key});
