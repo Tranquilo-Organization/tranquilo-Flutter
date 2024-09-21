@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/routing/routes.dart';
@@ -6,10 +7,42 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/survey/ui/widgets/list_tile_recommend.dart';
+import 'package:tranquilo_app/features/survey/data/model/survey_response_model.dart';
 
-class SurveyResult extends StatelessWidget {
+class SurveyResult extends StatefulWidget {
   const SurveyResult({super.key});
+
+  @override
+  _SurveyResultState createState() => _SurveyResultState();
+}
+
+class _SurveyResultState extends State<SurveyResult> {
+  String _anxietyLevel = 'unknown'; // Default anxiety level
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSurveyResult();
+  }
+
+  Future<void> _loadSurveyResult() async {
+    final resultJson = await SharedPrefHelper.getString('surveyResult');
+    debugPrint('Retrieved JSON string: $resultJson'); // Debugging line
+
+    if (resultJson.isNotEmpty) {
+      // Convert the JSON string back to a Map
+      final Map<String, dynamic> jsonMap = jsonDecode(resultJson);
+      // Create a SurveyResponseModel from the JSON Map
+      final surveyResult = SurveyResponseModel.fromJson(jsonMap);
+      setState(() {
+        _anxietyLevel = surveyResult.anxietyLevel;
+      });
+    } else {
+      debugPrint('No survey result found in SharedPreferences');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +66,18 @@ class SurveyResult extends StatelessWidget {
               ),
               verticalSpace(16),
               Text(
-                'Your Anxiety level is moderate, here\nare some recommendations :',
+                'Your Anxiety level is $_anxietyLevel, here\nare some recommendations :',
                 style: TextStyles.font16JetBlackMedium,
               ),
               verticalSpace(12),
               const ListTileRecommend(
                 icon: 'assets/svgs/routine.svg',
-                text:'Check your personalized routine to manage your anxiety level',
+                text:
+                    'Check your personalized routine to manage your anxiety level',
               ),
               const ListTileRecommend(
                 icon: 'assets/svgs/community.svg',
-                text:'Join our community forum to connect with others',
+                text: 'Join our community forum to connect with others',
               ),
               verticalSpace(20),
               AppTextButton(

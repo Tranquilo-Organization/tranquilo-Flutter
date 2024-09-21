@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
@@ -159,8 +161,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
         if (state is Error) {
           showSnackBar(context, state.error.message, Colors.red);
         } else if (state is Success) {
-          showSnackBar(
-              context, 'Survey submitted successfully!', ColorsManager.white);
+          context.pushNamed(Routes.surveyCompleted);
         }
       },
       builder: (context, state) {
