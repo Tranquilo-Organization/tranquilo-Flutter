@@ -166,7 +166,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
       },
       builder: (context, state) {
         return SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: PageView.builder(
               controller: _controller,
@@ -205,7 +205,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                         return Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: RadioListTile(
-                            selectedTileColor: ColorsManager.oceanBlue,
+                            fillColor: const WidgetStatePropertyAll<Color>(ColorsManager.oceanBlue),
                             title: Text(
                               answer,
                               style: TextStyles.font16BlackRegular,
@@ -229,6 +229,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                           controller: _surveyData[index]['controller'],
                           hintText: 'Enter your answer',
                           keyboardType: TextInputType.text,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h),
                         ),
                       ),
                     ],
