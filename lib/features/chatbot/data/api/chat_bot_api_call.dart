@@ -4,7 +4,7 @@ import 'package:tranquilo_app/core/network/api_constants.dart';
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_response_model.dart';
 
-part 'chat_bot_api_call.g.dart'; // Add this line
+part 'chat_bot_api_call.g.dart';
 
 @RestApi(baseUrl: ApiConstants.chatbotApiUrl)
 abstract class ChatbotApiService {
