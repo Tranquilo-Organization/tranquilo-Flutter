@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/network/api_error_handler.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_state.dart';
@@ -6,6 +7,8 @@ import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.
 
 class ChatbotCubit extends Cubit<ChatbotState> {
   final ChatbotRepo _chatbotRepo;
+  List<Widget> messages = [];
+
 
   ChatbotCubit(this._chatbotRepo) : super(const ChatbotState.initial());
 
@@ -18,6 +21,7 @@ class ChatbotCubit extends Cubit<ChatbotState> {
 
       response.when(
         success: (chatbotResponse) {
+
           emit(ChatbotState.success(
             request: requestModel,
             response: chatbotResponse,

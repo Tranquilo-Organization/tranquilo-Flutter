@@ -31,7 +31,7 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
 GetPostsResponseBody _$GetPostsResponseBodyFromJson(
         Map<String, dynamic> json) =>
     GetPostsResponseBody(
-      result: (json['result'] as List<dynamic>)
+      result: (json['model'] as List<dynamic>)
           .map((e) => Post.fromJson(e as Map<String, dynamic>))
           .toList(),
       statusCode: (json['statusCode'] as num).toInt(),
@@ -40,6 +40,6 @@ GetPostsResponseBody _$GetPostsResponseBodyFromJson(
 Map<String, dynamic> _$GetPostsResponseBodyToJson(
         GetPostsResponseBody instance) =>
     <String, dynamic>{
-      'result': instance.result,
+      'model': instance.result,
       'statusCode': instance.statusCode,
     };

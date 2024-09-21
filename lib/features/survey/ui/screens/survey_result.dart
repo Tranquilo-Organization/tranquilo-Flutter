@@ -84,7 +84,7 @@ class _SurveyResultState extends State<SurveyResult> {
               AppTextButton(
                 textButton: 'Continue to Dashboard',
                 onPressed: () {
-                  context.pushNamed(Routes.appLayout);
+                  context.pushNamedAndRemoveUntil(Routes.appLayout, predicate: (Route<dynamic> route) => false);
                 },
               ),
             ],

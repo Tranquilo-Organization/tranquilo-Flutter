@@ -11,6 +11,7 @@ import 'package:tranquilo_app/features/chatbot/logic/chatbot_state.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/message_input.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/chatbot_suggestion.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/features/chatbot/ui/widgets/message_widget.dart';
 
 class ChatbotScreen extends StatelessWidget {
   const ChatbotScreen({super.key});
@@ -27,7 +28,8 @@ class ChatbotScreen extends StatelessWidget {
               verticalSpace(40), // Adjust space to your needs
               Text(
                 'ChatBot',
-                style: TextStyles.font16WhiteSemiBold.copyWith(fontSize: 20.sp), // Use white font
+                style: TextStyles.font16WhiteSemiBold
+                    .copyWith(fontSize: 20.sp), // Use white font
               ),
               verticalSpace(36),
               Expanded(
@@ -59,119 +61,116 @@ class ChatbotScreen extends StatelessWidget {
                       Expanded(
                         child: BlocBuilder<ChatbotCubit, ChatbotState>(
                           builder: (context, state) {
-                            List<Widget> messages = [];
-
                             bool showSuggestions = state.maybeWhen(
                               initial: (showSuggestions) => showSuggestions,
                               orElse: () => false,
                             );
-                            if (showSuggestions) {
-                              messages.add(
-                                const Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    ChatbotSuggestion(text: "What's on your mind?"),
-                                    ChatbotSuggestion(text: "How are you feeling today?"),
-                                  ],
-                                ),
-                              );
-                            }
+                            // if (showSuggestions) {
+                            //   context.read<ChatbotCubit>().messages.add(
+                            //         const Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.spaceEvenly,
+                            //           children: [
+                            //             ChatbotSuggestion(
+                            //                 text: "What's on your mind?"),
+                            //             ChatbotSuggestion(
+                            //                 text: "How are you feeling today?"),
+                            //           ],
+                            //         ),
+                            //       );
+                            // }
                             if (state is Loading) {
-                              messages.add(
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                                    margin: EdgeInsets.symmetric(vertical: 10.h),
-                                    decoration: BoxDecoration(
-                                      color: ColorsManager.lighterSilver,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16.r),
-                                        topRight: Radius.circular(16.r),
-                                        bottomRight: Radius.circular(16.r),
+                              context.read<ChatbotCubit>().messages.add(
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 8.h, horizontal: 16.w),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 10.h),
+                                        decoration: BoxDecoration(
+                                          color: ColorsManager.lighterSilver,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(16.r),
+                                            topRight: Radius.circular(16.r),
+                                            bottomRight: Radius.circular(16.r),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Loading...',
+                                          style:
+                                              TextStyles.font16JetBlackRegular,
+                                        ),
                                       ),
                                     ),
-                                    child: Text(
-                                      'Loading...',
-                                      style: TextStyles.font16JetBlackRegular,
-                                    ),
-                                  ),
-                                ),
-                              );
+                                  );
                             } else if (state is Success) {
-                              messages.add(
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                                    margin: EdgeInsets.symmetric(vertical: 10.h),
-                                    decoration: BoxDecoration(
-                                      color: ColorsManager.oceanBlue,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16.r),
-                                        topRight: Radius.circular(16.r),
-                                        bottomRight: Radius.circular(16.r),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      state.request.msg,
-                                      style: TextStyles.font16WhiteSemiBold,
-                                    ),
-                                  ),
-                                ),
-                              );
-                              messages.add(
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                                    margin: EdgeInsets.symmetric(vertical: 4.h),
-                                    decoration: BoxDecoration(
-                                      color: ColorsManager.lightGreyBlue,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16.r),
-                                        topRight: Radius.circular(16.r),
-                                        bottomLeft: Radius.circular(16.r),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      state.response.response,
-                                      style: TextStyles.font16JetBlackRegular,
-                                    ),
-                                  ),
-                                ),
-                              );
+                              context
+                                  .read<ChatbotCubit>()
+                                  .messages
+                                  .removeLast();
+                              context.read<ChatbotCubit>().messages.add(
+                                  MessageWidget(
+                                      text: state.request.msg, isSender: true));
+                              context.read<ChatbotCubit>().messages.add(
+                                  MessageWidget(
+                                      text: state.response.response,
+                                      isSender: false));
                             } else if (state is Error) {
-                              messages.add(
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                                    margin: EdgeInsets.symmetric(vertical: 10.h),
-                                    decoration: BoxDecoration(
-                                      color: Colors.redAccent,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16.r),
-                                        topRight: Radius.circular(16.r),
-                                        bottomRight: Radius.circular(16.r),
+                              context.read<ChatbotCubit>().messages.add(
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 8.h, horizontal: 16.w),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 10.h),
+                                        decoration: BoxDecoration(
+                                          color: Colors.redAccent,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(16.r),
+                                            topRight: Radius.circular(16.r),
+                                            bottomRight: Radius.circular(16.r),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Error: ${getErrorMessage(state.error)}',
+                                          style: TextStyles.font16WhiteSemiBold,
+                                        ),
                                       ),
                                     ),
-                                    child: Text(
-                                      'Error: ${getErrorMessage(state.error)}',
-                                      style: TextStyles.font16WhiteSemiBold,
-                                    ),
-                                  ),
-                                ),
-                              );
+                                  );
                             }
 
                             return Column(
                               children: [
-                                // Chatbot conversation box
+                                showSuggestions
+                                    ? const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          ChatbotSuggestion(
+                                              text: "What's on your mind?"),
+                                          ChatbotSuggestion(
+                                              text:
+                                                  "How are you feeling today?"),
+                                        ],
+                                      )
+                                    : const SizedBox(),
                                 Expanded(
-                                  child: ListView(
-                                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                                    children: messages,
+                                  child: ListView.builder(
+                                    itemCount: context
+                                        .read<ChatbotCubit>()
+                                        .messages
+                                        .length,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16.w),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return context
+                                          .read<ChatbotCubit>()
+                                          .messages[index];
+                                    },
                                   ),
                                 ),
                                 const MessageInput(),
@@ -191,4 +190,3 @@ class ChatbotScreen extends StatelessWidget {
     );
   }
 }
-
