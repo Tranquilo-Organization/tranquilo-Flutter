@@ -13,17 +13,22 @@ class RoutineRepo {
     try {
       int? levelId = await SharedPrefHelper.getAnxietyLevelId();
       if (levelId != null) {
+        // Call the API service to get the response wrapped in RoutineResponseModel
         final response = await _apiService.fetchRoutinesByLevelId(levelId);
-        return ApiResult.success(response);
+
+        // Log the raw response for debugging
+        print('Fetched routines: ${response.toString()}');
+
+        // Return the success result
+        return ApiResult.success(
+            response); // Assuming response is already List<Routine>
       } else {
-        // Handle missing levelId case
         return ApiResult.failure(
           ErrorHandler.handle(
               Exception("Anxiety level ID not found in shared preferences")),
         );
       }
     } catch (error) {
-      // Use ErrorHandler to return a failure response
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
