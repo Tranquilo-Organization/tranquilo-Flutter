@@ -4,12 +4,10 @@ import 'package:tranquilo_app/core/network/api_error_handler.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/home/data/model/routine_response_model.dart';
 
-
-
 class RoutineRepo {
   final ApiService _apiService;
 
-  RoutineRepository(this._apiService);
+  RoutineRepo(this._apiService);
 
   Future<ApiResult<List<Routine>>> fetchRoutines() async {
     try {
@@ -20,7 +18,8 @@ class RoutineRepo {
       } else {
         // Handle missing levelId case
         return ApiResult.failure(
-          ErrorHandler.handle(Exception("Anxiety level ID not found in shared preferences")),
+          ErrorHandler.handle(
+              Exception("Anxiety level ID not found in shared preferences")),
         );
       }
     } catch (error) {
