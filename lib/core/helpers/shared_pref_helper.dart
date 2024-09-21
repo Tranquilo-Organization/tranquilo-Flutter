@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -161,6 +162,16 @@ class SharedPrefHelper {
     debugPrint('SharedPrefHelper : Saving survey result');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('surveyResult', value);
+  }
+
+  // Fetch the anxiety level id from the saved survey result
+  static Future<int?> getAnxietyLevelId() async {
+    String? surveyResult = await getSurveyResult();
+    if (surveyResult != null) {
+      Map<String, dynamic> resultMap = json.decode(surveyResult);
+      return resultMap['anxiety_level_id'];
+    }
+    return null;
   }
 }
 

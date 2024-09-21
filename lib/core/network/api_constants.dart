@@ -15,6 +15,7 @@ class ApiConstants {
   static const String chatbot = "chatbot";
   static const String communityPosts = "Post";
   static const String predict = 'predict';
+  static const String routine = 'routine/Levelid';
 }
 
 class ApiErrors {
