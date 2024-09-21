@@ -16,7 +16,6 @@ class MorningRoutine extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              //verticalSpace(24),
               const RoutineAppBar(
                 titleAppBar: 'Morning Routine',
               ),

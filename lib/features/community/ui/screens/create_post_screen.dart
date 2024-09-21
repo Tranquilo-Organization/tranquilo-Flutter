@@ -4,6 +4,7 @@ import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/widgets/switch_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -42,20 +43,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       'Post anonymously',
                       style: TextStyles.font14OceanBlueRegular,
                     ),
-                    Switch(
+                    SwitchWidget(
                       value: isAnonymous,
                       onChanged: (value) {
                         setState(() {
                           isAnonymous = value;
                         });
                       },
-                      activeColor: ColorsManager.white,
-                      activeTrackColor: ColorsManager.oceanBlue,
-                      inactiveThumbColor: ColorsManager.white,
-                      inactiveTrackColor: ColorsManager.inActiveSwitch,
-                      trackOutlineColor: const WidgetStatePropertyAll<Color>(
-                          ColorsManager.inActiveSwitch),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -67,14 +62,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 children: [
                   ClipOval(
                     child: Container(
-                      width: 40.w,  // Adjust to match the diameter you want for the avatar
+                      width: 40.w,
                       height: 40.w,
-                      color: Colors.transparent, // Set background color if needed
+                      color: Colors.transparent,
                       child: SvgPicture.asset(
                         isAnonymous
                             ? 'assets/svgs/anonymous.svg'
                             : 'assets/svgs/default_profile.svg',
-                        fit: BoxFit.cover,  // Ensure the SVG scales properly
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -92,7 +87,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               child: TextField(
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: isAnonymous ? 'Submit an anonymous post...' : "What's on your mind?",
+                  hintText: isAnonymous
+                      ? 'Submit an anonymous post...'
+                      : "What's on your mind?",
                   hintStyle: TextStyles.font14JetBlackRegular,
                   border: InputBorder.none,
                 ),

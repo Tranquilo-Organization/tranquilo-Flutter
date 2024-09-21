@@ -34,28 +34,5 @@ class CreatePostAppBar extends StatelessWidget {
         ),
       ],
     );
-    // Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     IconButton(
-    //       icon: const Icon(Icons.close, color: ColorsManager.jetBlack),
-    //       onPressed: () {
-    //         context.pop();
-    //       },
-    //     ),
-    //     Text(
-    //       'Create Post',
-    //       style: TextStyles.font20OceanBlueSemiBold,
-    //     ),
-    //     AppTextButton(
-    //       onPressed: (){},
-    //       textButton: 'Post',
-    //       width: 66.w,
-    //       height: 37.h,
-    //       padding: EdgeInsets.symmetric(vertical: 4.h),
-    //       fontSize: 14,
-    //     ),
-    //   ],
-    // ),
   }
 }

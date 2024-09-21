@@ -20,7 +20,7 @@ class NightRoutine extends StatelessWidget {
       body: BlocBuilder<RoutineCubit, RoutineState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: const Text('Please wait...')),
+            initial: () => const Center(child: Text('Please wait...')),
             loading: () => const Center(child: CircularProgressIndicator()),
             success: (routines) => _buildRoutineContent(routines),
             failure: (error) =>
@@ -32,48 +32,48 @@ class NightRoutine extends StatelessWidget {
   }
 
   Widget _buildRoutineContent(List<Routine> routines) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          verticalSpace(24),
-          const RoutineAppBar(
-            titleAppBar: 'Night Routine',
-          ),
-          verticalSpace(18),
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/svgs/task_line.svg',
-                      height: 550.h,
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                child: Column(
-                  children: routines.map((routine) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: 40.h, left: 30.w),
-                      child: TaskRoutine(
-                        containerColor: ColorsManager.firstTaskContainer,
-                        taskTitle: routine.name,
-                        taskDesc: routine.description,
-                        image:
-                            'assets/svgs/first_morning_task.svg', // Replace with relevant image
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const RoutineAppBar(
+              titleAppBar: 'Night Routine',
+            ),
+            verticalSpace(18),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svgs/task_line.svg',
+                        height: 550.h,
                       ),
-                    );
-                  }).toList(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          verticalSpace(43),
-        ],
+                Align(
+                  child: Column(
+                    children: routines.map((routine) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: 40.h, left: 30.w),
+                        child: TaskRoutine(
+                          containerColor: ColorsManager.firstTaskContainer,
+                          taskTitle: routine.name,
+                          taskDesc: routine.description,
+                          image: 'assets/svgs/first_morning_task.svg', // Replace with relevant image
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+            verticalSpace(43),
+          ],
+        ),
       ),
     );
   }

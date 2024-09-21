@@ -64,6 +64,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: ColorsManager.oceanBlue,
       controller: controller,
       focusNode: focusNode,
       keyboardType: keyboardType,
@@ -78,7 +79,7 @@ class AppTextFormField extends StatelessWidget {
       initialValue: initialValue,
       onChanged: onChanged,
       onFieldSubmitted: onFieldSubmitted,
-      onSaved: onSaved, // Now correctly wired to handle saving the form's state
+      onSaved: onSaved,
       maxLines: maxLines ?? 1,
       minLines: minLines ?? 1,
       style: inputTextStyle ?? TextStyles.font12JetBlackMedium,

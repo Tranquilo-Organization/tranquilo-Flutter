@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/edit_profile_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/settings_screen.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
@@ -135,6 +139,22 @@ class AppRouter {
       case Routes.createPostScreen:
         return MaterialPageRoute(
           builder: (_) => const CreatePostScreen(),
+        );
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const EditProfileScreen(),
+        );
+      case Routes.settingsProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SettingsScreen(),
+        );
+      case Routes.privacyPolicyScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PrivacyPolicyScreen(),
+        );
+      case Routes.notificationsSettingsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationsSettingsScreen(),
         );
       default:
         return MaterialPageRoute(
