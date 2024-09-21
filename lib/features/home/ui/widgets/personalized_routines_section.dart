@@ -55,5 +55,3 @@ class PersonalizedRoutinesSection extends StatelessWidget {
     );
   }
 }
-
-

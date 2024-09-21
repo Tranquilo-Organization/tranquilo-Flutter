@@ -9,8 +9,10 @@ import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/home/ui/night_routine.dart';
 import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
+import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
+import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
@@ -108,15 +110,27 @@ class AppRouter {
         );
       case Routes.morningScreen:
         return MaterialPageRoute(
-          builder: (_) => const MorningRoutine(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                RoutineCubit(RoutineRepo(getIt<ApiService>())),
+            child: const MorningRoutine(),
+          ),
         );
       case Routes.afternoonScreen:
         return MaterialPageRoute(
-          builder: (_) => const AfternoonRoutine(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                RoutineCubit(RoutineRepo(getIt<ApiService>())),
+            child: const AfternoonRoutine(),
+          ),
         );
       case Routes.nightScreen:
         return MaterialPageRoute(
-          builder: (_) => const NightRoutine(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                RoutineCubit(RoutineRepo(getIt<ApiService>())),
+            child: const NightRoutine(),
+          ),
         );
       case Routes.createPostScreen:
         return MaterialPageRoute(
