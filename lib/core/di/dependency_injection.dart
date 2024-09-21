@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
+import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
+import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/community/data/repo/post_repo.dart';
@@ -28,7 +30,8 @@ Future<void> setupGetIt() async {
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
   getIt.registerLazySingleton<ChatbotApiService>(() => ChatbotApiService(dio));
- getIt.registerLazySingleton<ClassificationModelApiService>(() => ClassificationModelApiService(dio));
+  getIt.registerLazySingleton<ClassificationModelApiService>(
+      () => ClassificationModelApiService(dio));
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerLazySingleton<LoginCubit>(() => LoginCubit(getIt()));
@@ -46,17 +49,21 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<VerifyOtpRepo>(() => VerifyOtpRepo(getIt()));
   getIt.registerLazySingleton<VerifyOtpCubit>(() => VerifyOtpCubit(getIt()));
 
-    // reset password
-  getIt.registerLazySingleton<ResetPasswordRepo>(() => ResetPasswordRepo(getIt()));
-  getIt.registerLazySingleton<ResetPasswordCubit>(() => ResetPasswordCubit(getIt()));
-      // chatbot
+  // reset password
+  getIt.registerLazySingleton<ResetPasswordRepo>(
+      () => ResetPasswordRepo(getIt()));
+  getIt.registerLazySingleton<ResetPasswordCubit>(
+      () => ResetPasswordCubit(getIt()));
+  // chatbot
   getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));
   getIt.registerLazySingleton<ChatbotCubit>(() => ChatbotCubit(getIt()));
-   // Posts
+  // Posts
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerLazySingleton<PostsCubit>(() => PostsCubit(getIt()));
   //survey
-   getIt.registerLazySingleton<SurveyRepo>(() => SurveyRepo(getIt()));
+  getIt.registerLazySingleton<SurveyRepo>(() => SurveyRepo(getIt()));
   getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt()));
-
+//routine
+  getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
+  getIt.registerLazySingleton<RoutineCubit>(() => RoutineCubit(getIt()));
 }

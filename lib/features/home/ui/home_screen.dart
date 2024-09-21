@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/features/home/ui/widgets/carousel_slider_containers.dart';
-import 'package:tranquilo_app/features/home/ui/widgets/personalized_routines_section.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/today_feelings.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/welcome_list_tile.dart';
+import 'package:tranquilo_app/features/home/ui/widgets/carousel_slider_containers.dart';
+import 'package:tranquilo_app/features/home/ui/widgets/personalized_routines_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
