@@ -4,6 +4,9 @@ class ApiConstants {
   static const String chatbotApiUrl =
       "https://tranquilo-chatbot-production.up.railway.app/";
 
+  static const String classificationModelUrl =
+      'https://tranquilo-ai-production.up.railway.app/';
+
   static const String login = "account/login";
   static const String signUp = "account/register";
   static const String forgetPassword = "account/forgot-password";
@@ -11,6 +14,7 @@ class ApiConstants {
   static const String resetPassword = "account/reset-password";
   static const String chatbot = "chatbot";
   static const String communityPosts = "Post";
+  static const String predict = 'predict';
 }
 
 class ApiErrors {

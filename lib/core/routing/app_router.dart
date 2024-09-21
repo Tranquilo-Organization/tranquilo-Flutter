@@ -9,7 +9,9 @@ import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/home/ui/night_routine.dart';
 import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
+import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
@@ -20,6 +22,7 @@ import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
 import 'package:tranquilo_app/features/community/ui/screens/create_post_screen.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
+import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
@@ -81,7 +84,11 @@ class AppRouter {
         );
       case Routes.surveyScreens:
         return MaterialPageRoute(
-          builder: (_) => const SurveyScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
+            child: const SurveyScreen(),
+          ),
         );
       case Routes.surveyCompleted:
         return MaterialPageRoute(
@@ -89,7 +96,11 @@ class AppRouter {
         );
       case Routes.surveyResult:
         return MaterialPageRoute(
-          builder: (_) => const SurveyResult(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
+            child: const SurveyResult(),
+          ),
         );
       case Routes.appLayout:
         return MaterialPageRoute(

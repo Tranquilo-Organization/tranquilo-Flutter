@@ -3,7 +3,7 @@ part 'api_error_model.g.dart';
 
 @JsonSerializable()
 class ApiErrorModel {
-  final String? message;
+  final String message;
   @JsonKey(name: 'statusCode')
   final int? code;
 
