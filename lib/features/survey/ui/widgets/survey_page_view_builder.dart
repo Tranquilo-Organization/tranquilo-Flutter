@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,9 @@ import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_state.dart';
+import 'package:tranquilo_app/features/survey/data/model/survey_request_model.dart';
 
 class SurveyPageViewBuilder extends StatefulWidget {
   const SurveyPageViewBuilder({super.key});
@@ -99,6 +103,23 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     _surveyData[2]['controller'] = _bmiController;
   }
 
+  // Method to create the request model
+  SurveyRequestModel _buildSurveyRequest() {
+    return SurveyRequestModel(
+      age: int.parse(_ageController.text),
+      gender: _surveyData[1]['selectedAnswer'],
+      bmi: double.parse(_bmiController.text),
+      whoBmi: _surveyData[3]['selectedAnswer'],
+      depressiveness: int.parse(_surveyData[4]['selectedAnswer']),
+      depressionDiagnosis: _surveyData[5]['selectedAnswer'] == 'Yes' ? 1 : 0,
+      depressionTreatment: _surveyData[6]['selectedAnswer'] == 'Yes' ? 1 : 0,
+      anxiousness: int.parse(_surveyData[7]['selectedAnswer']),
+      anxietyDiagnosis: _surveyData[8]['selectedAnswer'] == 'Yes' ? 1 : 0,
+      anxietyTreatment: _surveyData[9]['selectedAnswer'] == 'Yes' ? 1 : 0,
+      sleepiness: int.parse(_surveyData[10]['selectedAnswer']),
+    );
+  }
+
   void _nextPage() {
     if (_surveyData[_currentStep]['type'] == 'mcq' &&
         _surveyData[_currentStep]['selectedAnswer'] == null) {
@@ -133,113 +154,123 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: PageView.builder(
-          controller: _controller,
-          onPageChanged: (index) {
-            setState(() {
-              _currentStep = index;
-            });
-          },
-          itemCount: _surveyData.length,
-          itemBuilder: (context, index) {
-            final questionType = _surveyData[index]['type'];
+    return BlocConsumer<SurveyCubit, SurveyState>(
+      listener: (context, state) {
+        if (state is Error) {
+          showSnackBar(context, state.error.message, Colors.red);
+        } else if (state is Success) {
+          showSnackBar(
+              context, 'Survey submitted successfully!', ColorsManager.white);
+        }
+      },
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: PageView.builder(
+              controller: _controller,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentStep = index;
+                });
+              },
+              itemCount: _surveyData.length,
+              itemBuilder: (context, index) {
+                final questionType = _surveyData[index]['type'];
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                verticalSpace(40),
-                Text(
-                  'Step ${index + 1} of ${_surveyData.length}',
-                  style:
-                      TextStyles.font20OceanBlueSemiBold.copyWith(fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-                verticalSpace(32),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Text(
-                    _surveyData[index]['question'],
-                    style: TextStyles.font16JetBlackMedium.copyWith(
-                      fontWeight: FontWeightHelper.regular,
-                    ),
-                  ),
-                ),
-                verticalSpace(16),
-                if (questionType == 'mcq') ...[
-                  ..._surveyData[index]['answers'].map((answer) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: RadioListTile(
-                        selectedTileColor: ColorsManager.oceanBlue,
-                        title: Text(
-                          answer,
-                          style: TextStyles.font16BlackRegular,
-                        ),
-                        dense: true,
-                        value: answer,
-                        groupValue: _surveyData[index]['selectedAnswer'],
-                        onChanged: (value) {
-                          setState(() {
-                            _surveyData[index]['selectedAnswer'] = value;
-                          });
-                        },
-                      ),
-                    );
-                  }).toList(),
-                ],
-                if (questionType == 'input') ...[
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: AppTextFormField(
-                      controller: _surveyData[index]['controller'],
-                      hintText: 'Enter your answer',
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ],
-                verticalSpace(48),
-                Row(
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (_currentStep > 0)
-                      Expanded(
-                        child: AppTextButton(
-                          onPressed: _prevPage,
-                          textButton: 'Back',
-                          backgroundColor: ColorsManager.white,
-                          textColor: ColorsManager.oceanBlue,
-                          borderColor: ColorsManager.oceanBlue,
+                    verticalSpace(40),
+                    Text(
+                      'Step ${index + 1} of ${_surveyData.length}',
+                      style: TextStyles.font20OceanBlueSemiBold
+                          .copyWith(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                    verticalSpace(32),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      child: Text(
+                        _surveyData[index]['question'],
+                        style: TextStyles.font16JetBlackMedium.copyWith(
+                          fontWeight: FontWeightHelper.regular,
                         ),
                       ),
-                    Expanded(
-                      child: AppTextButton(
-                        onPressed: () {
-                          if (_currentStep == _surveyData.length - 1) {
-                            // Final submission logic
-                            showSnackBar(
-                              context,
-                              'Survey completed!',
-                              ColorsManager.oceanBlue,
-                            );
-                          } else {
-                            _nextPage();
-                          }
-                        },
-                        textButton: _currentStep == _surveyData.length - 1
-                            ? 'Finish'
-                            : 'Next',
+                    ),
+                    verticalSpace(16),
+                    if (questionType == 'mcq') ...[
+                      ..._surveyData[index]['answers'].map((answer) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: RadioListTile(
+                            selectedTileColor: ColorsManager.oceanBlue,
+                            title: Text(
+                              answer,
+                              style: TextStyles.font16BlackRegular,
+                            ),
+                            dense: true,
+                            value: answer,
+                            groupValue: _surveyData[index]['selectedAnswer'],
+                            onChanged: (value) {
+                              setState(() {
+                                _surveyData[index]['selectedAnswer'] = value;
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ],
+                    if (questionType == 'input') ...[
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: AppTextFormField(
+                          controller: _surveyData[index]['controller'],
+                          hintText: 'Enter your answer',
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
+                    ],
+                    verticalSpace(48),
+                    Row(
+                      children: [
+                        if (_currentStep > 0)
+                          Expanded(
+                            child: AppTextButton(
+                              onPressed: _prevPage,
+                              textButton: 'Back',
+                              backgroundColor: ColorsManager.white,
+                              textColor: ColorsManager.oceanBlue,
+                              borderColor: ColorsManager.oceanBlue,
+                            ),
+                          ),
+                        Expanded(
+                          child: AppTextButton(
+                            onPressed: () {
+                              if (_currentStep == _surveyData.length - 1) {
+                                // Final submission logic
+                                final request = _buildSurveyRequest();
+                                context
+                                    .read<SurveyCubit>()
+                                    .submitSurvey(request);
+                              } else {
+                                _nextPage();
+                              }
+                            },
+                            textButton: _currentStep == _surveyData.length - 1
+                                ? 'Finish'
+                                : 'Next',
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
-                verticalSpace(40),
-              ],
-            );
-          },
-        ),
-      ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

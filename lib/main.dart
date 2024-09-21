@@ -17,7 +17,7 @@ void main() async {
 
   runApp(
     TranquiloApp(appRouter: AppRouter(), initialRoute: Routes.surveyStarting
-        //  isFirstLaunch
+        // isFirstLaunch
         //     ? Routes.onBoardingScreen
         //     : (isLoggedIn
         //         ? (isSurveyCompleted ? Routes.appLayout : Routes.surveyStarting)
