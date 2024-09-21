@@ -7,7 +7,7 @@ import '../../data/repo/post_repo.dart';
 part 'posts_state.dart';
 part 'posts_cubit.freezed.dart';
 
-class PostsCubit extends Cubit<PostsState<List<Post>>> {
+class PostsCubit extends Cubit<PostsState> {
   final PostRepo _postRepo;
 
   PostsCubit(this._postRepo) : super(const PostsState.initial());

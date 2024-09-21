@@ -32,6 +32,7 @@ class Post {
 
 @JsonSerializable()
 class GetPostsResponseBody {
+  @JsonKey(name: 'model')
   final List<Post> result;
   final int statusCode;
 

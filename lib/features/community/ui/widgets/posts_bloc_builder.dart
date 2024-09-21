@@ -36,7 +36,7 @@ class PostsBlocBuilder extends StatelessWidget {
           postsError: (error) {
             return SliverToBoxAdapter(
               child: Text(
-                error.message ?? 'An unexpected error occurred',
+                error.message,
                 style: TextStyles.font14JetBlackMedium,
               ),
             );

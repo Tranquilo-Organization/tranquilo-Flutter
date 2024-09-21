@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
@@ -8,6 +9,9 @@ import 'package:tranquilo_app/features/chatbot/ui/chatbot_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/profile_screen.dart';
 import 'package:tranquilo_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:tranquilo_app/features/community/ui/screens/community_post_screen.dart';
+
+import '../../core/di/dependency_injection.dart';
+import '../community/logic/posts_cubit/posts_cubit.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({super.key});
@@ -22,20 +26,36 @@ class _AppLayoutState extends State<AppLayout> {
     const HomeScreen(),
     const ChatbotScreen(),
     const DashboardScreen(),
-    const CommunityPostScreen(),
+    BlocProvider(
+      create: (context) => getIt<PostsCubit>()..fetchPosts(),
+      child: const CommunityPostScreen(),
+    ),
     const ProfileScreen(),
   ];
+  PageController pageController = PageController();
 
   void onItemTapped(int index) {
+
+    pageController.jumpToPage(index);
     setState(() {
       selectedIndex = index;
     });
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[selectedIndex],
+      body: PopScope(
+        canPop: false,
+        child: PageView(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: screens,
+        ),
+      ),
       bottomNavigationBar: Container(
         height: 90.h,
         decoration: BoxDecoration(
@@ -121,3 +141,4 @@ class _AppLayoutState extends State<AppLayout> {
     );
   }
 }
+

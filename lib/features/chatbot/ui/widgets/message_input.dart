@@ -60,9 +60,7 @@ class _MessageInputState extends State<MessageInput> {
                   final message = _controller.text;
                   if (message.isNotEmpty && !isLoading) {
                     final requestModel = ChatbotRequestModel(msg: message);
-                    context
-                        .read<ChatbotCubit>()
-                        .getChatbotResponse(requestModel);
+                    context.read<ChatbotCubit>().getChatbotResponse(requestModel);
                     _controller.clear();
                   }
                 },

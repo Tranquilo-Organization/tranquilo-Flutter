@@ -19,48 +19,46 @@ class CommunityPostScreen extends StatefulWidget {
 class _CommunityPostScreenState extends State<CommunityPostScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PostsCubit>()..fetchPosts(),
-      child: Scaffold(
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                sliver: SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      verticalSpace(20),
-                      Text(
-                        'Community',
-                        style: TextStyles.font20OceanBlueSemiBold,
-                        textAlign: TextAlign.center,
-                      ),
-                      verticalSpace(20),
-                      Row(
-                        children: [
-                          const CreatePostWidget(),
-                          horizontalSpace(5),
-                          const Expanded(
-                            flex: 1,
-                            child: FilterWidget(),
-                          ),
-                        ],
-                      ),
-                      verticalSpace(20),
-                    ],
-                  ),
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    verticalSpace(20),
+                    Text(
+                      'Community',
+                      style: TextStyles.font20OceanBlueSemiBold,
+                      textAlign: TextAlign.center,
+                    ),
+                    verticalSpace(20),
+                    Row(
+                      children: [
+                        const CreatePostWidget(),
+                        horizontalSpace(5),
+                        const Expanded(
+                          flex: 1,
+                          child: FilterWidget(),
+                        ),
+                      ],
+                    ),
+                    verticalSpace(20),
+                  ],
                 ),
               ),
-              SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                sliver: const PostsBlocBuilder(),
-              ),
-            ],
-          ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              sliver: const PostsBlocBuilder(),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+

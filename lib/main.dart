@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/simple_bloc_observer.dart';
+
 import 'core/routing/routes.dart';
 import 'core/helpers/constants.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +12,8 @@ import 'package:tranquilo_app/core/routing/app_router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
-
+  final blocObserver = SimpleBlocObserver();
+  Bloc.observer = blocObserver;
   bool isFirstLaunch = await SharedPrefHelper.isFirstLaunch();
   bool isLoggedIn = isFirstLaunch ? false : await checkIfLoggedInUser();
   bool isSurveyCompleted =
