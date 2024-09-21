@@ -14,6 +14,8 @@ import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_state.dart';
 import 'package:tranquilo_app/features/survey/data/model/survey_request_model.dart';
 
+import '../../../../core/helpers/shared_pref_helper.dart';
+
 class SurveyPageViewBuilder extends StatefulWidget {
   const SurveyPageViewBuilder({super.key});
 
@@ -248,13 +250,11 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                           ),
                         Expanded(
                           child: AppTextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_currentStep == _surveyData.length - 1) {
-                                // Final submission logic
                                 final request = _buildSurveyRequest();
-                                context
-                                    .read<SurveyCubit>()
-                                    .submitSurvey(request);
+                                context.read<SurveyCubit>().submitSurvey(request);
+                                await SharedPrefHelper.setSurveyCompleted(true);
                               } else {
                                 _nextPage();
                               }
