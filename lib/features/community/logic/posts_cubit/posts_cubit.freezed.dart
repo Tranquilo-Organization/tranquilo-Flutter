@@ -22,6 +22,10 @@ mixin _$PostsState<T> {
     required TResult Function() postsLoading,
     required TResult Function(List<Post> postsList) postsSuccess,
     required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,9 @@ mixin _$PostsState<T> {
     TResult? Function()? postsLoading,
     TResult? Function(List<Post> postsList)? postsSuccess,
     TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +45,9 @@ mixin _$PostsState<T> {
     TResult Function()? postsLoading,
     TResult Function(List<Post> postsList)? postsSuccess,
     TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +57,9 @@ mixin _$PostsState<T> {
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
     required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +68,9 @@ mixin _$PostsState<T> {
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
     TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +79,9 @@ mixin _$PostsState<T> {
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
     TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +153,10 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() postsLoading,
     required TResult Function(List<Post> postsList) postsSuccess,
     required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
   }) {
     return initial();
   }
@@ -145,6 +168,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? postsLoading,
     TResult? Function(List<Post> postsList)? postsSuccess,
     TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
   }) {
     return initial?.call();
   }
@@ -156,6 +182,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? postsLoading,
     TResult Function(List<Post> postsList)? postsSuccess,
     TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,6 +200,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
     required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
   }) {
     return initial(this);
   }
@@ -182,6 +214,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
     TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +228,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
     TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -251,6 +289,10 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     required TResult Function() postsLoading,
     required TResult Function(List<Post> postsList) postsSuccess,
     required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
   }) {
     return postsLoading();
   }
@@ -262,6 +304,9 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult? Function()? postsLoading,
     TResult? Function(List<Post> postsList)? postsSuccess,
     TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
   }) {
     return postsLoading?.call();
   }
@@ -273,6 +318,9 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult Function()? postsLoading,
     TResult Function(List<Post> postsList)? postsSuccess,
     TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
     required TResult orElse(),
   }) {
     if (postsLoading != null) {
@@ -288,6 +336,9 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
     required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
   }) {
     return postsLoading(this);
   }
@@ -299,6 +350,9 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
     TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
   }) {
     return postsLoading?.call(this);
   }
@@ -310,6 +364,9 @@ class _$PostsLoadingImpl<T> implements PostsLoading<T> {
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
     TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
     required TResult orElse(),
   }) {
     if (postsLoading != null) {
@@ -403,6 +460,10 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     required TResult Function() postsLoading,
     required TResult Function(List<Post> postsList) postsSuccess,
     required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
   }) {
     return postsSuccess(postsList);
   }
@@ -414,6 +475,9 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult? Function()? postsLoading,
     TResult? Function(List<Post> postsList)? postsSuccess,
     TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
   }) {
     return postsSuccess?.call(postsList);
   }
@@ -425,6 +489,9 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult Function()? postsLoading,
     TResult Function(List<Post> postsList)? postsSuccess,
     TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
     required TResult orElse(),
   }) {
     if (postsSuccess != null) {
@@ -440,6 +507,9 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
     required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
   }) {
     return postsSuccess(this);
   }
@@ -451,6 +521,9 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
     TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
   }) {
     return postsSuccess?.call(this);
   }
@@ -462,6 +535,9 @@ class _$PostsSuccessImpl<T> implements PostsSuccess<T> {
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
     TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
     required TResult orElse(),
   }) {
     if (postsSuccess != null) {
@@ -556,6 +632,10 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     required TResult Function() postsLoading,
     required TResult Function(List<Post> postsList) postsSuccess,
     required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
   }) {
     return postsError(error);
   }
@@ -567,6 +647,9 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     TResult? Function()? postsLoading,
     TResult? Function(List<Post> postsList)? postsSuccess,
     TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
   }) {
     return postsError?.call(error);
   }
@@ -578,6 +661,9 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     TResult Function()? postsLoading,
     TResult Function(List<Post> postsList)? postsSuccess,
     TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
     required TResult orElse(),
   }) {
     if (postsError != null) {
@@ -593,6 +679,9 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     required TResult Function(PostsLoading<T> value) postsLoading,
     required TResult Function(PostsSuccess<T> value) postsSuccess,
     required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
   }) {
     return postsError(this);
   }
@@ -604,6 +693,9 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     TResult? Function(PostsLoading<T> value)? postsLoading,
     TResult? Function(PostsSuccess<T> value)? postsSuccess,
     TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
   }) {
     return postsError?.call(this);
   }
@@ -615,6 +707,9 @@ class _$PostsErrorImpl<T> implements PostsError<T> {
     TResult Function(PostsLoading<T> value)? postsLoading,
     TResult Function(PostsSuccess<T> value)? postsSuccess,
     TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
     required TResult orElse(),
   }) {
     if (postsError != null) {
@@ -634,5 +729,490 @@ abstract class PostsError<T> implements PostsState<T> {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostsErrorImplCopyWith<T, _$PostsErrorImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreatePostLoadingImplCopyWith<T, $Res> {
+  factory _$$CreatePostLoadingImplCopyWith(_$CreatePostLoadingImpl<T> value,
+          $Res Function(_$CreatePostLoadingImpl<T>) then) =
+      __$$CreatePostLoadingImplCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$CreatePostLoadingImplCopyWithImpl<T, $Res>
+    extends _$PostsStateCopyWithImpl<T, $Res, _$CreatePostLoadingImpl<T>>
+    implements _$$CreatePostLoadingImplCopyWith<T, $Res> {
+  __$$CreatePostLoadingImplCopyWithImpl(_$CreatePostLoadingImpl<T> _value,
+      $Res Function(_$CreatePostLoadingImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CreatePostLoadingImpl<T> implements CreatePostLoading<T> {
+  const _$CreatePostLoadingImpl();
+
+  @override
+  String toString() {
+    return 'PostsState<$T>.createPostLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatePostLoadingImpl<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() postsLoading,
+    required TResult Function(List<Post> postsList) postsSuccess,
+    required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
+  }) {
+    return createPostLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? postsLoading,
+    TResult? Function(List<Post> postsList)? postsSuccess,
+    TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
+  }) {
+    return createPostLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? postsLoading,
+    TResult Function(List<Post> postsList)? postsSuccess,
+    TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostLoading != null) {
+      return createPostLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(PostsLoading<T> value) postsLoading,
+    required TResult Function(PostsSuccess<T> value) postsSuccess,
+    required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
+  }) {
+    return createPostLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(PostsLoading<T> value)? postsLoading,
+    TResult? Function(PostsSuccess<T> value)? postsSuccess,
+    TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
+  }) {
+    return createPostLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(PostsLoading<T> value)? postsLoading,
+    TResult Function(PostsSuccess<T> value)? postsSuccess,
+    TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostLoading != null) {
+      return createPostLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreatePostLoading<T> implements PostsState<T> {
+  const factory CreatePostLoading() = _$CreatePostLoadingImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$CreatePostSuccessImplCopyWith<T, $Res> {
+  factory _$$CreatePostSuccessImplCopyWith(_$CreatePostSuccessImpl<T> value,
+          $Res Function(_$CreatePostSuccessImpl<T>) then) =
+      __$$CreatePostSuccessImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({CreatePostResponseModel response});
+}
+
+/// @nodoc
+class __$$CreatePostSuccessImplCopyWithImpl<T, $Res>
+    extends _$PostsStateCopyWithImpl<T, $Res, _$CreatePostSuccessImpl<T>>
+    implements _$$CreatePostSuccessImplCopyWith<T, $Res> {
+  __$$CreatePostSuccessImplCopyWithImpl(_$CreatePostSuccessImpl<T> _value,
+      $Res Function(_$CreatePostSuccessImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? response = freezed,
+  }) {
+    return _then(_$CreatePostSuccessImpl<T>(
+      freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as CreatePostResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreatePostSuccessImpl<T> implements CreatePostSuccess<T> {
+  const _$CreatePostSuccessImpl(this.response);
+
+  @override
+  final CreatePostResponseModel response;
+
+  @override
+  String toString() {
+    return 'PostsState<$T>.createPostSuccess(response: $response)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatePostSuccessImpl<T> &&
+            const DeepCollectionEquality().equals(other.response, response));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreatePostSuccessImplCopyWith<T, _$CreatePostSuccessImpl<T>>
+      get copyWith =>
+          __$$CreatePostSuccessImplCopyWithImpl<T, _$CreatePostSuccessImpl<T>>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() postsLoading,
+    required TResult Function(List<Post> postsList) postsSuccess,
+    required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
+  }) {
+    return createPostSuccess(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? postsLoading,
+    TResult? Function(List<Post> postsList)? postsSuccess,
+    TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
+  }) {
+    return createPostSuccess?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? postsLoading,
+    TResult Function(List<Post> postsList)? postsSuccess,
+    TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostSuccess != null) {
+      return createPostSuccess(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(PostsLoading<T> value) postsLoading,
+    required TResult Function(PostsSuccess<T> value) postsSuccess,
+    required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
+  }) {
+    return createPostSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(PostsLoading<T> value)? postsLoading,
+    TResult? Function(PostsSuccess<T> value)? postsSuccess,
+    TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
+  }) {
+    return createPostSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(PostsLoading<T> value)? postsLoading,
+    TResult Function(PostsSuccess<T> value)? postsSuccess,
+    TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostSuccess != null) {
+      return createPostSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreatePostSuccess<T> implements PostsState<T> {
+  const factory CreatePostSuccess(final CreatePostResponseModel response) =
+      _$CreatePostSuccessImpl<T>;
+
+  CreatePostResponseModel get response;
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreatePostSuccessImplCopyWith<T, _$CreatePostSuccessImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreatePostErrorImplCopyWith<T, $Res> {
+  factory _$$CreatePostErrorImplCopyWith(_$CreatePostErrorImpl<T> value,
+          $Res Function(_$CreatePostErrorImpl<T>) then) =
+      __$$CreatePostErrorImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({ApiErrorModel error});
+}
+
+/// @nodoc
+class __$$CreatePostErrorImplCopyWithImpl<T, $Res>
+    extends _$PostsStateCopyWithImpl<T, $Res, _$CreatePostErrorImpl<T>>
+    implements _$$CreatePostErrorImplCopyWith<T, $Res> {
+  __$$CreatePostErrorImplCopyWithImpl(_$CreatePostErrorImpl<T> _value,
+      $Res Function(_$CreatePostErrorImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$CreatePostErrorImpl<T>(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreatePostErrorImpl<T> implements CreatePostError<T> {
+  const _$CreatePostErrorImpl({required this.error});
+
+  @override
+  final ApiErrorModel error;
+
+  @override
+  String toString() {
+    return 'PostsState<$T>.createPostError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatePostErrorImpl<T> &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreatePostErrorImplCopyWith<T, _$CreatePostErrorImpl<T>> get copyWith =>
+      __$$CreatePostErrorImplCopyWithImpl<T, _$CreatePostErrorImpl<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() postsLoading,
+    required TResult Function(List<Post> postsList) postsSuccess,
+    required TResult Function(ApiErrorModel error) postsError,
+    required TResult Function() createPostLoading,
+    required TResult Function(CreatePostResponseModel response)
+        createPostSuccess,
+    required TResult Function(ApiErrorModel error) createPostError,
+  }) {
+    return createPostError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? postsLoading,
+    TResult? Function(List<Post> postsList)? postsSuccess,
+    TResult? Function(ApiErrorModel error)? postsError,
+    TResult? Function()? createPostLoading,
+    TResult? Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult? Function(ApiErrorModel error)? createPostError,
+  }) {
+    return createPostError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? postsLoading,
+    TResult Function(List<Post> postsList)? postsSuccess,
+    TResult Function(ApiErrorModel error)? postsError,
+    TResult Function()? createPostLoading,
+    TResult Function(CreatePostResponseModel response)? createPostSuccess,
+    TResult Function(ApiErrorModel error)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostError != null) {
+      return createPostError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(PostsLoading<T> value) postsLoading,
+    required TResult Function(PostsSuccess<T> value) postsSuccess,
+    required TResult Function(PostsError<T> value) postsError,
+    required TResult Function(CreatePostLoading<T> value) createPostLoading,
+    required TResult Function(CreatePostSuccess<T> value) createPostSuccess,
+    required TResult Function(CreatePostError<T> value) createPostError,
+  }) {
+    return createPostError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(PostsLoading<T> value)? postsLoading,
+    TResult? Function(PostsSuccess<T> value)? postsSuccess,
+    TResult? Function(PostsError<T> value)? postsError,
+    TResult? Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult? Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult? Function(CreatePostError<T> value)? createPostError,
+  }) {
+    return createPostError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(PostsLoading<T> value)? postsLoading,
+    TResult Function(PostsSuccess<T> value)? postsSuccess,
+    TResult Function(PostsError<T> value)? postsError,
+    TResult Function(CreatePostLoading<T> value)? createPostLoading,
+    TResult Function(CreatePostSuccess<T> value)? createPostSuccess,
+    TResult Function(CreatePostError<T> value)? createPostError,
+    required TResult orElse(),
+  }) {
+    if (createPostError != null) {
+      return createPostError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreatePostError<T> implements PostsState<T> {
+  const factory CreatePostError({required final ApiErrorModel error}) =
+      _$CreatePostErrorImpl<T>;
+
+  ApiErrorModel get error;
+
+  /// Create a copy of PostsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreatePostErrorImplCopyWith<T, _$CreatePostErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

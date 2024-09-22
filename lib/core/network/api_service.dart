@@ -10,7 +10,9 @@ import 'package:tranquilo_app/features/auth/login/data/model/login_response_body
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_response_model.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_request_body.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_request_model.dart';
+import 'package:tranquilo_app/features/community/data/model/create_post_request_model.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_response_model.dart';
+import 'package:tranquilo_app/features/community/data/model/create_post_response_model.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_request_model.dart';
 import 'package:tranquilo_app/features/auth/forget_password/data/model/forget_password_request_model.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_password_response_model.dart';
@@ -53,4 +55,9 @@ abstract class ApiService {
   // Fetch routines by anxiety level id
   @GET("${ApiConstants.routine}/{id}")
   Future<RoutineResponseModel> fetchRoutinesByLevelId(@Path("id") int levelId);
+
+  @POST(ApiConstants.communityPosts)
+  Future<CreatePostResponseModel> createCommunityPost(
+    @Body() CreatePostRequestModel resetPasswordRequestModel,
+  );
 }
