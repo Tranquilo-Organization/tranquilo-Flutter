@@ -298,12 +298,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<GetPostsResponseBody> communityCpmments() async {
+  Future<GetCommentResponseModel> communityCpmments() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetPostsResponseBody>(Options(
+    final _options = _setStreamType<GetCommentResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -320,9 +320,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetPostsResponseBody _value;
+    late GetCommentResponseModel _value;
     try {
-      _value = GetPostsResponseBody.fromJson(_result.data!);
+      _value = GetCommentResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
