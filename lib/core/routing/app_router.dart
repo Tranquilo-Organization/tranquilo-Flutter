@@ -41,6 +41,12 @@ import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_passw
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 class AppRouter {
+  PostsCubit? _postsCubit;
+
+  void _initializePostCubit() {
+    _postsCubit ??= getIt<PostsCubit>();
+  }
+
   Route generateRoute(RouteSettings settings) {
     final arguments = settings.arguments;
     switch (settings.name) {
@@ -114,8 +120,12 @@ class AppRouter {
           ),
         );
       case Routes.appLayout:
+        _initializePostCubit();
         return MaterialPageRoute(
-          builder: (_) => const AppLayout(),
+          builder: (_) => BlocProvider<PostsCubit>.value(
+            value: _postsCubit!,
+            child: const AppLayout(),
+          ),
         );
       case Routes.morningScreen:
         return MaterialPageRoute(
@@ -139,6 +149,7 @@ class AppRouter {
           ),
         );
       case Routes.createPostScreen:
+        _initializePostCubit();
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<PostsCubit>()..fetchPosts(),

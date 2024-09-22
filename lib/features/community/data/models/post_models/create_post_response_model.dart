@@ -1,19 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
-
-part 'create_post_response_model.g.dart'; // Generated code will go here
+part 'create_post_response_model.g.dart';
 
 @JsonSerializable()
 class CreatePostResponseModel {
   final int postId;
   final String message;
-  final String notification;
+  final String notifcation;
   final String? profilePicture;
   final int statusCode;
 
   CreatePostResponseModel({
     required this.postId,
     required this.message,
-    required this.notification,
+    required this.notifcation,
     this.profilePicture,
     required this.statusCode,
   });

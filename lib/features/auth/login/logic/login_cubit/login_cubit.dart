@@ -28,6 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
     response.when(
       success: (loginResponse) async {
         await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, loginResponse.token);
+        await SharedPrefHelper.saveEmail(loginResponse.email);
         emit(LoginState.success(loginResponse));
       },
       failure: (error) {

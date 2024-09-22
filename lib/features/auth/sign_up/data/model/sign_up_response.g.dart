@@ -10,10 +10,14 @@ SignupResponse _$SignupResponseFromJson(Map<String, dynamic> json) =>
     SignupResponse(
       token: json['token'] as String?,
       expireDate: json['expireDate'] as String?,
+      email: json['email'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$SignupResponseToJson(SignupResponse instance) =>
     <String, dynamic>{
       'token': instance.token,
       'expireDate': instance.expireDate,
+      'email': instance.email,
+      'id': instance.id,
     };
