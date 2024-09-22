@@ -1,52 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
+import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
+import 'package:tranquilo_app/features/community/data/models/comment_models/create_comment_request_model.dart';
 
-import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
+class CommentsTextField extends StatefulWidget {
+  const CommentsTextField({Key? key}) : super(key: key);
 
-class CommentsTextField extends StatelessWidget {
-  const CommentsTextField({super.key});
+  @override
+  _CommentsTextFieldState createState() => _CommentsTextFieldState();
+}
+
+class _CommentsTextFieldState extends State<CommentsTextField> {
+  final TextEditingController _controller = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _submitComment(BuildContext context) async {
+    if (_controller.text.isEmpty) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      String email = await SharedPrefHelper.getEmail('email');
+      String? postIdString = await SharedPrefHelper.getPostId();
+      int postId = postIdString != null ? int.parse(postIdString) : 0;
+
+      if (email.isEmpty || postId == 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error: Unable to retrieve saved data')),
+        );
+        return;
+      }
+
+      CreateCommentRequestModel requestModel = CreateCommentRequestModel(
+        commentText: _controller.text,
+        userEmail: email,
+        postID: postId,
+      );
+
+      context.read<CommentsCubit>().createComment(requestModel);
+      _controller.clear();
+    } catch (e) {
+      debugPrint('Error while submitting comment: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error: Failed to post comment')),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 8.h),
+      padding: const EdgeInsets.only(top: 8.0),
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 7.h),
-              margin: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 14.h),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: ColorsManager.containerSilver),
-              ),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Type your comment here...',
-                          border: InputBorder.none,
-                          hintStyle: TextStyles.font12DarkGreyLight,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: SvgPicture.asset(
-                      'assets/svgs/chatbot_sending_button.svg',
-                      height: 32.h,
-                    ),
-                  ),
-                ],
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: 'Type your comment here...',
+                border: OutlineInputBorder(),
               ),
             ),
+          ),
+          IconButton(
+            icon: SvgPicture.asset('assets/svgs/chatbot_sending_button.svg'),
+            onPressed: () => _submitComment(context),
           ),
         ],
       ),
