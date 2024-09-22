@@ -7,17 +7,15 @@ class RoutineCubit extends Cubit<RoutineState> {
 
   RoutineCubit(this.routineRepo) : super(const RoutineState.initial());
 
-  /// Fetches routines based on the anxiety level stored in shared preferences.
   Future<void> fetchRoutines() async {
     emit(const RoutineState.loading());
 
     final result = await routineRepo.fetchRoutines();
 
-    // Handle the result based on the new RoutineRepo logic
+    // Handle the result
     result.when(
       success: (routines) => emit(RoutineState.success(routines)),
       failure: (error) {
-        // Emit an error state with the provided error message
         emit(RoutineState.failure(error.apiErrorModel));
       },
     );

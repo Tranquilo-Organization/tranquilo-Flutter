@@ -1,17 +1,17 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/di/dependency_injection.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import '../community/logic/posts_cubit/posts_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/home/ui/home_screen.dart';
+import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/chatbot/ui/chatbot_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/screens/profile_screen.dart';
 import 'package:tranquilo_app/features/dashboard/ui/dashboard_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/profile_screen.dart';
 import 'package:tranquilo_app/features/community/ui/screens/community_post_screen.dart';
-
-import '../../core/di/dependency_injection.dart';
-import '../community/logic/posts_cubit/posts_cubit.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({super.key});
@@ -23,7 +23,10 @@ class AppLayout extends StatefulWidget {
 class _AppLayoutState extends State<AppLayout> {
   int selectedIndex = 0;
   List<Widget> screens = [
-    const HomeScreen(),
+    BlocProvider(
+      create: (context) => getIt<RoutineCubit>()..fetchRoutines(),
+      child: const HomeScreen(),
+    ),
     const ChatbotScreen(),
     const DashboardScreen(),
     BlocProvider(
@@ -35,15 +38,11 @@ class _AppLayoutState extends State<AppLayout> {
   PageController pageController = PageController();
 
   void onItemTapped(int index) {
-
     pageController.jumpToPage(index);
     setState(() {
       selectedIndex = index;
     });
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -141,4 +140,3 @@ class _AppLayoutState extends State<AppLayout> {
     );
   }
 }
-
