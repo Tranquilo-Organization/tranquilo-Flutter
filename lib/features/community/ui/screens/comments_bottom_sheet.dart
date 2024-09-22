@@ -41,16 +41,7 @@ class CommentsBottomSheet extends StatelessWidget {
             Expanded(
               child: BlocListener<CommentsCubit, CommentsState>(
                 listener: (context, state) {
-                  state.when(
-                    initial: () {
-                      // Handle initial state if necessary
-                    },
-                    commentsLoading: () {
-                      // Handle loading state if necessary
-                    },
-                    commentsSuccess: (comments) {
-                      // You can trigger some UI change or state if necessary
-                    },
+                  state.maybeWhen(
                     commentsError: (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -61,11 +52,12 @@ class CommentsBottomSheet extends StatelessWidget {
                         ),
                       );
                     },
+                    orElse: () {},
                   );
                 },
                 child: BlocBuilder<CommentsCubit, CommentsState>(
                   builder: (context, state) {
-                    return state.when(
+                    return state.maybeWhen(
                       initial: () =>
                           const Center(child: CircularProgressIndicator()),
                       commentsLoading: () =>
@@ -78,6 +70,8 @@ class CommentsBottomSheet extends StatelessWidget {
                           style: const TextStyle(color: Colors.red),
                         ),
                       ),
+                      orElse: () => const Center(
+                          child: Text('Unexpected state encountered')),
                     );
                   },
                 ),

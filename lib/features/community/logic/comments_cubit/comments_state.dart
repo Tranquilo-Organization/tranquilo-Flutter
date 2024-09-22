@@ -9,4 +9,10 @@ class CommentsState<T> with _$CommentsState<T> {
       CommentsSuccess<T>;
   const factory CommentsState.commentsError({required ApiErrorModel error}) =
       CommentsError;
+
+  const factory CommentsState.createCommentLoading() = CreateCommentLoading;
+  const factory CommentsState.createCommentSuccess(
+      CreateCommentResponseModel response) = CreateCommentSuccess;
+  const factory CommentsState.createCommentError(
+      {required ApiErrorModel error}) = CreateCommentError;
 }
