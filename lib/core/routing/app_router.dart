@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/home/ui/notifications_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/edit_profile_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
@@ -155,6 +156,10 @@ class AppRouter {
       case Routes.notificationsSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationsSettingsScreen(),
+        );
+      case Routes.notificationsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationsScreen(),
         );
       default:
         return MaterialPageRoute(

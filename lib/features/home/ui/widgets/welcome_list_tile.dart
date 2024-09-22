@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 
 class WelcomeListTile extends StatelessWidget {
@@ -18,8 +20,12 @@ class WelcomeListTile extends StatelessWidget {
         'Here’s your daily update',
         style: TextStyles.font12DarkGreyLight,
       ),
-      trailing: SvgPicture.asset('assets/svgs/notifications_home.svg'),
+      trailing: InkWell(
+        onTap: (){
+          context.pushNamed(Routes.notificationsScreen);
+        },
+        child: SvgPicture.asset('assets/svgs/notifications_home.svg'),
+      ),
     );
   }
 }
-
