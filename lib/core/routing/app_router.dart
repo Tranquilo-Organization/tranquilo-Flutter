@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/features/home/ui/notifications_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/screens/edit_profile_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
-import 'package:tranquilo_app/features/profile/ui/screens/settings_screen.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import '../../features/auth/login/ui/login_screen.dart';
@@ -18,6 +13,7 @@ import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
+import 'package:tranquilo_app/features/home/ui/notifications_screen.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
@@ -25,14 +21,20 @@ import 'package:tranquilo_app/features/survey/ui/screens/survey_result.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_screen.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_starting.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/settings_screen.dart';
 import 'package:tranquilo_app/features/survey/ui/screens/survey_completed.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/edit_profile_screen.dart';
+import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/screens/create_post_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
+import 'package:tranquilo_app/features/community/ui/screens/community_post_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
@@ -139,7 +141,10 @@ class AppRouter {
         );
       case Routes.createPostScreen:
         return MaterialPageRoute(
-          builder: (_) => const CreatePostScreen(),
+          builder: (_) =>  BlocProvider(
+      create: (context) => getIt<PostsCubit>()..fetchPosts(),
+      child: const CreatePostScreen(),
+    ),
         );
       case Routes.editProfileScreen:
         return MaterialPageRoute(

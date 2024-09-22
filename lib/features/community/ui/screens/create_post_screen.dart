@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/switch_widget.dart';
+import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
+import 'package:tranquilo_app/features/community/data/model/create_post_request_model.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -16,6 +19,29 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   bool isAnonymous = false;
+  final TextEditingController _postController = TextEditingController();
+
+  // Replace this with the actual user ID from your user context
+  String? userId = "your_user_id"; // Replace with actual user ID logic
+
+  void _createPost() {
+    final postContent = _postController.text;
+    if (postContent.isNotEmpty) {
+      context.read<PostsCubit>().createPost(
+            CreatePostRequestModel(
+              postText: postContent,
+              userId: isAnonymous
+                  ? 'anonymous'
+                  : userId!, // Use anonymous or user ID
+            ),
+          );
+      _postController.clear(); // Clear input after posting
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Post content cannot be empty!')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +50,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         child: Column(
           children: [
             verticalSpace(16),
-            const CreatePostAppBar(),
+            CreatePostAppBar(onPost: _createPost), // Pass the callback
             verticalSpace(16),
             Container(
               width: double.infinity,
@@ -85,6 +111,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: TextField(
+                controller: _postController,
                 maxLines: 5,
                 decoration: InputDecoration(
                   hintText: isAnonymous
@@ -95,9 +122,41 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 ),
               ),
             ),
+            verticalSpace(20),
+            BlocConsumer<PostsCubit, PostsState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  createPostSuccess: (response) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Post created successfully!')),
+                    );
+                  },
+                  createPostError: (error) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content:
+                              Text('Failed to create post: ${error.message}')),
+                    );
+                  },
+                  orElse: () {},
+                );
+              },
+              builder: (context, state) {
+                return state.maybeWhen(
+                  createPostLoading: () => const CircularProgressIndicator(),
+                  orElse: () => SizedBox.shrink(),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _postController.dispose();
+    super.dispose();
   }
 }
