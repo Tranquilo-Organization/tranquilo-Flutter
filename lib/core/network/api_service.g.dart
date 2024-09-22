@@ -264,12 +264,12 @@ class _ApiService implements ApiService {
 
   @override
   Future<CreatePostResponseModel> createCommunityPost(
-      CreatePostRequestModel resetPasswordRequestModel) async {
+      CreatePostRequestModel createPostRequestModel) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(resetPasswordRequestModel.toJson());
+    _data.addAll(createPostRequestModel.toJson());
     final _options = _setStreamType<CreatePostResponseModel>(Options(
       method: 'POST',
       headers: _headers,

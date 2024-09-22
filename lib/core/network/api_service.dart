@@ -58,7 +58,7 @@ abstract class ApiService {
 
   @POST(ApiConstants.communityPosts)
   Future<CreatePostResponseModel> createCommunityPost(
-    @Body() CreatePostRequestModel resetPasswordRequestModel,
+    @Body() CreatePostRequestModel createPostRequestModel,
   );
 
   @GET(ApiConstants.communityComments)
