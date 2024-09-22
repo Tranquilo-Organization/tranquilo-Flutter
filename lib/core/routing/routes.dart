@@ -19,4 +19,5 @@ class Routes {
   static const String settingsProfileScreen = '/settingsProfileScreen';
   static const String privacyPolicyScreen = '/privacyPolicyScreen';
   static const String notificationsSettingsScreen = '/notificationsSettingsScreen';
+  static const String notificationsScreen = '/notificationsScreen';
 }
