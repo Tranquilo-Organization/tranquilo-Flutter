@@ -39,6 +39,7 @@ class PostsCubit extends Cubit<PostsState> {
         emit(PostsState.createPostSuccess(response));
       },
       failure: (error) {
+        print('Create post error: ${error.apiErrorModel}');
         emit(PostsState.createPostError(error: error.apiErrorModel));
       },
     );

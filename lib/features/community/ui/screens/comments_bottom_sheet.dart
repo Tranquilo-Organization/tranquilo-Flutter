@@ -39,23 +39,48 @@ class CommentsBottomSheet extends StatelessWidget {
             ),
             verticalSpace(16),
             Expanded(
-              child: BlocBuilder<CommentsCubit, CommentsState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    commentsLoading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    commentsSuccess: (comments) =>
-                        CommentsListView(comments: comments),
-                    commentsError: (error) => Center(
-                      child: Text(
-                        'Failed to load comments: ${error.message}',
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    ),
+              child: BlocListener<CommentsCubit, CommentsState>(
+                listener: (context, state) {
+                  state.when(
+                    initial: () {
+                      // Handle initial state if necessary
+                    },
+                    commentsLoading: () {
+                      // Handle loading state if necessary
+                    },
+                    commentsSuccess: (comments) {
+                      // You can trigger some UI change or state if necessary
+                    },
+                    commentsError: (error) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Failed to load comments: ${error.message}',
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
+                child: BlocBuilder<CommentsCubit, CommentsState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      commentsLoading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      commentsSuccess: (comments) =>
+                          CommentsListView(comments: comments),
+                      commentsError: (error) => Center(
+                        child: Text(
+                          'Failed to load comments: ${error.message}',
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             const CommentsTextField(),
