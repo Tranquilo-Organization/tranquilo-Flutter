@@ -891,10 +891,10 @@ class __$$CreatePostSuccessImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? response = freezed,
+    Object? response = null,
   }) {
     return _then(_$CreatePostSuccessImpl<T>(
-      freezed == response
+      null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CreatePostResponseModel,
@@ -920,12 +920,12 @@ class _$CreatePostSuccessImpl<T> implements CreatePostSuccess<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreatePostSuccessImpl<T> &&
-            const DeepCollectionEquality().equals(other.response, response));
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+  int get hashCode => Object.hash(runtimeType, response);
 
   /// Create a copy of PostsState
   /// with the given fields replaced by the non-null parameter values.

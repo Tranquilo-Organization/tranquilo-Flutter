@@ -9,7 +9,6 @@ class PostsState<T> with _$PostsState<T> {
   const factory PostsState.postsError({required ApiErrorModel error}) =
       PostsError;
 
-  // States for creating a post
   const factory PostsState.createPostLoading() = CreatePostLoading;
   const factory PostsState.createPostSuccess(CreatePostResponseModel response) =
       CreatePostSuccess;
