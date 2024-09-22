@@ -6,12 +6,15 @@ class VoteIcon extends StatelessWidget {
   final String post;
   final BorderRadiusGeometry borderRadius;
   final IconData icon;
+  final Color iconColor;
+  final TextStyle? style;
 
   const VoteIcon({
     super.key,
     required this.post,
     required this.borderRadius,
     required this.icon,
+    required this.iconColor, this.style,
   });
 
   @override
@@ -23,7 +26,7 @@ class VoteIcon extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius,
             side: const BorderSide(
-              color: ColorsManager.black,
+              color: ColorsManager.containerSilver,
             ),
           ),
         ),
@@ -34,10 +37,11 @@ class VoteIcon extends StatelessWidget {
             Icon(
               icon,
               size: 16,
+              color: iconColor,
             ),
             Text(
               post,
-              style: TextStyles.font12JetBlackRegular,
+              style: style,
             ),
           ],
         ),

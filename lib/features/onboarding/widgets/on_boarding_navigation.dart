@@ -26,7 +26,7 @@ class OnBoardingNavigation extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            context.pushNamed(Routes.loginScreen); // Navigate to login screen
+            context.pushNamed(Routes.loginScreen);
           },
           child: Text(
             'Skip',

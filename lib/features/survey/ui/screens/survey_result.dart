@@ -15,7 +15,7 @@ class SurveyResult extends StatefulWidget {
   const SurveyResult({super.key});
 
   @override
-  _SurveyResultState createState() => _SurveyResultState();
+  State<SurveyResult> createState() => _SurveyResultState();
 }
 
 class _SurveyResultState extends State<SurveyResult> {
@@ -28,14 +28,9 @@ class _SurveyResultState extends State<SurveyResult> {
   }
 
   Future<void> _loadSurveyResult() async {
-    final resultJson =
-        await SharedPrefHelper.getSurveyResult(); // Retrieve survey result
-    debugPrint('Retrieved JSON string: $resultJson'); // Debugging line
-
+    final resultJson = await SharedPrefHelper.getSurveyResult();
     if (resultJson != null && resultJson.isNotEmpty) {
-      // Convert the JSON string back to a Map
       final Map<String, dynamic> jsonMap = jsonDecode(resultJson);
-      // Create a SurveyResponseModel from the JSON Map
       final surveyResult = SurveyResponseModel.fromJson(jsonMap);
       setState(() {
         _anxietyLevel = surveyResult.anxietyLevel;
@@ -56,7 +51,7 @@ class _SurveyResultState extends State<SurveyResult> {
               verticalSpace(40),
               Text(
                 'Survey Results',
-                style: TextStyles.font20OceanBlueSemiBold,
+                style: TextStyles.font20JetBlackSemiBold,
               ),
               verticalSpace(5),
               SvgPicture.asset(
@@ -82,9 +77,12 @@ class _SurveyResultState extends State<SurveyResult> {
               ),
               verticalSpace(20),
               AppTextButton(
-                textButton: 'Continue to Dashboard',
+                textButton: 'Continue to Home',
                 onPressed: () {
-                  context.pushNamedAndRemoveUntil(Routes.appLayout, predicate: (Route<dynamic> route) => false);
+                  context.pushNamedAndRemoveUntil(
+                    Routes.appLayout,
+                    predicate: (Route<dynamic> route) => false,
+                  );
                 },
               ),
             ],

@@ -30,7 +30,7 @@ class OtpHeader extends StatelessWidget {
                     ),
                   ),
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_rounded, color: ColorsManager.oceanBlue),
+                    icon: const Icon(Icons.arrow_back_ios_rounded, color: ColorsManager.jetBlack),
                     onPressed: () {
                       context.pop();
                     },
@@ -41,7 +41,7 @@ class OtpHeader extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "Verification",
-                  style: TextStyles.font20OceanBlueSemiBold,
+                  style: TextStyles.font20JetBlackSemiBold,
                 ),
               ),
             ],

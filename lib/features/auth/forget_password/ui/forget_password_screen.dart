@@ -20,7 +20,6 @@ class ForgetPasswordScreen extends StatelessWidget {
           state.when(
             initial: () {},
             loading: () {
-              // Show a loading dialog or indicator
               showDialog(
                 context: context,
                 builder: (context) => const Center(
@@ -29,15 +28,11 @@ class ForgetPasswordScreen extends StatelessWidget {
               );
             },
             success: (data) {
-              // Close the loading dialog
               Navigator.pop(context);
-              // Navigate to OTP screen or show success message
               context.pushNamed(Routes.otpScreen);
             },
             error: (error) {
-              // Close the loading dialog
               Navigator.pop(context);
-              // Show error message
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(error.message.toString())),
               );

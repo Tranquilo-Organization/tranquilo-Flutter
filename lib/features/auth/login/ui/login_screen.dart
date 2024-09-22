@@ -42,8 +42,7 @@ class LoginScreen extends StatelessWidget {
                   SnackBar(
                     backgroundColor: Colors.red,
                     content: Text(
-                      errorState.error.message ??
-                          'An unexpected error occurred',
+                      errorState.error.message,
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),

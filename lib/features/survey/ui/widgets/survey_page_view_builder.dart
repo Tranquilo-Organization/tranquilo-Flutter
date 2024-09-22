@@ -8,12 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_state.dart';
 import 'package:tranquilo_app/features/survey/data/model/survey_request_model.dart';
-
 import '../../../../core/helpers/shared_pref_helper.dart';
 
 class SurveyPageViewBuilder extends StatefulWidget {
@@ -26,12 +24,8 @@ class SurveyPageViewBuilder extends StatefulWidget {
 class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
   int _currentStep = 0;
   final PageController _controller = PageController();
-
-  // Controllers for the text input fields
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _bmiController = TextEditingController();
-
-  /// Updated survey questions to fit the request data
   final List<Map<String, dynamic>> _surveyData = [
     {
       'question': 'What is your age?',
@@ -106,8 +100,6 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     _surveyData[0]['controller'] = _ageController;
     _surveyData[2]['controller'] = _bmiController;
   }
-
-  // Method to create the request model
   SurveyRequestModel _buildSurveyRequest() {
     return SurveyRequestModel(
       age: int.parse(_ageController.text),
@@ -194,9 +186,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Text(
                       _surveyData[index]['question'],
-                      style: TextStyles.font16JetBlackMedium.copyWith(
-                        fontWeight: FontWeightHelper.regular,
-                      ),
+                      style: TextStyles.font18JetBlackMedium,
                     ),
                   ),
                   verticalSpace(16),

@@ -12,6 +12,7 @@ import 'package:tranquilo_app/features/chatbot/ui/widgets/message_input.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/chatbot_suggestion.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/features/chatbot/ui/widgets/message_widget.dart';
+import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
 
 class ChatbotScreen extends StatelessWidget {
   const ChatbotScreen({super.key});
@@ -25,11 +26,12 @@ class ChatbotScreen extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              verticalSpace(40), // Adjust space to your needs
+              verticalSpace(40),
               Text(
-                'ChatBot',
-                style: TextStyles.font16WhiteSemiBold
-                    .copyWith(fontSize: 20.sp), // Use white font
+                'TranqBot',
+                style: TextStyles.font16WhiteSemiBold.copyWith(
+                  fontSize: 20.sp,
+                ),
               ),
               verticalSpace(36),
               Expanded(
@@ -52,7 +54,7 @@ class ChatbotScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      verticalSpace(46),
+                      verticalSpace(23),
                       SvgPicture.asset(
                         'assets/svgs/logo_chatbot.svg',
                         height: 64.h,
@@ -65,20 +67,6 @@ class ChatbotScreen extends StatelessWidget {
                               initial: (showSuggestions) => showSuggestions,
                               orElse: () => false,
                             );
-                            // if (showSuggestions) {
-                            //   context.read<ChatbotCubit>().messages.add(
-                            //         const Row(
-                            //           mainAxisAlignment:
-                            //               MainAxisAlignment.spaceEvenly,
-                            //           children: [
-                            //             ChatbotSuggestion(
-                            //                 text: "What's on your mind?"),
-                            //             ChatbotSuggestion(
-                            //                 text: "How are you feeling today?"),
-                            //           ],
-                            //         ),
-                            //       );
-                            // }
                             if (state is Loading) {
                               context.read<ChatbotCubit>().messages.add(
                                     Align(
@@ -110,13 +98,22 @@ class ChatbotScreen extends StatelessWidget {
                                   .messages
                                   .removeLast();
                               context.read<ChatbotCubit>().messages.add(
-                                  MessageWidget(
-                                      text: state.request.msg, isSender: true));
+                                    MessageWidget(
+                                      text: state.request.msg,
+                                      isSender: true,
+                                    ),
+                                  );
                               context.read<ChatbotCubit>().messages.add(
-                                  MessageWidget(
+                                    MessageWidget(
                                       text: state.response.response,
-                                      isSender: false));
+                                      isSender: false,
+                                    ),
+                                  );
                             } else if (state is Error) {
+                              context
+                                  .read<ChatbotCubit>()
+                                  .messages
+                                  .removeLast();
                               context.read<ChatbotCubit>().messages.add(
                                     Align(
                                       alignment: Alignment.centerLeft,
@@ -145,15 +142,40 @@ class ChatbotScreen extends StatelessWidget {
                             return Column(
                               children: [
                                 showSuggestions
-                                    ? const Row(
+                                    ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           ChatbotSuggestion(
-                                              text: "What's on your mind?"),
+                                            text:
+                                                "Can you help me, please?",
+                                            onTap: () {
+                                              const suggestion =
+                                                  "Can you help me, please?";
+                                              context
+                                                  .read<ChatbotCubit>()
+                                                  .getChatbotResponse(
+                                                    ChatbotRequestModel(
+                                                      msg: suggestion,
+                                                    ),
+                                                  );
+                                            },
+                                          ),
                                           ChatbotSuggestion(
-                                              text:
-                                                  "How are you feeling today?"),
+                                            text:
+                                                "feeling anxious right now",
+                                            onTap: () {
+                                              const suggestion =
+                                                  "feeling anxious right now";
+                                              context
+                                                  .read<ChatbotCubit>()
+                                                  .getChatbotResponse(
+                                                    ChatbotRequestModel(
+                                                      msg: suggestion,
+                                                    ),
+                                                  );
+                                            },
+                                          ),
                                         ],
                                       )
                                     : const SizedBox(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +36,7 @@ class SurveyStarting extends StatelessWidget {
               Text(
                 'This questionnaire will help us\nunderstand your anxiety symptoms and\nprovide personalized recommendations\nfor managing them.',
                 textAlign: TextAlign.center,
-                style: TextStyles.font14JetBlackMedium,
+                style: TextStyles.font14JetBlackMedium.copyWith(color: ColorsManager.darkGrey),
               ),
               verticalSpace(30),
               AppTextButton(

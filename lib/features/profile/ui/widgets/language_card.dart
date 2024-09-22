@@ -10,7 +10,7 @@ class LanguageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Card(
       color: Colors.white,
-      elevation: 10,
+      elevation: 3,
       child: SettingsListTile(
         icon: 'assets/svgs/language_icon.svg',
         title: 'English(US)',

@@ -23,7 +23,7 @@ class DashboardScreen extends StatelessWidget{
                 verticalSpace(20),
                 Text(
                   'Dashboard',
-                  style: TextStyles.font20OceanBlueSemiBold,
+                  style: TextStyles.font20JetBlackSemiBold,
                   textAlign: TextAlign.center,
                 ),
                 verticalSpace(32),

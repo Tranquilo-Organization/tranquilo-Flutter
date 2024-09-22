@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/theming/font_weight_helper.dart';
 import 'package:tranquilo_app/features/onboarding/model/on_boarding_model.dart';
 
 class OnBoardingContent extends StatelessWidget {
@@ -30,7 +31,7 @@ class OnBoardingContent extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeightHelper.semiBold,
               color: ColorsManager.jetBlack,
             ),
           ),
@@ -40,8 +41,8 @@ class OnBoardingContent extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15.sp,
-              fontWeight: FontWeight.w400,
-              color: ColorsManager.jetBlack,
+              fontWeight: FontWeightHelper.regular,
+              color: ColorsManager.darkGrey,
             ),
           ),
         ],

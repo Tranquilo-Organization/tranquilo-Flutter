@@ -14,7 +14,7 @@ class ResetPasswordHeader extends StatelessWidget {
           children: [
             Text(
               "Reset Password",
-              style: TextStyles.font20OceanBlueSemiBold,
+              style: TextStyles.font20JetBlackSemiBold,
             ),
           ],
         ),

@@ -20,13 +20,13 @@ class SurveyScreen extends StatelessWidget {
               verticalSpace(40),
               Text(
                 'GAD Survey',
-                style: TextStyles.font20OceanBlueSemiBold,
+                style: TextStyles.font20JetBlackSemiBold,
                 textAlign: TextAlign.center,
               ),
               verticalSpace(32),
               Text(
                 'Answer the following questions to\nhelp us understand yor anxiety levels',
-                style: TextStyles.font16BlackRegular,
+                style: TextStyles.font14JetBlackLight,
                 textAlign: TextAlign.center,
               ),
               verticalSpace(48),

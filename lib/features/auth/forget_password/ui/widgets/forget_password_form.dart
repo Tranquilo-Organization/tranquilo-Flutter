@@ -30,9 +30,7 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final String email = _emailController.text;
-      // Save email using SharedPreferences
       await SharedPrefHelper.setData('email', email);
-      // Call the cubit to send the forget password request
       context.read<ForgetPasswordCubit>().resetPassword(email);
     }
   }

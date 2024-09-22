@@ -34,25 +34,25 @@ Future<void> setupGetIt() async {
       () => ClassificationModelApiService(dio));
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
-  getIt.registerLazySingleton<LoginCubit>(() => LoginCubit(getIt()));
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
   // sign up
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
-  getIt.registerLazySingleton<SignUpCubit>(() => SignUpCubit(getIt()));
+  getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt()));
 
   // forget password
   getIt.registerLazySingleton<ForgetPasswordRepo>(
       () => ForgetPasswordRepo(getIt()));
-  getIt.registerLazySingleton<ForgetPasswordCubit>(
+  getIt.registerFactory<ForgetPasswordCubit>(
       () => ForgetPasswordCubit(getIt()));
 
   // verify otp
   getIt.registerLazySingleton<VerifyOtpRepo>(() => VerifyOtpRepo(getIt()));
-  getIt.registerLazySingleton<VerifyOtpCubit>(() => VerifyOtpCubit(getIt()));
+  getIt.registerFactory<VerifyOtpCubit>(() => VerifyOtpCubit(getIt()));
 
   // reset password
   getIt.registerLazySingleton<ResetPasswordRepo>(
       () => ResetPasswordRepo(getIt()));
-  getIt.registerLazySingleton<ResetPasswordCubit>(
+  getIt.registerFactory<ResetPasswordCubit>(
       () => ResetPasswordCubit(getIt()));
   // chatbot
   getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));

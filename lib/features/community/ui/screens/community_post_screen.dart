@@ -29,7 +29,7 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
                     verticalSpace(20),
                     Text(
                       'Community',
-                      style: TextStyles.font20OceanBlueSemiBold,
+                      style: TextStyles.font20JetBlackSemiBold,
                       textAlign: TextAlign.center,
                     ),
                     verticalSpace(20),

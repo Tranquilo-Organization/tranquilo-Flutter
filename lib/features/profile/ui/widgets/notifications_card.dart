@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/settings_list_tile.dart';
-
 import '../../../../core/widgets/switch_widget.dart';
 
 class NotificationsCard extends StatefulWidget {
@@ -23,7 +22,7 @@ class _NotificationsCardState extends State<NotificationsCard> {
       children: [
         Card(
           color: Colors.white,
-          elevation: 10,
+          elevation: 3,
           child: Column(
             children: [
               SettingsListTile(
@@ -65,7 +64,7 @@ class _NotificationsCardState extends State<NotificationsCard> {
         verticalSpace(12),
         Card(
           color: Colors.white,
-          elevation: 10,
+          elevation: 3,
           child: SettingsListTile(
             title: 'Show preview',
             trailing: SwitchWidget(

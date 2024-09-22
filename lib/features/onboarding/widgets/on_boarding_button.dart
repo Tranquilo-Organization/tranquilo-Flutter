@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'ring_indicator.dart'; // Ensure correct import path
+import 'ring_indicator.dart';
 
 class FillableButton extends StatefulWidget {
   final VoidCallback onPressed;
@@ -26,23 +26,21 @@ class _FillableButtonState extends State<FillableButton> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: SizedBox(
-        width: 100.0, // Adjust size as needed
-        height: 100.0, // Adjust size as needed
+        width: 100.0,
+        height: 100.0,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Circular indicator with filling effect
             CustomPaint(
               painter: RingIndicatorPainter(
                 color: widget.fillColor,
                 progress: widget.progress,
               ),
-              size: const Size(100.0, 100.0), // Adjust size to match button
+              size: const Size(100.0, 100.0),
             ),
-            // Circular button with SVG icon
             Container(
-              width: 60.0, // Button size
-              height: 60.0, // Button size
+              width: 60.0,
+              height: 60.0,
               decoration: BoxDecoration(
                 color: widget.fillColor,
                 shape: BoxShape.circle,
@@ -50,10 +48,8 @@ class _FillableButtonState extends State<FillableButton> {
               child: Center(
                 child: SvgPicture.asset(
                   'assets/svgs/arrow.svg',
-                  // ignore: deprecated_member_use
-                  color: widget.textColor,
-                  width: 24.0,
-                  height: 24.0,
+                  width: 20.0,
+                  height: 20.0,
                 ),
               ),
             ),

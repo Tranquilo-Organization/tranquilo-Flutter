@@ -6,10 +6,12 @@ import '../theming/styles.dart';
 
 class AppTextButton extends StatelessWidget {
   final String textButton;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? borderColor;
   final Color? textColor;
+  final Color? disabledBackgroundColor;
+  final Color? disabledTextColor;
   final double? width;
   final double? height;
   final double? fontSize;
@@ -23,6 +25,8 @@ class AppTextButton extends StatelessWidget {
     this.backgroundColor,
     this.borderColor,
     this.textColor,
+    this.disabledBackgroundColor,
+    this.disabledTextColor,
     this.width,
     this.height,
     this.fontSize,
@@ -41,18 +45,24 @@ class AppTextButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor ?? ColorsManager.oceanBlue,
-            padding: padding ??EdgeInsets.symmetric(vertical: 12.h),
+            disabledBackgroundColor: disabledBackgroundColor ?? const Color(0xFFA3C8D3),
+            disabledForegroundColor: disabledTextColor ?? ColorsManager.white,
+            padding: padding ?? EdgeInsets.symmetric(vertical: 12.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.r),
               side: BorderSide(
-                color: borderColor ?? ColorsManager.oceanBlue,
+                color: (onPressed == null)
+                    ? Colors.transparent
+                    : borderColor ?? ColorsManager.oceanBlue,
               ),
             ),
           ),
           child: Text(
             textButton,
             style: TextStyles.font16WhiteSemiBold.copyWith(
-              color: textColor ?? ColorsManager.white,
+              color: onPressed == null
+                  ? disabledTextColor ?? ColorsManager.white
+                  : textColor ?? ColorsManager.white,
               fontSize: fontSize ?? 16,
               fontWeight: fontWeight ?? FontWeightHelper.semiBold,
             ),

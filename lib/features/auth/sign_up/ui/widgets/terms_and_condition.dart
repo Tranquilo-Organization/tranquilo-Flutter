@@ -45,7 +45,6 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
                   style: TextStyles.font14OceanBlueMedium,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-
                     },
                 ),
               ],

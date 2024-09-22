@@ -21,7 +21,7 @@ class EditProfileInfo extends StatelessWidget {
           Text(
             infoTitle,
             textAlign: TextAlign.start,
-            style: TextStyles.font16JetBlackRegular.copyWith(
+            style: TextStyles.font14JetBlackRegular.copyWith(
               color: ColorsManager.darkGrey,
             ),
           ),
