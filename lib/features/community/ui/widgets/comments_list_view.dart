@@ -1,7 +1,7 @@
-import 'replay_widget.dart';
 import 'comment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:tranquilo_app/features/community/data/models/get_comment_response_model.dart';
+
 
 class CommentsListView extends StatelessWidget {
   final List<CommentModel> comments;
@@ -27,7 +27,7 @@ class CommentsListView extends StatelessWidget {
 
   String _getTimeAgo(DateTime commentDate) {
     final now = DateTime.now();
-    final difference = now.difference(commentDate).inMinutes;
+    final difference = now.difference(commentDate).inHours;
     return '$difference min ago';
   }
 }

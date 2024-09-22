@@ -9,13 +9,13 @@ part of 'create_post_request_model.dart';
 CreatePostRequestModel _$CreatePostRequestModelFromJson(
         Map<String, dynamic> json) =>
     CreatePostRequestModel(
-      postText: json['postText'] as String,
-      userId: json['userId'] as String,
+      postText: json['PostText'] as String,
+      userEmail: json['userEmail'] as String,
     );
 
 Map<String, dynamic> _$CreatePostRequestModelToJson(
         CreatePostRequestModel instance) =>
     <String, dynamic>{
-      'postText': instance.postText,
-      'userId': instance.userId,
+      'PostText': instance.postText,
+      'userEmail': instance.userEmail,
     };

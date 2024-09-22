@@ -6,6 +6,7 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/switch_widget.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
 import 'package:tranquilo_app/features/community/data/models/create_post_request_model.dart';
@@ -16,23 +17,33 @@ class CreatePostScreen extends StatefulWidget {
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
-
 class _CreatePostScreenState extends State<CreatePostScreen> {
   bool isAnonymous = false;
   final TextEditingController _postController = TextEditingController();
 
-  // Replace this with the actual user ID from your user context
-  String? userId = "your_user_id"; // Replace with actual user ID logic
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserEmail();
+  }
+
+  // Method to load the saved email from SharedPreferences
+  void _loadUserEmail() async {
+    userEmail = await SharedPrefHelper.getEmail('email');
+    setState(() {});
+  }
 
   void _createPost() {
     final postContent = _postController.text;
     if (postContent.isNotEmpty) {
+      final email = isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
+
       context.read<PostsCubit>().createPost(
             CreatePostRequestModel(
               postText: postContent,
-              userId: isAnonymous
-                  ? 'anonymous'
-                  : userId!, // Use anonymous or user ID
+              userEmail: email, // Use the retrieved email or 'anonymous'
             ),
           );
       _postController.clear(); // Clear input after posting
