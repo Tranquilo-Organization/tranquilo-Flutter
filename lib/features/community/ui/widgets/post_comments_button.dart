@@ -37,6 +37,7 @@ class PostCommentsButton extends StatelessWidget {
               builder: (context, scrollController) {
                 return CommentsBottomSheet(
                   scrollController: scrollController,
+                  post: post,
                 );
               },
             );

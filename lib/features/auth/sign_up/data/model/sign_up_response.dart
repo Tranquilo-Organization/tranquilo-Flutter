@@ -8,12 +8,14 @@ class SignupResponse {
   String? expireDate;
   String? email;
   String? id;
+  String? userName;
 
   SignupResponse({
     this.token,
     this.expireDate,
     this.email,
     this.id,
+    this.userName,
   });
 
   factory SignupResponse.fromJson(Map<String, dynamic> json) =>
