@@ -17,6 +17,7 @@ class CreatePostScreen extends StatefulWidget {
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
 }
+
 class _CreatePostScreenState extends State<CreatePostScreen> {
   bool isAnonymous = false;
   final TextEditingController _postController = TextEditingController();
@@ -38,7 +39,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   void _createPost() {
     final postContent = _postController.text;
     if (postContent.isNotEmpty) {
-      final email = isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
+      final email =
+          isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
 
       context.read<PostsCubit>().createPost(
             CreatePostRequestModel(
@@ -138,8 +140,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               listener: (context, state) {
                 state.maybeWhen(
                   createPostSuccess: (response) {
+                    // Save the post ID in SharedPreferences
+                    SharedPrefHelper.setData('post_id', response.postId);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Post created successfully!')),
+                      const SnackBar(
+                          content: Text('Post created successfully!')),
                     );
                   },
                   createPostError: (error) {

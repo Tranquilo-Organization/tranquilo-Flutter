@@ -9,7 +9,7 @@ part of 'create_post_response_model.dart';
 CreatePostResponseModel _$CreatePostResponseModelFromJson(
         Map<String, dynamic> json) =>
     CreatePostResponseModel(
-      commentId: (json['commentId'] as num).toInt(),
+      postId: (json['postId'] as num).toInt(),
       message: json['message'] as String,
       notification: json['notification'] as String,
       profilePicture: json['profilePicture'] as String?,
@@ -19,7 +19,7 @@ CreatePostResponseModel _$CreatePostResponseModelFromJson(
 Map<String, dynamic> _$CreatePostResponseModelToJson(
         CreatePostResponseModel instance) =>
     <String, dynamic>{
-      'commentId': instance.commentId,
+      'postId': instance.postId,
       'message': instance.message,
       'notification': instance.notification,
       'profilePicture': instance.profilePicture,
