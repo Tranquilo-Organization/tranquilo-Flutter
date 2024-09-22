@@ -21,6 +21,7 @@ mixin _$UserProfileState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
     required TResult Function(ApiErrorModel error) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$UserProfileState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
     TResult? Function(ApiErrorModel error)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$UserProfileState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
     TResult Function(ApiErrorModel error)? failure,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$UserProfileState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
     required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$UserProfileState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
     TResult? Function(_Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$UserProfileState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
@@ -133,6 +139,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
     required TResult Function(ApiErrorModel error) failure,
   }) {
     return initial();
@@ -144,6 +151,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
     TResult? Function(ApiErrorModel error)? failure,
   }) {
     return initial?.call();
@@ -155,6 +163,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
     TResult Function(ApiErrorModel error)? failure,
     required TResult orElse(),
   }) {
@@ -170,6 +179,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
@@ -181,6 +191,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return initial?.call(this);
@@ -192,6 +203,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -250,6 +262,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
     required TResult Function(ApiErrorModel error) failure,
   }) {
     return loading();
@@ -261,6 +274,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
     TResult? Function(ApiErrorModel error)? failure,
   }) {
     return loading?.call();
@@ -272,6 +286,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
     TResult Function(ApiErrorModel error)? failure,
     required TResult orElse(),
   }) {
@@ -287,6 +302,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
@@ -298,6 +314,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return loading?.call(this);
@@ -309,6 +326,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -345,10 +363,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profile = freezed,
+    Object? profile = null,
   }) {
     return _then(_$SuccessImpl(
-      freezed == profile
+      null == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as ProfileResponseModel,
@@ -374,12 +392,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other.profile, profile));
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(profile));
+  int get hashCode => Object.hash(runtimeType, profile);
 
   /// Create a copy of UserProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -395,6 +412,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
     required TResult Function(ApiErrorModel error) failure,
   }) {
     return success(profile);
@@ -406,6 +424,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
     TResult? Function(ApiErrorModel error)? failure,
   }) {
     return success?.call(profile);
@@ -417,6 +436,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
     TResult Function(ApiErrorModel error)? failure,
     required TResult orElse(),
   }) {
@@ -432,6 +452,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return success(this);
@@ -443,6 +464,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return success?.call(this);
@@ -454,6 +476,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -474,6 +497,129 @@ abstract class _Success implements UserProfileState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteSuccessImplCopyWith<$Res> {
+  factory _$$DeleteSuccessImplCopyWith(
+          _$DeleteSuccessImpl value, $Res Function(_$DeleteSuccessImpl) then) =
+      __$$DeleteSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteSuccessImplCopyWithImpl<$Res>
+    extends _$UserProfileStateCopyWithImpl<$Res, _$DeleteSuccessImpl>
+    implements _$$DeleteSuccessImplCopyWith<$Res> {
+  __$$DeleteSuccessImplCopyWithImpl(
+      _$DeleteSuccessImpl _value, $Res Function(_$DeleteSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteSuccessImpl implements _DeleteSuccess {
+  const _$DeleteSuccessImpl();
+
+  @override
+  String toString() {
+    return 'UserProfileState.deleteSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeleteSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
+    required TResult Function(ApiErrorModel error) failure,
+  }) {
+    return deleteSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
+    TResult? Function(ApiErrorModel error)? failure,
+  }) {
+    return deleteSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
+    TResult Function(ApiErrorModel error)? failure,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return deleteSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return deleteSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (deleteSuccess != null) {
+      return deleteSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteSuccess implements UserProfileState {
+  const factory _DeleteSuccess() = _$DeleteSuccessImpl;
 }
 
 /// @nodoc
@@ -498,10 +644,10 @@ class __$$FailureImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$FailureImpl(
-      freezed == error
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as ApiErrorModel,
@@ -527,12 +673,11 @@ class _$FailureImpl implements _Failure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FailureImpl &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of UserProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -548,6 +693,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(ProfileResponseModel profile) success,
+    required TResult Function() deleteSuccess,
     required TResult Function(ApiErrorModel error) failure,
   }) {
     return failure(error);
@@ -559,6 +705,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(ProfileResponseModel profile)? success,
+    TResult? Function()? deleteSuccess,
     TResult? Function(ApiErrorModel error)? failure,
   }) {
     return failure?.call(error);
@@ -570,6 +717,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(ProfileResponseModel profile)? success,
+    TResult Function()? deleteSuccess,
     TResult Function(ApiErrorModel error)? failure,
     required TResult orElse(),
   }) {
@@ -585,6 +733,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_DeleteSuccess value) deleteSuccess,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -596,6 +745,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_DeleteSuccess value)? deleteSuccess,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -607,6 +757,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_DeleteSuccess value)? deleteSuccess,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {

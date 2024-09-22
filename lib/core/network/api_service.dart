@@ -74,4 +74,7 @@ abstract class ApiService {
 
   @GET("${ApiConstants.profile}{email}")
   Future<ProfileResponseModel> fetchUserProfile(@Path("email") String email);
+
+  @DELETE("${ApiConstants.profile}{email}")
+  Future<void> deleteUserProfile(@Path("email") String email);
 }

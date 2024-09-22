@@ -9,17 +9,41 @@ class UserProfileRepo {
 
   UserProfileRepo(this._apiService);
 
+  // Fetch User Profile
   Future<ApiResult<ProfileResponseModel>> fetchUserProfile() async {
     try {
       String email = await SharedPrefHelper.getEmail();
 
       if (email.isNotEmpty) {
-        // Step 2: Fetch the user profile using the API
         final ProfileResponseModel profileResponseModel =
             await _apiService.fetchUserProfile(email);
 
-        // Step 3: Return the profile response on success
+        // Return the profile response on success
         return ApiResult.success(profileResponseModel);
+      } else {
+        return ApiResult.failure(
+          ErrorHandler.handle(
+            Exception("Email not found in shared preferences"),
+          ),
+        );
+      }
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  // Delete User Profile (no response expected)
+  Future<ApiResult<void>> deleteUserProfile() async {
+    try {
+      // Retrieve the email from shared preferences
+      String email = await SharedPrefHelper.getEmail();
+
+      if (email.isNotEmpty) {
+        // Call the delete user profile API, the response is empty
+        await _apiService.deleteUserProfile(email);
+
+        // Return success with no data
+        return const ApiResult.success(null);
       } else {
         return ApiResult.failure(
           ErrorHandler.handle(

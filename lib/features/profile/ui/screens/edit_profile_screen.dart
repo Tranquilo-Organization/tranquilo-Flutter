@@ -19,14 +19,10 @@ class EditProfileScreen extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<UserProfileCubit, UserProfileState>(
           builder: (context, state) {
-            return state.when(
-              initial: () => const Center(
-                  child:
-                      CircularProgressIndicator()), // Change initial to show loading
+            return state.maybeWhen(
               loading: () => const Center(child: CircularProgressIndicator()),
               success: (profile) => buildProfileScreen(profile.model),
-              failure: (error) =>
-                  const Center(child: Text('Failed to load profile')),
+              orElse: () => const Center(child: Text('Failed to load profile')),
             );
           },
         ),

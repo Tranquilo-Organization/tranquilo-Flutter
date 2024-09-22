@@ -2,21 +2,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_state.dart';
 import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 
-
 class UserProfileCubit extends Cubit<UserProfileState> {
-  final UserProfileRepo userProfileRepo;
+  final UserProfileRepo _userProfileRepo;
 
-  UserProfileCubit(this.userProfileRepo) : super(const UserProfileState.initial());
+  UserProfileCubit(this._userProfileRepo)
+      : super(const UserProfileState.initial());
 
+  // Fetch User Profile
   Future<void> fetchUserProfile() async {
     emit(const UserProfileState.loading());
 
-    final result = await userProfileRepo.fetchUserProfile();
+    final result = await _userProfileRepo.fetchUserProfile();
 
-    // Handle the result
     result.when(
-      success: (profile) => emit(UserProfileState.success(profile)),
-      failure: (error) => emit(UserProfileState.failure(error.apiErrorModel)),
+      success: (profile) {
+        emit(UserProfileState.success(profile));
+      },
+      failure: (error) {
+        emit(UserProfileState.failure(error.apiErrorModel));
+      },
+    );
+  }
+
+  // Delete User Profile
+  Future<void> deleteUserProfile() async {
+    emit(const UserProfileState.loading());
+
+    final result = await _userProfileRepo.deleteUserProfile();
+
+    result.when(
+      success: (_) {
+        emit(const UserProfileState.deleteSuccess());
+      },
+      failure: (error) {
+        emit(UserProfileState.failure(error.apiErrorModel));
+      },
     );
   }
 }
