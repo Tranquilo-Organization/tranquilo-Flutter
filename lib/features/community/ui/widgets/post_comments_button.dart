@@ -30,7 +30,7 @@ class PostCommentsButton extends StatelessWidget {
           isScrollControlled: true,
           builder: (context) {
             return DraggableScrollableSheet(
-              initialChildSize: 0.5,
+              initialChildSize: 0.7,
               minChildSize: 0.3,
               maxChildSize: 0.9,
               expand: false,

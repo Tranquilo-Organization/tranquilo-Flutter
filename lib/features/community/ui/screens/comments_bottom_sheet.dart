@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
@@ -8,7 +7,7 @@ import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/comments_list_view.dart';
 import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/comments_text_field.dart'; // Assuming you have DI setup
+import 'package:tranquilo_app/features/community/ui/widgets/comments_text_field.dart';
 
 class CommentsBottomSheet extends StatelessWidget {
   final ScrollController scrollController;

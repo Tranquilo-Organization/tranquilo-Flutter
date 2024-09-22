@@ -913,10 +913,10 @@ class __$$CreateCommentSuccessImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? response = freezed,
+    Object? response = null,
   }) {
     return _then(_$CreateCommentSuccessImpl<T>(
-      freezed == response
+      null == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CreateCommentResponseModel,
@@ -942,12 +942,12 @@ class _$CreateCommentSuccessImpl<T> implements CreateCommentSuccess<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateCommentSuccessImpl<T> &&
-            const DeepCollectionEquality().equals(other.response, response));
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+  int get hashCode => Object.hash(runtimeType, response);
 
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.

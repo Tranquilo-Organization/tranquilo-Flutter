@@ -9,7 +9,15 @@ class PostsBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostsCubit, PostsState>(
+    return BlocConsumer<PostsCubit, PostsState>(
+      listener: (context, state) {
+        state.maybeWhen(
+            createPostSuccess: (_){
+              debugPrint("============================= \nlisten");
+              context.read<PostsCubit>().fetchPosts();
+            }, orElse: () {  }
+        );
+      },
       builder: (context, state) {
         return state.maybeWhen(
           initial: () => SliverToBoxAdapter(
@@ -24,6 +32,7 @@ class PostsBlocBuilder extends StatelessWidget {
             child: Center(child: CircularProgressIndicator()),
           ),
           postsSuccess: (posts) {
+            debugPrint("================================\nbuild");
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: posts.length,
@@ -33,6 +42,7 @@ class PostsBlocBuilder extends StatelessWidget {
               ),
             );
           },
+
           postsError: (error) {
             return SliverToBoxAdapter(
               child: Text(

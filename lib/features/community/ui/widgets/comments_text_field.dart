@@ -6,10 +6,10 @@ import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_c
 import 'package:tranquilo_app/features/community/data/models/comment_models/create_comment_request_model.dart';
 
 class CommentsTextField extends StatefulWidget {
-  const CommentsTextField({Key? key}) : super(key: key);
+  const CommentsTextField({super.key});
 
   @override
-  _CommentsTextFieldState createState() => _CommentsTextFieldState();
+  State<CommentsTextField> createState() => _CommentsTextFieldState();
 }
 
 class _CommentsTextFieldState extends State<CommentsTextField> {
@@ -24,7 +24,7 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
     });
 
     try {
-      String email = await SharedPrefHelper.getEmail('email');
+      String email = await SharedPrefHelper.getEmail();
       String? postIdString = await SharedPrefHelper.getPostId();
       int postId = postIdString != null ? int.parse(postIdString) : 0;
 
@@ -62,7 +62,7 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
+            child: TextFormField(
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Type your comment here...',

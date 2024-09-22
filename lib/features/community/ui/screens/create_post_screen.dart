@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,31 +25,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   String? userEmail;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadUserEmail();
-  }
-
-  // Method to load the saved email from SharedPreferences
-  void _loadUserEmail() async {
-    userEmail = await SharedPrefHelper.getEmail('email');
-    setState(() {});
-  }
-
-  void _createPost() {
+  void _createPost() async {
     final postContent = _postController.text;
     if (postContent.isNotEmpty) {
+      userEmail = await SharedPrefHelper.getEmail();
       final email =
           isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
 
       context.read<PostsCubit>().createPost(
             CreatePostRequestModel(
               postText: postContent,
-              userEmail: email, // Use the retrieved email or 'anonymous'
+              userEmail: email,
             ),
           );
-      _postController.clear(); // Clear input after posting
+      _postController.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Post content cannot be empty!')),
@@ -63,7 +53,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         child: Column(
           children: [
             verticalSpace(16),
-            CreatePostAppBar(onPost: _createPost), // Pass the callback
+            CreatePostAppBar(onPost: _createPost),
             verticalSpace(16),
             Container(
               width: double.infinity,
@@ -140,18 +130,27 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               listener: (context, state) {
                 state.maybeWhen(
                   createPostSuccess: (response) {
-                    // Save the post ID in SharedPreferences
                     SharedPrefHelper.setData('post_id', response.postId);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Post created successfully!')),
+                      SnackBar(
+                        backgroundColor: ColorsManager.green,
+                        content: Text(
+                          'Post created successfully!',
+                          style: TextStyles.font14JetBlackMedium.copyWith(
+                            color: ColorsManager.white,
+                          ),
+                        ),
+                      ),
                     );
+                    //context.read<PostsCubit>().fetchPosts();
+                    context.pop();
                   },
                   createPostError: (error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                          content:
-                              Text('Failed to create post: ${error.message}')),
+                        content:
+                            Text('Failed to create post: ${error.message}'),
+                      ),
                     );
                   },
                   orElse: () {},
@@ -160,7 +159,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               builder: (context, state) {
                 return state.maybeWhen(
                   createPostLoading: () => const CircularProgressIndicator(),
-                  orElse: () => SizedBox.shrink(),
+                  orElse: () => const SizedBox.shrink(),
                 );
               },
             ),

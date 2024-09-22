@@ -10,10 +10,14 @@ LoginResponseBody _$LoginResponseBodyFromJson(Map<String, dynamic> json) =>
     LoginResponseBody(
       token: json['token'] as String,
       expireDate: json['expireDate'] as String,
+      email: json['email'] as String,
+      id: json['id'] as String,
     );
 
 Map<String, dynamic> _$LoginResponseBodyToJson(LoginResponseBody instance) =>
     <String, dynamic>{
       'token': instance.token,
       'expireDate': instance.expireDate,
+      'email': instance.email,
+      'id': instance.id,
     };

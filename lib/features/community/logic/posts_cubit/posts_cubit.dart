@@ -21,7 +21,8 @@ class PostsCubit extends Cubit<PostsState> {
 
     result.when(
       success: (data) {
-        emit(PostsState.postsSuccess(data.result));
+        final List<Post> result = data.result.reversed.toList();
+        emit(PostsState.postsSuccess(result));
       },
       failure: (error) {
         emit(PostsState.postsError(error: error.apiErrorModel));
