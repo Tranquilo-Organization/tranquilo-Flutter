@@ -4,9 +4,11 @@ import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
+import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
+import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
@@ -67,7 +69,11 @@ Future<void> setupGetIt() async {
 //routine
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
   getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
-
+//comment
     getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
   getIt.registerFactory<CommentsCubit>(() => CommentsCubit(getIt()));
+
+  //profile 
+      getIt.registerLazySingleton<UserProfileRepo>(() => UserProfileRepo(getIt()));
+        getIt.registerFactory<UserProfileCubit>(() => UserProfileCubit(getIt()));
 }
