@@ -1,7 +1,6 @@
 import 'comment_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/community/data/models/get_comment_response_model.dart';
-
+import 'package:tranquilo_app/features/community/data/models/comment_models/get_comment_response_model.dart';
 
 class CommentsListView extends StatelessWidget {
   final List<CommentModel> comments;

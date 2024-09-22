@@ -9,7 +9,7 @@ import 'package:tranquilo_app/core/widgets/switch_widget.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
-import 'package:tranquilo_app/features/community/data/models/create_post_request_model.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/create_post_request_model.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});

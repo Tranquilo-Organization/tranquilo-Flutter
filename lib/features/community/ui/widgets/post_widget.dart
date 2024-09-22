@@ -6,8 +6,8 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_votes.dart';
-import 'package:tranquilo_app/features/community/data/models/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_comments_button.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;

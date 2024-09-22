@@ -4,8 +4,8 @@ import '../../../../core/theming/styles.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors_manger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/features/community/data/models/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/screens/comments_bottom_sheet.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
 
 class PostCommentsButton extends StatelessWidget {
   final Post post;

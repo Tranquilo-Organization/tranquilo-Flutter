@@ -2,7 +2,7 @@ import '../../data/repos/comment_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tranquilo_app/core/network/api_error_model.dart';
-import 'package:tranquilo_app/features/community/data/models/get_comment_response_model.dart';
+import 'package:tranquilo_app/features/community/data/models/comment_models/get_comment_response_model.dart';
 
 part 'comments_state.dart';
 part 'comments_cubit.freezed.dart';
