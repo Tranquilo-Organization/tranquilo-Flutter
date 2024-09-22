@@ -20,7 +20,7 @@ class PostCommentsButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.r),
           side: const BorderSide(
-            color: ColorsManager.black,
+            color: ColorsManager.containerSilver,
           ),
         ),
       ),

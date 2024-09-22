@@ -9,7 +9,7 @@ class SupportCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      elevation: 10,
+      elevation: 3,
       child: Column(
         children: [
           const SettingsListTile(

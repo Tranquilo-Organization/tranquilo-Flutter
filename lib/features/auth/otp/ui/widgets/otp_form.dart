@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
@@ -44,7 +43,6 @@ class _OtpFormState extends State<OtpForm> {
   void _verifyOtp() async {
     bool isValid = true;
 
-    // Check if all OTP fields are filled
     for (var controller in _controllers) {
       if (controller.text.length != 1) {
         isValid = false;
@@ -53,22 +51,12 @@ class _OtpFormState extends State<OtpForm> {
     }
 
     if (isValid) {
-      // Collect OTP input
       final otp = _controllers.map((c) => c.text).join();
-
-      // Get the email from SharedPreferences
       final email = await SharedPrefHelper.getEmail('email');
-
-      // Create OTP request model with email and OTP
-      final requestModel = VerifyOtpRequestModel(
-        email: email, // Use the stored email
-        otp: otp,
-      );
-
-      // Call the Bloc to verify OTP
+      final requestModel = VerifyOtpRequestModel(email: email, otp: otp,);
       BlocProvider.of<VerifyOtpCubit>(context).verifyOtp(requestModel);
-    } else {
-      // Show error if OTP is not complete
+    }
+    else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: ColorsManager.oceanBlue,
@@ -121,3 +109,5 @@ class _OtpFormState extends State<OtpForm> {
     );
   }
 }
+
+

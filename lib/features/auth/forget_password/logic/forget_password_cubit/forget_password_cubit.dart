@@ -13,8 +13,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     emit(const ForgetPasswordState.loading());
 
     final response = await _forgetPasswordRepo.forgetPassword(
-      ForgetPasswordRequestModel(
-          email: email), // Create request model with email
+      ForgetPasswordRequestModel(email: email),
     );
 
     response.when(

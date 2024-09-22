@@ -45,6 +45,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.jetBlack,
   );
+  static TextStyle font18JetBlackMedium = GoogleFonts.poppins(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.jetBlack,
+  );
 
   static TextStyle font14JetBlackRegular = GoogleFonts.poppins(
     fontSize: 14.sp,
@@ -92,6 +97,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.light,
     color: ColorsManager.darkGrey,
   );
+  static TextStyle font14JetBlackLight = GoogleFonts.poppins(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.light,
+    color: ColorsManager.jetBlack,
+  );
 
   static TextStyle font12JetBlackMedium = GoogleFonts.poppins(
     fontSize: 12.sp,
@@ -103,6 +113,18 @@ class TextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.jetBlack,
+  );
+
+  static TextStyle font12GreenRegular = GoogleFonts.poppins(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.green,
+  );
+
+  static TextStyle font12RedRegular = GoogleFonts.poppins(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.red,
   );
 
   static TextStyle font16WhiteSemiBold = GoogleFonts.poppins(

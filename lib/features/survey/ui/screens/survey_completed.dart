@@ -21,12 +21,12 @@ class SurveyCompleted extends StatelessWidget {
             verticalSpace(40),
             Text(
               'GAD Survey',
-              style: TextStyles.font20OceanBlueSemiBold,
+              style: TextStyles.font20JetBlackSemiBold,
             ),
             verticalSpace(32),
             Text(
               'You have successfully completed\nthe questionnaire',
-              style: TextStyles.font16JetBlackMedium,
+              style: TextStyles.font14JetBlackLight,
               textAlign: TextAlign.center,
             ),
             verticalSpace(32),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/features/community/data/model/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/vote_icon.dart';
 
@@ -21,6 +23,8 @@ class PostVotes extends StatelessWidget {
             bottomLeft: Radius.circular(8.r),
           ),
           icon: Icons.arrow_upward,
+          iconColor: ColorsManager.green,
+          style: TextStyles.font12GreenRegular,
         ),
         VoteIcon(
           post: formatNumber(post.downVoteCountLength),
@@ -29,6 +33,8 @@ class PostVotes extends StatelessWidget {
             bottomRight: Radius.circular(8.r),
           ),
           icon: Icons.arrow_downward,
+          iconColor: ColorsManager.red,
+          style: TextStyles.font12RedRegular,
         ),
       ],
     );

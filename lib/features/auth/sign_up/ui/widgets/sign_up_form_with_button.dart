@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/routing/app_router.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/widgets/terms_and_condition.dart';

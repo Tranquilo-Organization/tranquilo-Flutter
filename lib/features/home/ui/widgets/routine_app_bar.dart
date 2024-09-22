@@ -20,12 +20,12 @@ class RoutineAppBar extends StatelessWidget {
         child: const Icon(
           CupertinoIcons.back,
           size: 32,
-          color: ColorsManager.oceanBlue,
+          color: ColorsManager.jetBlack,
         ),
       ),
       title: Text(
         titleAppBar,
-        style: TextStyles.font20OceanBlueSemiBold,
+        style: TextStyles.font20JetBlackSemiBold,
       ),
     );
   }

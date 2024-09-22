@@ -29,7 +29,7 @@ class SignUpHeader extends StatelessWidget {
                     ),
                   ),
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_rounded, color: ColorsManager.oceanBlue),
+                    icon: const Icon(Icons.arrow_back_ios_rounded, color: ColorsManager.jetBlack),
                     onPressed: () {
                       context.pop();
                     },
@@ -40,7 +40,7 @@ class SignUpHeader extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "Sign Up",
-                  style: TextStyles.font24OceanBlueSemiBold,
+                  style: TextStyles.font24OceanBlueSemiBold.copyWith(color: ColorsManager.jetBlack),
                 ),
               ),
             ],

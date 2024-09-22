@@ -5,14 +5,12 @@ import '../../../../core/theming/styles.dart';
 
 class TaskRoutine extends StatelessWidget {
   final Color containerColor;
-  final String taskTitle;
   final String taskDesc;
   final String image;
 
   const TaskRoutine({
     super.key,
     required this.containerColor,
-    required this.taskTitle,
     required this.taskDesc,
     required this.image,
   });
@@ -23,37 +21,27 @@ class TaskRoutine extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
-          height: 188.h,
-          width: 282.w,
-          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.only(left: 24.w),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: containerColor,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                taskTitle,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyles.font14JetBlackSemiBold,
-              ),
               Text(
                 taskDesc,
                 maxLines: 6,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyles.font12JetBlackRegular,
               ),
+              Expanded(
+                child: SvgPicture.asset(
+                  image,
+                ),
+              ),
             ],
-          ),
-        ),
-        Positioned(
-          right: -30,
-          child: SvgPicture.asset(
-            image,
-            height: 191.h,
           ),
         ),
       ],

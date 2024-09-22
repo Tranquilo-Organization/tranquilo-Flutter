@@ -11,10 +11,8 @@ class RingIndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const double strokeWidth =
-        5.0; // Increase stroke width to make it more visible
-    const double padding =
-        12.0; // Increased padding to move the ring farther from the edges
+    const double strokeWidth = 5.0;
+    const double padding = 12.0;
     final Rect rect = Rect.fromLTWH(
       padding,
       padding,
@@ -22,21 +20,17 @@ class RingIndicatorPainter extends CustomPainter {
       size.height - 2 * padding,
     );
     final double sweepAngle = 2 * 3.141592653589793 * progress;
-
-    // Draw the full circle
     canvas.drawArc(
       rect,
       -3.141592653589793 / 2,
       2 * 3.141592653589793,
       false,
       Paint()
-        ..color = color.withOpacity(0.2) // Background color for the ring
+        ..color = color.withOpacity(0.2)
         ..style = PaintingStyle.stroke
         ..strokeWidth = strokeWidth
         ..strokeCap = StrokeCap.round,
     );
-
-    // Draw the progress ring
     canvas.drawArc(
       rect,
       -3.141592653589793 / 2,

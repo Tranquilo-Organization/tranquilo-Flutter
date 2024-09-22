@@ -19,7 +19,7 @@ class _InterfaceCardState extends State<InterfaceCard> {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      elevation: 10,
+      elevation: 3,
       child: Column(
         children: [
           SettingsListTile(

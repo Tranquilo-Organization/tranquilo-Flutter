@@ -31,19 +31,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.ease,
       );
     } else {
-      // Call completeOnboarding when user reaches the last onboarding page
       completeOnboarding(context);
     }
   }
 
   Future<void> completeOnboarding(BuildContext context) async {
-    // Set isFirstLaunch to false after the onboarding is completed
     await SharedPrefHelper.setData(SharedPrefKeys.isFirstLaunch, false);
-
-    // Ensure the token is cleared (optional, in case there was a bad state)
     await SharedPrefHelper.clearAllSecuredData();
-
-    // Navigate to the login screen after onboarding
     context.pushNamed(Routes.loginScreen);
   }
 

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'verify_otp_response_model.g.dart'; // Correct name for the generated file
+part 'verify_otp_response_model.g.dart';
 
 @JsonSerializable()
 class VerifyOtpResponseModel {

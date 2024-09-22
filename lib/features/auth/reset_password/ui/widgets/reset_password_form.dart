@@ -2,10 +2,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/helpers/show_dialog.dart';
-import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/core/network/api_result.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/app_validation.dart';
@@ -17,7 +15,7 @@ import 'package:tranquilo_app/features/auth/reset_password/data/models/reset_pas
 
 class ResetPasswordForm extends StatefulWidget {
   final String email;
-  final String otp; // OTP passed from OtpForm
+  final String otp;
 
   const ResetPasswordForm({super.key, required this.email, required this.otp});
 
@@ -50,16 +48,14 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
       final String newPassword = _newPasswordController.text;
       final String confirmPassword = _confirmPasswordController.text;
       final String email = widget.email;
-      final String otp = widget.otp; // Get OTP passed from OtpForm
+      final String otp = widget.otp;
 
       final requestModel = ResetPasswordRequestModel(
         email: email,
-        otp: otp, // Include OTP in request
+        otp: otp,
         password: newPassword,
         confirmPassword: confirmPassword,
       );
-
-      // Call the cubit to handle reset password logic
       context.read<ResetPasswordCubit>().resetPassword(requestModel);
     }
   }
@@ -71,7 +67,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
         if (state is ResetPasswordSuccess) {
           showSuccessDialog(context);
         } else if (state is ResetPasswordError) {
-          // Show an error message on failure
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to reset password: ${state.error}')),
           );

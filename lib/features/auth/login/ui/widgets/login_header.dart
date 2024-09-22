@@ -13,7 +13,7 @@ class LoginHeader extends StatelessWidget {
       children: [
         Text(
           "Sign in",
-          style: TextStyles.font24OceanBlueSemiBold,
+          style: TextStyles.font24OceanBlueSemiBold.copyWith(color: ColorsManager.jetBlack),
         ),
         verticalSpace(16),
         const Divider(
