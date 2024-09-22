@@ -8,6 +8,8 @@ import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/home/logic/routine_state.dart';
+import 'package:tranquilo_app/core/animations/custom_error_widget.dart';
+import 'package:tranquilo_app/core/animations/custom_loading_widget.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/task_routine.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/congrats_dialog.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/routine_app_bar.dart';
@@ -43,7 +45,7 @@ class _MorningRoutineState extends State<MorningRoutine> {
             return state.when(
               initial: () =>
                   const Center(child: Text('No routines loaded yet.')),
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const CustomLoadingWidget(),
               success: (routines) {
                 // Filter for morning routines
                 final morningRoutine = routines.firstWhere(
@@ -179,12 +181,7 @@ class _MorningRoutineState extends State<MorningRoutine> {
                 );
               },
               failure: (error) {
-                return Center(
-                  child: Text(
-                    'Error: ${error.message}', // Display error message from ApiErrorModel
-                    style: TextStyles.font16JetBlackRegular,
-                  ),
-                );
+                return CustomErrorWidget();
               },
             );
           },

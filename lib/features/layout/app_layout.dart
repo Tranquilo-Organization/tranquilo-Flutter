@@ -9,6 +9,7 @@ import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/features/home/ui/home_screen.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
 import 'package:tranquilo_app/features/chatbot/ui/chatbot_screen.dart';
+import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/dashboard/ui/dashboard_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/profile_screen.dart';
 import 'package:tranquilo_app/features/community/ui/screens/community_post_screen.dart';
@@ -33,7 +34,10 @@ class _AppLayoutState extends State<AppLayout> {
       value: getIt<PostsCubit>()..fetchPosts(),
       child: const CommunityPostScreen(),
     ),
-    const ProfileScreen(),
+    BlocProvider(
+      create: (context) => getIt<UserProfileCubit>()..fetchUserProfile(),
+      child: const ProfileScreen(),
+    ),
   ];
   PageController pageController = PageController();
 

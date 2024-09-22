@@ -17,6 +17,7 @@ class ApiConstants {
   static const String predict = 'predict';
   static const String routine = 'routine/Levelid';
   static const String communityComments = 'Comment';
+  static const String profile = "/Profile/UserEmail/";
 }
 
 class ApiErrors {

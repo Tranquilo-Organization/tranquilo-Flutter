@@ -6,6 +6,7 @@ import 'package:tranquilo_app/features/auth/login/data/model/login_request_body.
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_response.dart';
 import 'package:tranquilo_app/features/chatbot/data/model/chatbot_request_model.dart';
 import 'package:tranquilo_app/features/auth/login/data/model/login_response_body.dart';
+import 'package:tranquilo_app/features/profile/data/model/profile_response_model.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_request_body.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_request_model.dart';
 import 'package:tranquilo_app/features/auth/otp/data/models/verify_otp_response_model.dart';
@@ -70,4 +71,10 @@ abstract class ApiService {
   Future<CreateCommentResponseModel> createComment(
     @Body() CreateCommentRequestModel createCommentRequestModel,
   );
+
+  @GET("${ApiConstants.profile}{email}")
+  Future<ProfileResponseModel> fetchUserProfile(@Path("email") String email);
+
+  @DELETE("${ApiConstants.profile}{email}")
+  Future<void> deleteUserProfile(@Path("email") String email);
 }
