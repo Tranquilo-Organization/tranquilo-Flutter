@@ -5,5 +5,6 @@ class SharedPrefKeys {
   static const String isFirstLaunch = 'isFirstLaunch';
   static const String isSurveyCompleted = 'isSurveyCompleted';
   static const String userEmail = 'userEmail';
+  static const String userName = 'userName';
 
 }

@@ -5,19 +5,29 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/comments_list_view.dart';
 import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/comments_text_field.dart';
 
 class CommentsBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
+  final Post post;
 
-  const CommentsBottomSheet({super.key, required this.scrollController});
+  const CommentsBottomSheet({
+    super.key,
+    required this.scrollController,
+    required this.post,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CommentsCubit>()..fetchComments(),
+      create: (context) {
+        return getIt<CommentsCubit>()
+          ..post = post
+          ..fetchComments();
+      },
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
@@ -38,7 +48,7 @@ class CommentsBottomSheet extends StatelessWidget {
             ),
             verticalSpace(16),
             Expanded(
-              child: BlocListener<CommentsCubit, CommentsState>(
+              child: BlocConsumer<CommentsCubit, CommentsState>(
                 listener: (context, state) {
                   state.maybeWhen(
                     commentsError: (error) {
@@ -54,26 +64,22 @@ class CommentsBottomSheet extends StatelessWidget {
                     orElse: () {},
                   );
                 },
-                child: BlocBuilder<CommentsCubit, CommentsState>(
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      initial: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      commentsLoading: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      commentsSuccess: (comments) =>
-                          CommentsListView(comments: comments),
-                      commentsError: (error) => Center(
-                        child: Text(
-                          'Failed to load comments: ${error.message}',
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      ),
-                      orElse: () => const Center(
-                          child: Text('Unexpected state encountered')),
-                    );
-                  },
-                ),
+                buildWhen: (previous, current) {
+                  if (current is CommentsLoading || current is CommentsSuccess){
+                    return true;
+                  }
+                  return false;
+                },
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    commentsLoading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    commentsSuccess: (comments) =>
+                        CommentsListView(comments: comments),
+                    orElse: () => const Center(
+                        child: Text('Unexpected state encountered')),
+                  );
+                },
               ),
             ),
             const CommentsTextField(),

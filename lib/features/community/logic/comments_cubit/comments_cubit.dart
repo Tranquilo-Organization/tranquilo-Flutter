@@ -1,3 +1,5 @@
+import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
+
 import '../../data/repos/comment_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,10 +13,9 @@ part 'comments_cubit.freezed.dart';
 
 class CommentsCubit extends Cubit<CommentsState> {
   final CommentRepo _commentRepo;
-
+  late Post post;
   CommentsCubit(this._commentRepo) : super(const CommentsState.initial());
 
-  /// Fetch comments from the repository
   Future<void> fetchComments() async {
     emit(const CommentsState.commentsLoading());
 
@@ -22,7 +23,8 @@ class CommentsCubit extends Cubit<CommentsState> {
 
     result.when(
       success: (data) {
-        emit(CommentsState.commentsSuccess(data.model));
+        List<CommentModel> comments = data.model.reversed.toList();
+        emit(CommentsState.commentsSuccess(comments));
       },
       failure: (error) {
         emit(CommentsState.commentsError(error: error.apiErrorModel));
@@ -30,7 +32,6 @@ class CommentsCubit extends Cubit<CommentsState> {
     );
   }
 
-  /// Create a new comment
   Future<void> createComment(CreateCommentRequestModel requestModel) async {
     emit(const CommentsState.createCommentLoading());
 
@@ -38,6 +39,7 @@ class CommentsCubit extends Cubit<CommentsState> {
 
     result.when(
       success: (data) {
+        fetchComments();
         emit(CommentsState.createCommentSuccess(data));
       },
       failure: (error) {

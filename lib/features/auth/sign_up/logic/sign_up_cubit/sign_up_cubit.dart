@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_state.dart';
+import '../../../../../core/helpers/constants.dart';
+import '../../../../../core/helpers/shared_pref_helper.dart';
 import '../../data/model/sign_up_request_body.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
@@ -32,7 +34,10 @@ class SignUpCubit extends Cubit<SignUpState> {
       ),
     );
 
-    response.when(success: (signupResponse) {
+    response.when(success: (signupResponse) async {
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, signupResponse.token ?? '');
+      await SharedPrefHelper.saveEmail(signupResponse.email ?? '');
+      await SharedPrefHelper.setData(SharedPrefKeys.userName,signupResponse.userName);
       emit(SignUpState.signupSuccess(signupResponse));
     }, failure: (error) {
       emit(SignUpState.signupError(error: error.apiErrorModel));

@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tranquilo_app/core/helpers/constants.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 
-class WelcomeListTile extends StatelessWidget {
+class WelcomeListTile extends StatefulWidget {
   const WelcomeListTile({super.key});
+
+  @override
+  State<WelcomeListTile> createState() => _WelcomeListTileState();
+}
+
+class _WelcomeListTileState extends State<WelcomeListTile> {
+
+  String userName = '';
+
+  void getUserName() async {
+    userName = await SharedPrefHelper.getString(SharedPrefKeys.userName);
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    getUserName();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +36,7 @@ class WelcomeListTile extends StatelessWidget {
       dense: true,
       contentPadding: EdgeInsets.zero,
       title: Text(
-        'Welcome Guest',
+        'Welcome $userName',
         style: TextStyles.font16JetBlackMedium,
       ),
       subtitle: Text(

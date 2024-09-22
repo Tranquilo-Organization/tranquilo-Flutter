@@ -8,12 +8,14 @@ class LoginResponseBody {
   final String expireDate;
   final String email;
   final String id;
+  final String userName;
 
   LoginResponseBody({
     required this.token,
     required this.expireDate,
     required this.email,
     required this.id,
+    required this.userName,
   });
 
   /// A factory constructor for creating a new `LoginResponseBody` instance
