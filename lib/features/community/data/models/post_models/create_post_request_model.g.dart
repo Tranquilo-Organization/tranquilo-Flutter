@@ -10,12 +10,12 @@ CreatePostRequestModel _$CreatePostRequestModelFromJson(
         Map<String, dynamic> json) =>
     CreatePostRequestModel(
       postText: json['PostText'] as String,
-      userEmail: json['userEmail'] as String,
+      userEmail: json['UserEmail'] as String,
     );
 
 Map<String, dynamic> _$CreatePostRequestModelToJson(
         CreatePostRequestModel instance) =>
     <String, dynamic>{
       'PostText': instance.postText,
-      'userEmail': instance.userEmail,
+      'UserEmail': instance.userEmail,
     };

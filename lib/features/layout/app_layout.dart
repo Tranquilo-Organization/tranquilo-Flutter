@@ -29,8 +29,8 @@ class _AppLayoutState extends State<AppLayout> {
     ),
     const ChatbotScreen(),
     const DashboardScreen(),
-    BlocProvider(
-      create: (context) => getIt<PostsCubit>()..fetchPosts(),
+    BlocProvider.value(
+      value: getIt<PostsCubit>()..fetchPosts(),
       child: const CommunityPostScreen(),
     ),
     const ProfileScreen(),

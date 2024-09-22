@@ -101,7 +101,7 @@ class SharedPrefHelper {
   }
 
   /// Retrieves the saved email from SharedPreferences
-  static Future<String> getEmail(String s) async {
+  static Future<String> getEmail() async {
     debugPrint('SharedPrefHelper : Retrieving email');
     return await getString('email');
   }

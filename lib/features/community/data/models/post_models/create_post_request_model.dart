@@ -1,13 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-
-part 'create_post_request_model.g.dart'; // Generated code will go here
+part 'create_post_request_model.g.dart';
 
 @JsonSerializable()
 class CreatePostRequestModel {
   @JsonKey(name: 'PostText')
   final String postText;
 
-  @JsonKey(name: 'userEmail')
+  @JsonKey(name: 'UserEmail')
   final String userEmail;
 
   CreatePostRequestModel({required this.postText, required this.userEmail});

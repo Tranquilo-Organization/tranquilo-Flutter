@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_comment_response_model.g.dart';

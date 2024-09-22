@@ -6,10 +6,14 @@ part 'login_response_body.g.dart';
 class LoginResponseBody {
   final String token;
   final String expireDate;
+  final String email;
+  final String id;
 
   LoginResponseBody({
     required this.token,
     required this.expireDate,
+    required this.email,
+    required this.id,
   });
 
   /// A factory constructor for creating a new `LoginResponseBody` instance
