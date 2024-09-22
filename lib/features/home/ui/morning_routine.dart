@@ -56,7 +56,6 @@ class _MorningRoutineState extends State<MorningRoutine> {
                       child: Text('No morning routine available.'));
                 }
 
-                // Extract the steps for the morning routine
                 final steps = morningRoutine.steps;
 
                 return SingleChildScrollView(

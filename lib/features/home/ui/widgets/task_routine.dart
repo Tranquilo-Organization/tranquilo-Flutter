@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskRoutine extends StatelessWidget {
   final Color containerColor;
@@ -30,11 +30,13 @@ class TaskRoutine extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                taskDesc,
-                maxLines: 6,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyles.font12JetBlackRegular,
+              Expanded(
+                child: Text(
+                  taskDesc,
+                  maxLines: 6,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyles.font12JetBlackRegular,
+                ),
               ),
               Expanded(
                 child: SvgPicture.asset(
