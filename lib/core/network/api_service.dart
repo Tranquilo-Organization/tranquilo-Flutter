@@ -50,9 +50,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.communityPosts)
   Future<GetPostsResponseBody> communityPosts();
-   // Fetch routines by anxiety level id
+  // Fetch routines by anxiety level id
   @GET("${ApiConstants.routine}/{id}")
-  Future<List<Routine>> fetchRoutinesByLevelId(@Path("id") int levelId);
+  Future<RoutineResponseModel> fetchRoutinesByLevelId(@Path("id") int levelId);
 }
-
-

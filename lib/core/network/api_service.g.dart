@@ -230,12 +230,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Routine>> fetchRoutinesByLevelId(int levelId) async {
+  Future<RoutineResponseModel> fetchRoutinesByLevelId(int levelId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Routine>>(Options(
+    final _options = _setStreamType<RoutineResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -251,12 +251,10 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Routine> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late RoutineResponseModel _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => Routine.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = RoutineResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

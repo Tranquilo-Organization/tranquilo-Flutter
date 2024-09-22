@@ -13,19 +13,15 @@ class RoutineRepo {
     try {
       int? levelId = await SharedPrefHelper.getAnxietyLevelId();
       if (levelId != null) {
-        // Call the API service to get the response wrapped in RoutineResponseModel
-        final response = await _apiService.fetchRoutinesByLevelId(levelId);
+        // Fetch the response
+        final RoutineResponseModel routineResponseModel =
+            await _apiService.fetchRoutinesByLevelId(levelId);
 
-        // Log the raw response for debugging
-        print('Fetched routines: ${response.toString()}');
+        // Extract the list of routines from the 'model' field
+        final List<Routine> routines = routineResponseModel.model;
 
-        // Wrap the response in a RoutineResponseModel
-        // Assuming response is a valid JSON and maps correctly
-        final routineResponseModel =
-            RoutineResponseModel.fromJson(response as Map<String, dynamic>);
-
-        // Return the success result with the list of routines
-        return ApiResult.success(routineResponseModel.model);
+        // Return the list of routines on success
+        return ApiResult.success(routines);
       } else {
         return ApiResult.failure(
           ErrorHandler.handle(
