@@ -13,10 +13,11 @@ class PostsBlocBuilder extends StatelessWidget {
     return BlocConsumer<PostsCubit, PostsState>(
       listener: (context, state) {
         state.maybeWhen(
-            createPostSuccess: (_){
-              debugPrint("============================= \nlisten");
-              context.read<PostsCubit>().fetchPosts();
-            }, orElse: () {  }
+          createPostSuccess: (_) {
+            debugPrint("============================= \nlisten");
+            context.read<PostsCubit>().fetchPosts();
+          },
+          orElse: () {},
         );
       },
       builder: (context, state) {
@@ -29,19 +30,20 @@ class PostsBlocBuilder extends StatelessWidget {
               ),
             ),
           ),
-          postsLoading: () => const CustomLoadingWidget(),
+          postsLoading: () => const SliverToBoxAdapter(
+            child: CustomLoadingWidget(),
+          ),
           postsSuccess: (posts) {
             debugPrint("================================\nbuild");
             return SliverList(
               delegate: SliverChildBuilderDelegate(
-                childCount: posts.length,
-                (context, index) {
+                    (context, index) {
                   return PostWidget(post: posts[index]);
                 },
+                childCount: posts.length,
               ),
             );
           },
-
           postsError: (error) {
             return SliverToBoxAdapter(
               child: Text(
@@ -50,9 +52,10 @@ class PostsBlocBuilder extends StatelessWidget {
               ),
             );
           },
-          createPostLoading: () => const CustomLoadingWidget(),
+          createPostLoading: () => const SliverToBoxAdapter(
+            child: CustomLoadingWidget(), // Ensure it's inside SliverToBoxAdapter
+          ),
           createPostSuccess: (response) {
-            // Handle success, maybe show a message or update the UI
             return SliverToBoxAdapter(
               child: Text(
                 'Post created successfully!',

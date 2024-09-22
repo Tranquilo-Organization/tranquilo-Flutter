@@ -17,8 +17,6 @@ class CommunityPostScreen extends StatefulWidget {
 }
 
 class _CommunityPostScreenState extends State<CommunityPostScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
