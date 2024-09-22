@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
-
 import '../../../core/theming/styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
 
 class DashboardScreen extends StatelessWidget{
   const DashboardScreen({super.key});
