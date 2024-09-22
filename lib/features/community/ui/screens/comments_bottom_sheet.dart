@@ -5,10 +5,11 @@ import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/di/dependency_injection.dart';
-import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
+import 'package:tranquilo_app/core/animations/custom_loading_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/comments_list_view.dart';
-import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/comments_text_field.dart';
+import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/post_response.dart';
 
 class CommentsBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -73,7 +74,7 @@ class CommentsBottomSheet extends StatelessWidget {
                 builder: (context, state) {
                   return state.maybeWhen(
                     commentsLoading: () =>
-                        const Center(child: CircularProgressIndicator()),
+                        const Center(child: CustomLoadingWidget()),
                     commentsSuccess: (comments) =>
                         CommentsListView(comments: comments),
                     orElse: () => const Center(
