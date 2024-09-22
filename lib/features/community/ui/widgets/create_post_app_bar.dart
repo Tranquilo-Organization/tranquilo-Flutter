@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/colors_manger.dart';
+import '../../../../core/widgets/app_text_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
-import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
-import '../../../../core/widgets/app_text_button.dart';
 
 class CreatePostAppBar extends StatelessWidget {
-  const CreatePostAppBar({super.key});
+  final VoidCallback onPost;
+
+  const CreatePostAppBar({super.key, required this.onPost});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CreatePostAppBar extends StatelessWidget {
       ),
       actions: [
         AppTextButton(
-          onPressed: (){},
+          onPressed: onPost,
           textButton: 'Post',
           width: 66.w,
           height: 37.h,

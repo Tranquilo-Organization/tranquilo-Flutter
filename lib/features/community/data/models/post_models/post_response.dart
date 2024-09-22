@@ -45,4 +45,3 @@ class GetPostsResponseBody {
       _$GetPostsResponseBodyFromJson(json);
   Map<String, dynamic> toJson() => _$GetPostsResponseBodyToJson(this);
 }
-

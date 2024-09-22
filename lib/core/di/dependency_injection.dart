@@ -7,15 +7,17 @@ import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
-import 'package:tranquilo_app/features/community/data/repo/post_repo.dart';
+import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
+import 'package:tranquilo_app/features/community/data/repos/comment_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/api/chat_bot_api_call.dart';
 import 'package:tranquilo_app/features/auth/otp/data/repo/verify_otp_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
+import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -42,8 +44,8 @@ Future<void> setupGetIt() async {
   // forget password
   getIt.registerLazySingleton<ForgetPasswordRepo>(
       () => ForgetPasswordRepo(getIt()));
-  getIt.registerFactory<ForgetPasswordCubit>(
-      () => ForgetPasswordCubit(getIt()));
+  getIt
+      .registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit(getIt()));
 
   // verify otp
   getIt.registerLazySingleton<VerifyOtpRepo>(() => VerifyOtpRepo(getIt()));
@@ -52,12 +54,11 @@ Future<void> setupGetIt() async {
   // reset password
   getIt.registerLazySingleton<ResetPasswordRepo>(
       () => ResetPasswordRepo(getIt()));
-  getIt.registerFactory<ResetPasswordCubit>(
-      () => ResetPasswordCubit(getIt()));
+  getIt.registerFactory<ResetPasswordCubit>(() => ResetPasswordCubit(getIt()));
   // chatbot
   getIt.registerLazySingleton<ChatbotRepo>(() => ChatbotRepo(getIt()));
   getIt.registerFactory<ChatbotCubit>(() => ChatbotCubit(getIt()));
-   // Posts
+  // Posts
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerFactory<PostsCubit>(() => PostsCubit(getIt()));
   //survey
@@ -66,4 +67,7 @@ Future<void> setupGetIt() async {
 //routine
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
   getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
+
+    getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
+  getIt.registerFactory<CommentsCubit>(() => CommentsCubit(getIt()));
 }

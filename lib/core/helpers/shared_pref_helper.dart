@@ -173,6 +173,18 @@ class SharedPrefHelper {
     }
     return null;
   }
+
+  /// Saves the post ID in SharedPreferences
+  static Future<void> savePostId(String postId) async {
+    debugPrint('SharedPrefHelper : Saving post ID : $postId');
+    await setData('post_id', postId);
+  }
+
+  /// Retrieves the saved post ID from SharedPreferences
+  static Future<String?> getPostId() async {
+    debugPrint('SharedPrefHelper : Retrieving post ID');
+    return await getString('post_id');
+  }
 }
 
   // /// Removes OTP from FlutterSecureStorage

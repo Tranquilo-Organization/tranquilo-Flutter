@@ -1,56 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/replay_widget.dart';
 import 'comment_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:tranquilo_app/features/community/data/models/comment_models/get_comment_response_model.dart';
 
 class CommentsListView extends StatelessWidget {
-  final ScrollController scrollController;
+  final List<CommentModel> comments;
 
-  const CommentsListView({super.key, required this.scrollController});
+  const CommentsListView({super.key, required this.comments});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      controller: scrollController,
-      children: const [
-        CommentWidget(
+    return ListView.builder(
+      itemCount: comments.length,
+      itemBuilder: (context, index) {
+        final comment = comments[index];
+        return CommentWidget(
           profileImage: 'assets/svgs/default_profile.svg',
-          name: 'User 0',
-          timeAgo: '14 min',
-          comment:
-          'I’ve been working on managing my anxiety for a while now. Deep breathing exercises and journaling help, but it’s still a struggle some days',
-          likes: 2,
-        ),
-        ReplyWidget(
-          profileImage: 'assets/svgs/default_profile.svg',
-          name: 'User 1',
-          timeAgo: '10 min',
-          comment:
-          'Anxiety can be so exhausting! It\'s like my mind is constantly racing, even when there\'s nothing to worry about',
-        ),
-        CommentWidget(
-          profileImage: 'assets/svgs/default_profile.svg',
-          name: 'User 1',
-          timeAgo: '9 min',
-          comment:
-          'It took me a long time to understand my anxiety. Now I’m learning that it’s okay to not be okay. Small steps, every day.',
-          likes: 0,
-        ),
-        CommentWidget(
-          profileImage: 'assets/svgs/default_profile.svg',
-          name: 'User 2',
-          timeAgo: '9 min',
-          comment:
-          'It took me a long time to understand my anxiety. Now I’m learning that it’s okay to not be okay. Small steps, every day.',
-          likes: 0,
-        ),
-        ReplyWidget(
-          profileImage: 'assets/svgs/default_profile.svg',
-          name: 'User 0',
-          timeAgo: '10 min',
-          comment:
-          'Anxiety can be so exhausting! It\'s like my mind is constantly racing, even when there\'s nothing to worry about',
-        ),
-      ],
+          name: comment.userName,
+          timeAgo: _getTimeAgo(comment.date),
+          comment: comment.commentText,
+          likes: comment.upVoteCountLength,
+        );
+      },
     );
+  }
+
+  String _getTimeAgo(DateTime commentDate) {
+    final now = DateTime.now();
+    final difference = now.difference(commentDate).inHours;
+    return '$difference min ago';
   }
 }

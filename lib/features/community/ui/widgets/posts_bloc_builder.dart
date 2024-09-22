@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/post_widget.dart';
-
 import '../../../../core/theming/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/posts_cubit/posts_cubit.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/post_widget.dart';
 
 class PostsBlocBuilder extends StatelessWidget {
   const PostsBlocBuilder({super.key});
@@ -12,14 +11,15 @@ class PostsBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PostsCubit, PostsState>(
       builder: (context, state) {
-        return state.when(
-          initial: () =>
-              SliverToBoxAdapter(
-                child: Center(child: Text(
-                  'No posts yet',
-                  style: TextStyles.font14JetBlackMedium,
-                )),
+        return state.maybeWhen(
+          initial: () => SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                'No posts yet',
+                style: TextStyles.font14JetBlackMedium,
               ),
+            ),
+          ),
           postsLoading: () => const SliverToBoxAdapter(
             child: Center(child: CircularProgressIndicator()),
           ),
@@ -27,7 +27,7 @@ class PostsBlocBuilder extends StatelessWidget {
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: posts.length,
-                    (context, index) {
+                (context, index) {
                   return PostWidget(post: posts[index]);
                 },
               ),
@@ -41,6 +41,27 @@ class PostsBlocBuilder extends StatelessWidget {
               ),
             );
           },
+          createPostLoading: () => const SliverToBoxAdapter(
+            child: Center(child: CircularProgressIndicator()),
+          ),
+          createPostSuccess: (response) {
+            // Handle success, maybe show a message or update the UI
+            return SliverToBoxAdapter(
+              child: Text(
+                'Post created successfully!',
+                style: TextStyles.font14JetBlackMedium,
+              ),
+            );
+          },
+          createPostError: (error) {
+            return SliverToBoxAdapter(
+              child: Text(
+                error.message,
+                style: TextStyles.font14JetBlackMedium,
+              ),
+            );
+          },
+          orElse: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
         );
       },
     );
