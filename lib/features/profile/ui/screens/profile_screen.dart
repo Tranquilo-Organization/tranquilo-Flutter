@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/logout_dialog.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/profile_list_tile.dart';
 

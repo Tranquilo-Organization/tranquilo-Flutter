@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/theming/colors_manger.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/colors_manger.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditProfileInfo extends StatelessWidget {
   final String infoTitle;
+  final String initialValue;
 
   const EditProfileInfo({
     super.key,
     required this.infoTitle,
+    required this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController(text: initialValue);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
@@ -26,6 +30,7 @@ class EditProfileInfo extends StatelessWidget {
             ),
           ),
           TextFormField(
+            controller: controller,
             cursorColor: ColorsManager.oceanBlue,
             decoration: InputDecoration(
               enabledBorder:
@@ -46,4 +51,3 @@ class EditProfileInfo extends StatelessWidget {
     );
   }
 }
-
