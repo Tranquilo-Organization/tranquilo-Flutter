@@ -53,7 +53,7 @@ class PostsBlocBuilder extends StatelessWidget {
             );
           },
           createPostLoading: () => const SliverToBoxAdapter(
-            child: CustomLoadingWidget(), // Ensure it's inside SliverToBoxAdapter
+            child: CustomLoadingWidget(),
           ),
           createPostSuccess: (response) {
             return SliverToBoxAdapter(
