@@ -11,7 +11,7 @@ class UserProfileRepo {
 
   Future<ApiResult<ProfileResponseModel>> fetchUserProfile() async {
     try {
-      String email = await SharedPrefHelper.getEmail('');
+      String email = await SharedPrefHelper.getEmail();
 
       if (email.isNotEmpty) {
         // Step 2: Fetch the user profile using the API
