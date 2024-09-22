@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +31,6 @@ class _MorningRoutineState extends State<MorningRoutine> {
   @override
   void initState() {
     super.initState();
-    // Load routines when the widget is first built
     context.read<RoutineCubit>().fetchRoutines();
   }
 
@@ -43,23 +41,13 @@ class _MorningRoutineState extends State<MorningRoutine> {
         child: BlocBuilder<RoutineCubit, RoutineState>(
           builder: (context, state) {
             return state.when(
-              initial: () =>
-                  const Center(child: Text('No routines loaded yet.')),
+              initial: () => const CustomLoadingWidget(),
               loading: () => const CustomLoadingWidget(),
               success: (routines) {
-                // Filter for morning routines
                 final morningRoutine = routines.firstWhere(
                   (routine) => routine.type == 'Morning',
                 );
-
-                // Check if morningRoutine exists
-                if (morningRoutine == null) {
-                  return const Center(
-                      child: Text('No morning routine available.'));
-                }
-
                 final steps = morningRoutine.steps;
-
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -69,7 +57,6 @@ class _MorningRoutineState extends State<MorningRoutine> {
                       verticalSpace(18),
                       Column(
                         children: [
-                          // First Task (Step 1)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -99,8 +86,6 @@ class _MorningRoutineState extends State<MorningRoutine> {
                             image: 'assets/svgs/first_morning_task.svg',
                           ),
                           verticalSpace(32),
-
-                          // Second Task (Step 2)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -130,8 +115,6 @@ class _MorningRoutineState extends State<MorningRoutine> {
                             image: 'assets/svgs/second_morning_task.svg',
                           ),
                           verticalSpace(32),
-
-                          // Third Task (Step 3)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -181,7 +164,9 @@ class _MorningRoutineState extends State<MorningRoutine> {
                 );
               },
               failure: (error) {
-                return CustomErrorWidget();
+                return CustomErrorWidget(
+                  error: 'Error: ${error.message}',
+                );
               },
             );
           },

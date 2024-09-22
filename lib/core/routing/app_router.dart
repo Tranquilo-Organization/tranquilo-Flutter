@@ -30,7 +30,6 @@ import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.d
 import 'package:tranquilo_app/features/community/ui/screens/create_post_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
-import 'package:tranquilo_app/features/community/ui/screens/community_post_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
@@ -161,13 +160,16 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) =>
                 UserProfileCubit(UserProfileRepo(getIt<ApiService>()))
-                  ..fetchUserProfile(), // Fetch the profile when navigating
+                  ..fetchUserProfile(),
             child: const EditProfileScreen(),
           ),
         );
       case Routes.settingsProfileScreen:
         return MaterialPageRoute(
-          builder: (_) => const SettingsScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<UserProfileCubit>(),
+            child: const SettingsScreen(),
+          ),
         );
       case Routes.privacyPolicyScreen:
         return MaterialPageRoute(

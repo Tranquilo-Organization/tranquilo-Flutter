@@ -13,7 +13,6 @@ class CustomLoadingWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Updated Lottie asset path
           SizedBox(
             height: 200, 
             child: Lottie.asset('assets/lotties/loading_lottie.json'), 
@@ -21,7 +20,6 @@ class CustomLoadingWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
- 
           const LinearProgressIndicator(
             color: ColorsManager.oceanBlue,
             backgroundColor: ColorsManager.lightGrey,

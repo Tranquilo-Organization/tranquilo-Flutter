@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +10,9 @@ import 'package:tranquilo_app/features/home/logic/routine_state.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/task_routine.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/congrats_dialog.dart';
 import 'package:tranquilo_app/features/home/ui/widgets/routine_app_bar.dart';
+
+import '../../../core/animations/custom_error_widget.dart';
+import '../../../core/animations/custom_loading_widget.dart';
 
 class NightRoutine extends StatefulWidget {
   const NightRoutine({super.key});
@@ -30,7 +32,6 @@ class _MorningRoutineState extends State<NightRoutine> {
   @override
   void initState() {
     super.initState();
-    // Load routines when the widget is first built
     context.read<RoutineCubit>().fetchRoutines();
   }
 
@@ -41,15 +42,12 @@ class _MorningRoutineState extends State<NightRoutine> {
         child: BlocBuilder<RoutineCubit, RoutineState>(
           builder: (context, state) {
             return state.when(
-              initial: () =>
-                  const Center(child: Text('No routines loaded yet.')),
-              loading: () => const Center(child: CircularProgressIndicator()),
+              initial: () => const CustomLoadingWidget(),
+              loading: () => const CustomLoadingWidget(),
               success: (routines) {
                 final nightRoutine = routines.firstWhere(
                   (routine) => routine.type == 'Night',
                 );
-
-                // Extract the steps for the morning routine
                 final steps = nightRoutine.steps;
 
                 return SingleChildScrollView(
@@ -61,7 +59,6 @@ class _MorningRoutineState extends State<NightRoutine> {
                       verticalSpace(18),
                       Column(
                         children: [
-                          // First Task (Step 1)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -88,11 +85,9 @@ class _MorningRoutineState extends State<NightRoutine> {
                             taskDesc: steps.isNotEmpty
                                 ? steps[0]
                                 : 'No task description',
-                            image: 'assets/svgs/first_morning_task.svg',
+                            image: 'assets/svgs/first_night_task.svg',
                           ),
                           verticalSpace(32),
-
-                          // Second Task (Step 2)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -119,11 +114,9 @@ class _MorningRoutineState extends State<NightRoutine> {
                             taskDesc: steps.length > 1
                                 ? steps[1]
                                 : 'No task description',
-                            image: 'assets/svgs/second_morning_task.svg',
+                            image: 'assets/svgs/second_night_task.svg',
                           ),
                           verticalSpace(32),
-
-                          // Third Task (Step 3)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
                             child: Row(
@@ -150,7 +143,7 @@ class _MorningRoutineState extends State<NightRoutine> {
                             taskDesc: steps.length > 2
                                 ? steps[2]
                                 : 'No task description',
-                            image: 'assets/svgs/third_morning_task.svg',
+                            image: 'assets/svgs/third_night_task.svg',
                           ),
                         ],
                       ),
@@ -173,11 +166,8 @@ class _MorningRoutineState extends State<NightRoutine> {
                 );
               },
               failure: (error) {
-                return Center(
-                  child: Text(
-                    'Error: ${error.message}', // Display error message from ApiErrorModel
-                    style: TextStyles.font16JetBlackRegular,
-                  ),
+                return CustomErrorWidget(
+                  error: 'Error: ${error.message}',
                 );
               },
             );

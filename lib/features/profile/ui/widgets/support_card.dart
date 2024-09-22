@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/delete_account_dialog.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/settings_list_tile.dart';
 
 class SupportCard extends StatelessWidget {
-  const SupportCard({super.key});
+  final UserProfileCubit userProfileCubit;
+  const SupportCard({super.key, required this.userProfileCubit});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SupportCard extends StatelessWidget {
             title: 'About us',
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               showDeleteDialog(context);
             },
             child: const SettingsListTile(
@@ -27,6 +29,17 @@ class SupportCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void showDeleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DeleteAccountDialog(
+          userProfileCubit: userProfileCubit,
+        );
+      },
     );
   }
 }

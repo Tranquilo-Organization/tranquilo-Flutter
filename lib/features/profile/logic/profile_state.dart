@@ -10,6 +10,7 @@ class UserProfileState with _$UserProfileState {
   const factory UserProfileState.loading() = _Loading;
   const factory UserProfileState.success(ProfileResponseModel profile) =
       _Success;
-  const factory UserProfileState.deleteSuccess() = _DeleteSuccess;
-  const factory UserProfileState.failure(ApiErrorModel error) = _Failure;
+  const factory UserProfileState.deleteSuccess() = DeleteSuccess;
+  const factory UserProfileState.failure(ApiErrorModel error) = Failure;
 }
+

@@ -18,6 +18,7 @@ class ApiConstants {
   static const String routine = 'routine/Levelid';
   static const String communityComments = 'Comment';
   static const String profile = "/Profile/UserEmail/";
+  static const String delete = "/Profile/email/";
 }
 
 class ApiErrors {

@@ -49,8 +49,8 @@ mixin _$UserProfileState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +58,8 @@ mixin _$UserProfileState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,8 +67,8 @@ mixin _$UserProfileState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,8 +179,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) {
     return initial(this);
   }
@@ -191,8 +191,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -203,8 +203,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -302,8 +302,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) {
     return loading(this);
   }
@@ -314,8 +314,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) {
     return loading?.call(this);
   }
@@ -326,8 +326,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -452,8 +452,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) {
     return success(this);
   }
@@ -464,8 +464,8 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) {
     return success?.call(this);
   }
@@ -476,8 +476,8 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -520,7 +520,7 @@ class __$$DeleteSuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteSuccessImpl implements _DeleteSuccess {
+class _$DeleteSuccessImpl implements DeleteSuccess {
   const _$DeleteSuccessImpl();
 
   @override
@@ -583,8 +583,8 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) {
     return deleteSuccess(this);
   }
@@ -595,8 +595,8 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) {
     return deleteSuccess?.call(this);
   }
@@ -607,8 +607,8 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) {
     if (deleteSuccess != null) {
@@ -618,8 +618,8 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
   }
 }
 
-abstract class _DeleteSuccess implements UserProfileState {
-  const factory _DeleteSuccess() = _$DeleteSuccessImpl;
+abstract class DeleteSuccess implements UserProfileState {
+  const factory DeleteSuccess() = _$DeleteSuccessImpl;
 }
 
 /// @nodoc
@@ -657,7 +657,7 @@ class __$$FailureImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailureImpl implements _Failure {
+class _$FailureImpl implements Failure {
   const _$FailureImpl(this.error);
 
   @override
@@ -733,8 +733,8 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_DeleteSuccess value) deleteSuccess,
-    required TResult Function(_Failure value) failure,
+    required TResult Function(DeleteSuccess value) deleteSuccess,
+    required TResult Function(Failure value) failure,
   }) {
     return failure(this);
   }
@@ -745,8 +745,8 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
-    TResult? Function(_DeleteSuccess value)? deleteSuccess,
-    TResult? Function(_Failure value)? failure,
+    TResult? Function(DeleteSuccess value)? deleteSuccess,
+    TResult? Function(Failure value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -757,8 +757,8 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_DeleteSuccess value)? deleteSuccess,
-    TResult Function(_Failure value)? failure,
+    TResult Function(DeleteSuccess value)? deleteSuccess,
+    TResult Function(Failure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -768,8 +768,8 @@ class _$FailureImpl implements _Failure {
   }
 }
 
-abstract class _Failure implements UserProfileState {
-  const factory _Failure(final ApiErrorModel error) = _$FailureImpl;
+abstract class Failure implements UserProfileState {
+  const factory Failure(final ApiErrorModel error) = _$FailureImpl;
 
   ApiErrorModel get error;
 

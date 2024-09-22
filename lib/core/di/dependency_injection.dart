@@ -70,10 +70,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
   getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
 //comment
-    getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
+  getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
   getIt.registerFactory<CommentsCubit>(() => CommentsCubit(getIt()));
-
-  //profile 
-      getIt.registerLazySingleton<UserProfileRepo>(() => UserProfileRepo(getIt()));
-        getIt.registerFactory<UserProfileCubit>(() => UserProfileCubit(getIt()));
+  //profile
+  getIt.registerLazySingleton<UserProfileRepo>(() => UserProfileRepo(getIt()));
+  getIt.registerFactory<UserProfileCubit>(() => UserProfileCubit(getIt()));
 }

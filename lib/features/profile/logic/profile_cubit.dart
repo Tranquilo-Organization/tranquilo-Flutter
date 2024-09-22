@@ -8,7 +8,6 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   UserProfileCubit(this._userProfileRepo)
       : super(const UserProfileState.initial());
 
-  // Fetch User Profile
   Future<void> fetchUserProfile() async {
     emit(const UserProfileState.loading());
 
@@ -24,7 +23,6 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     );
   }
 
-  // Delete User Profile
   Future<void> deleteUserProfile() async {
     emit(const UserProfileState.loading());
 
@@ -40,3 +38,4 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     );
   }
 }
+

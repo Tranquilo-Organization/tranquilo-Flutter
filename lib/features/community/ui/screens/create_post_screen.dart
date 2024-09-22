@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/core/helpers/constants.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
@@ -20,24 +21,40 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
-  bool isAnonymous = false;
-  final TextEditingController _postController = TextEditingController();
 
-  String? userEmail;
+  final TextEditingController _postController = TextEditingController();
+  bool isAnonymous = false;
+  String? userEmail = 'guest@example.com';
+  String? userName = 'Guest';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserEmail();
+    _fetchUserName();
+  }
+
+  Future<void> _fetchUserEmail() async {
+    userEmail = await SharedPrefHelper.getEmail();
+    setState(() {});
+  }
+  Future<void> _fetchUserName() async {
+    userName = await SharedPrefHelper.getString(SharedPrefKeys.userName);
+    setState(() {});
+  }
 
   void _createPost() async {
     final postContent = _postController.text;
     if (postContent.isNotEmpty) {
-      userEmail = await SharedPrefHelper.getEmail();
       final email =
-          isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
+      isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
 
       context.read<PostsCubit>().createPost(
-            CreatePostRequestModel(
-              postText: postContent,
-              userEmail: email,
-            ),
-          );
+        CreatePostRequestModel(
+          postText: postContent,
+          userEmail: email,
+        ),
+      );
       _postController.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -104,7 +121,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   ),
                   horizontalSpace(12),
                   Text(
-                    isAnonymous ? 'Anonymous' : 'Guest',
+                    isAnonymous
+                        ? 'Anonymous'
+                        : (userName!),
                     style: TextStyles.font16JetBlackMedium,
                   ),
                 ],
@@ -142,14 +161,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ),
                       ),
                     );
-                    //context.read<PostsCubit>().fetchPosts();
                     context.pop();
                   },
                   createPostError: (error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content:
-                            Text('Failed to create post: ${error.message}'),
+                        Text('Failed to create post: ${error.message}'),
                       ),
                     );
                   },
@@ -175,3 +193,4 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     super.dispose();
   }
 }
+

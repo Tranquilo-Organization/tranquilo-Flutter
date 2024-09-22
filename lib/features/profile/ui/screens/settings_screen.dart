@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/helpers/show_dialog.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/app_bar_profile_screens.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/interface_card.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/language_card.dart';
@@ -48,7 +51,10 @@ class SettingsScreen extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                     verticalSpace(6),
-                    const SupportCard(),
+                    SupportCard(
+                      userProfileCubit:
+                          context.read<UserProfileCubit>(),
+                    ),
                   ],
                 ),
               ),

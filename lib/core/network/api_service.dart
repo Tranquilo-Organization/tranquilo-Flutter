@@ -55,7 +55,6 @@ abstract class ApiService {
 
   @GET(ApiConstants.communityPosts)
   Future<GetPostsResponseBody> communityPosts();
-  // Fetch routines by anxiety level id
   @GET("${ApiConstants.routine}/{id}")
   Future<RoutineResponseModel> fetchRoutinesByLevelId(@Path("id") int levelId);
 
@@ -75,6 +74,6 @@ abstract class ApiService {
   @GET("${ApiConstants.profile}{email}")
   Future<ProfileResponseModel> fetchUserProfile(@Path("email") String email);
 
-  @DELETE("${ApiConstants.profile}{email}")
+  @DELETE("${ApiConstants.delete}{email}")
   Future<void> deleteUserProfile(@Path("email") String email);
 }

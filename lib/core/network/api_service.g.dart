@@ -411,7 +411,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/Profile/UserEmail/${email}',
+          '/Profile/email/${email}',
           queryParameters: queryParameters,
           data: _data,
         )

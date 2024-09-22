@@ -22,6 +22,10 @@ class EditProfileScreen extends StatelessWidget {
             return state.maybeWhen(
               loading: () => const Center(child: CircularProgressIndicator()),
               success: (profile) => buildProfileScreen(profile.model),
+              failure: (error) {
+                print('Error: ${error.message}');
+                return Center(child: Text(error.message));
+              },
               orElse: () => const Center(child: Text('Failed to load profile')),
             );
           },
@@ -68,3 +72,4 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
+

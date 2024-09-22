@@ -64,9 +64,10 @@ class SignUpScreen extends StatelessWidget {
                 const SocialMediaButtons(),
                 verticalSpace(24),
                 HaveAccountQuestionText(
-                    questionText: 'Already have Account? ',
-                    clickableText: 'Sign In',
-                    onTap: () => context.pop()),
+                  questionText: 'Already have Account? ',
+                  clickableText: 'Sign In',
+                  onTap: () => context.pop(),
+                ),
               ],
             ),
           ),
@@ -75,4 +76,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
