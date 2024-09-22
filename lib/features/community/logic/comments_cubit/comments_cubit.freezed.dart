@@ -507,10 +507,10 @@ class __$$CommentsErrorImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$CommentsErrorImpl<T>(
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as ApiErrorModel,
@@ -536,12 +536,11 @@ class _$CommentsErrorImpl<T> implements CommentsError<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CommentsErrorImpl<T> &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.
