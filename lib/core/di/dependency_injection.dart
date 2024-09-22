@@ -11,11 +11,13 @@ import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
 import 'package:tranquilo_app/features/auth/login/data/repo/login_repo.dart';
 import 'package:tranquilo_app/features/auth/otp/logic/verify_otp_cubit.dart';
+import 'package:tranquilo_app/features/community/data/repos/comment_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/api/chat_bot_api_call.dart';
 import 'package:tranquilo_app/features/auth/otp/data/repo/verify_otp_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
+import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -65,4 +67,7 @@ Future<void> setupGetIt() async {
 //routine
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
   getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
+
+    getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
+  getIt.registerFactory<CommentsCubit>(() => CommentsCubit(getIt()));
 }
