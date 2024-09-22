@@ -16,6 +16,7 @@ class ApiConstants {
   static const String communityPosts = "Post";
   static const String predict = 'predict';
   static const String routine = 'routine/Levelid';
+  static const String communityComments = 'Comment';
 }
 
 class ApiErrors {
