@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_state.dart';
+import 'package:tranquilo_app/core/animations/custom_loading_widget.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/edit_profile_info.dart';
 import 'package:tranquilo_app/features/profile/data/model/profile_response_model.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/app_bar_profile_screens.dart';
@@ -20,10 +21,9 @@ class EditProfileScreen extends StatelessWidget {
         child: BlocBuilder<UserProfileCubit, UserProfileState>(
           builder: (context, state) {
             return state.maybeWhen(
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const CustomLoadingWidget(),
               success: (profile) => buildProfileScreen(profile.model),
               failure: (error) {
-                print('Error: ${error.message}');
                 return Center(child: Text(error.message));
               },
               orElse: () => const Center(child: Text('Failed to load profile')),
@@ -72,4 +72,3 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
-
