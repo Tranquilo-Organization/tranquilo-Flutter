@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/features/community/data/model/post_response.dart';
-import 'package:tranquilo_app/features/community/ui/screens/comments_bottom_sheet.dart';
-
+import 'package:flutter/material.dart';
+import '../../../../core/theming/styles.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/features/community/data/models/post_response.dart';
+import 'package:tranquilo_app/features/community/ui/screens/comments_bottom_sheet.dart';
 
 class PostCommentsButton extends StatelessWidget {
   final Post post;
@@ -62,4 +61,3 @@ class PostCommentsButton extends StatelessWidget {
     );
   }
 }
-

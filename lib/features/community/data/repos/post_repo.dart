@@ -1,9 +1,9 @@
 import 'package:tranquilo_app/core/network/api_result.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/api_error_handler.dart';
-import 'package:tranquilo_app/features/community/data/model/post_response.dart';
-import 'package:tranquilo_app/features/community/data/model/create_post_request_model.dart';
-import 'package:tranquilo_app/features/community/data/model/create_post_response_model.dart';
+import 'package:tranquilo_app/features/community/data/models/post_response.dart';
+import 'package:tranquilo_app/features/community/data/models/create_post_request_model.dart';
+import 'package:tranquilo_app/features/community/data/models/create_post_response_model.dart';
 
 class PostRepo {
   final ApiService _apiService;
@@ -22,7 +22,8 @@ class PostRepo {
   Future<ApiResult<CreatePostResponseModel>> createCommunityPost(
       CreatePostRequestModel createPostRequestModel) async {
     try {
-      final response = await _apiService.createCommunityPost(createPostRequestModel);
+      final response =
+          await _apiService.createCommunityPost(createPostRequestModel);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

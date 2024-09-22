@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../../core/helpers/format_number.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:tranquilo_app/features/community/data/model/post_response.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/vote_icon.dart';
-
-import '../../../../core/helpers/format_number.dart';
+import 'package:tranquilo_app/features/community/data/models/post_response.dart';
 
 class PostVotes extends StatelessWidget {
   final Post post;
@@ -18,7 +17,7 @@ class PostVotes extends StatelessWidget {
       children: [
         VoteIcon(
           post: formatNumber(post.upVoteCountLength),
-          borderRadius:  BorderRadius.only(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8.r),
             bottomLeft: Radius.circular(8.r),
           ),
@@ -40,6 +39,3 @@ class PostVotes extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -1,10 +1,10 @@
-import '../../data/repo/post_repo.dart';
+import '../../data/repos/post_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tranquilo_app/core/network/api_error_model.dart';
-import 'package:tranquilo_app/features/community/data/model/post_response.dart';
-import 'package:tranquilo_app/features/community/data/model/create_post_request_model.dart';
-import 'package:tranquilo_app/features/community/data/model/create_post_response_model.dart';
+import 'package:tranquilo_app/features/community/data/models/post_response.dart';
+import 'package:tranquilo_app/features/community/data/models/create_post_request_model.dart';
+import 'package:tranquilo_app/features/community/data/models/create_post_response_model.dart';
 
 part 'posts_state.dart';
 part 'posts_cubit.freezed.dart';

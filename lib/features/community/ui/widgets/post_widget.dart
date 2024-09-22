@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
+import '../../../../core/helpers/format_date.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/features/community/data/model/post_response.dart';
-import 'package:tranquilo_app/features/community/ui/widgets/post_comments_button.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_votes.dart';
-import '../../../../core/helpers/format_date.dart';
+import 'package:tranquilo_app/features/community/data/models/post_response.dart';
+import 'package:tranquilo_app/features/community/ui/widgets/post_comments_button.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
@@ -43,7 +43,8 @@ class PostWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(post.userName, style: TextStyles.font14JetBlackMedium),
-                  Text(formatDate(post.date), style: TextStyles.font12DarkGreyLight),
+                  Text(formatDate(post.date),
+                      style: TextStyles.font12DarkGreyLight),
                 ],
               ),
             ],
@@ -55,7 +56,7 @@ class PostWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width*0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: PostVotes(post: post),
               ),
               PostCommentsButton(post: post),
@@ -66,4 +67,3 @@ class PostWidget extends StatelessWidget {
     );
   }
 }
-
