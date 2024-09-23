@@ -46,7 +46,14 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     {
       'question': 'WHO BMI classification',
       'type': 'mcq',
-      'answers': ['Normal if BMI 18.5–25', 'Overweight if BMI 25–30', 'Underweight if BMI < 18.5', 'Class I Obesity if BMI 30–35', 'Class II Obesity if BMI 35–40', 'Class III Obesity if BMI > 40'] ,
+      'answers': [
+        'Normal if BMI 18.5–25',
+        'Overweight if BMI 25–30',
+        'Underweight if BMI < 18.5',
+        'Class I Obesity if BMI 30–35',
+        'Class II Obesity if BMI 35–40',
+        'Class III Obesity if BMI > 40'
+      ],
       'selectedAnswer': null,
     },
     {
@@ -82,13 +89,19 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     {
       'question': 'Are you currently receiving treatment for anxiety?',
       'type': 'mcq',
-      'answers': ['Yes', 'No',],
+      'answers': [
+        'Yes',
+        'No',
+      ],
       'selectedAnswer': null,
     },
     {
       'question': 'Do you suffer from sleep problems?',
       'type': 'mcq',
-      'answers': ['Yes', 'No',],
+      'answers': [
+        'Yes',
+        'No',
+      ],
       'selectedAnswer': null,
     },
   ];
@@ -100,6 +113,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     _surveyData[0]['controller'] = _ageController;
     _surveyData[2]['controller'] = _bmiController;
   }
+
   SurveyRequestModel _buildSurveyRequest() {
     return SurveyRequestModel(
       age: int.parse(_ageController.text),
@@ -117,21 +131,29 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
   }
 
   void _nextPage() {
-    if (_surveyData[_currentStep]['type'] == 'mcq' &&
+    // Get the current question type (either 'mcq' or 'input')
+    String questionType = _surveyData[_currentStep]['type'];
+
+    // If the current question is a multiple-choice question and no answer has been selected
+    if (questionType == 'mcq' &&
         _surveyData[_currentStep]['selectedAnswer'] == null) {
       showSnackBar(
         context,
         'Please select an answer before proceeding',
         ColorsManager.oceanBlue,
       );
-    } else if (_surveyData[_currentStep]['type'] == 'input' &&
+    }
+    // If the current question is an input question and the text field is empty
+    else if (questionType == 'input' &&
         _surveyData[_currentStep]['controller'].text.isEmpty) {
       showSnackBar(
         context,
         'Please fill in the required field',
         ColorsManager.oceanBlue,
       );
-    } else if (_currentStep < _surveyData.length - 1) {
+    }
+    // If all validation checks pass and it's not the last step, proceed to the next page
+    else if (_currentStep < _surveyData.length - 1) {
       _controller.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -160,8 +182,9 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
       },
       builder: (context, state) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height*0.6,
+          height: MediaQuery.of(context).size.height * 0.6,
           child: PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
             onPageChanged: (index) {
               setState(() {
@@ -193,12 +216,14 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                   if (questionType == 'mcq') ...[
                     ..._surveyData[index]['answers'].map((answer) {
                       return RadioListTile(
-                        fillColor: const WidgetStatePropertyAll<Color>(ColorsManager.oceanBlue),
+                        fillColor: const WidgetStatePropertyAll<Color>(
+                            ColorsManager.oceanBlue),
                         title: Text(
                           answer,
                           style: TextStyles.font14JetBlackMedium,
                         ),
-                        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                        visualDensity:
+                            const VisualDensity(horizontal: -4, vertical: -4),
                         dense: true,
                         value: answer,
                         groupValue: _surveyData[index]['selectedAnswer'],
@@ -210,7 +235,6 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                       );
                     }).toList(),
                     verticalSpace(24),
-
                   ],
                   if (questionType == 'input') ...[
                     Padding(
@@ -219,7 +243,8 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                         controller: _surveyData[index]['controller'],
                         hintText: 'Enter your answer',
                         keyboardType: TextInputType.text,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 16.h),
                       ),
                     ),
                     verticalSpace(48),
@@ -229,7 +254,8 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
                         'You can calculate it by this way : \nweight in kilograms / square height in meters',
-                        style: TextStyles.font14JetBlackMedium.copyWith(color: ColorsManager.lighterBlack),
+                        style: TextStyles.font14JetBlackMedium
+                            .copyWith(color: ColorsManager.lighterBlack),
                         textAlign: TextAlign.start,
                       ),
                     ),
@@ -251,10 +277,35 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                         child: AppTextButton(
                           onPressed: () async {
                             if (_currentStep == _surveyData.length - 1) {
-                              final request = _buildSurveyRequest();
-                              context.read<SurveyCubit>().submitSurvey(request);
-                              await SharedPrefHelper.setSurveyCompleted(true);
+                              // Before navigating, validate the last step (check if it's MCQ or input)
+                              if (_surveyData[_currentStep]['type'] == 'mcq' &&
+                                  _surveyData[_currentStep]['selectedAnswer'] ==
+                                      null) {
+                                showSnackBar(
+                                  context,
+                                  'Please select an answer before finishing',
+                                  ColorsManager.oceanBlue,
+                                );
+                              } else if (_surveyData[_currentStep]['type'] ==
+                                      'input' &&
+                                  _surveyData[_currentStep]['controller']
+                                      .text
+                                      .isEmpty) {
+                                showSnackBar(
+                                  context,
+                                  'Please fill in the required field before finishing',
+                                  ColorsManager.oceanBlue,
+                                );
+                              } else {
+                                // All validation passed, now submit the survey
+                                final request = _buildSurveyRequest();
+                                context
+                                    .read<SurveyCubit>()
+                                    .submitSurvey(request);
+                                await SharedPrefHelper.setSurveyCompleted(true);
+                              }
                             } else {
+                              // If not the last step, proceed to the next page
                               _nextPage();
                             }
                           },
