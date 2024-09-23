@@ -37,10 +37,14 @@ class DashboardScreen extends StatelessWidget{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Routine completion percentage',
-                      style: TextStyles.font14JetBlackMedium,
+                    Flexible(
+                      child: Text(
+                        'Routine completion percentage',
+                        style: TextStyles.font14JetBlackMedium,
+                        overflow: TextOverflow.ellipsis, // Handle overflow
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '67%',
                       style: TextStyles.font12OceanBlueSemiBold,
