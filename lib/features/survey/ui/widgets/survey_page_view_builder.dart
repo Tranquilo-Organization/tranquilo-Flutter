@@ -46,7 +46,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     {
       'question': 'WHO BMI classification',
       'type': 'mcq',
-      'answers': ['Underweight', 'Normal', 'Overweight', 'Obesity'],
+      'answers': ['Normal if BMI 18.5–25', 'Overweight if BMI 25–30', 'Underweight if BMI < 18.5', 'Class I Obesity if BMI 30–35', 'Class II Obesity if BMI 35–40', 'Class III Obesity if BMI > 40'] ,
       'selectedAnswer': null,
     },
     {
@@ -82,13 +82,13 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
     {
       'question': 'Are you currently receiving treatment for anxiety?',
       'type': 'mcq',
-      'answers': ['Yes', 'No', 'Maybe'],
+      'answers': ['Yes', 'No',],
       'selectedAnswer': null,
     },
     {
-      'question': 'How often do you feel sleepy during the day?',
+      'question': 'Do you suffer from sleep problems?',
       'type': 'mcq',
-      'answers': ['1', '2', '3', '4', '5'],
+      'answers': ['Yes', 'No',],
       'selectedAnswer': null,
     },
   ];
@@ -112,7 +112,7 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
       anxiousness: int.parse(_surveyData[7]['selectedAnswer']),
       anxietyDiagnosis: _surveyData[8]['selectedAnswer'] == 'Yes' ? 1 : 0,
       anxietyTreatment: _surveyData[9]['selectedAnswer'] == 'Yes' ? 1 : 0,
-      sleepiness: int.parse(_surveyData[10]['selectedAnswer']),
+      sleepiness: _surveyData[10]['selectedAnswer'] == 'Yes' ? 1 : 0,
     );
   }
 
@@ -224,6 +224,17 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
                     ),
                     verticalSpace(48),
                   ],
+                  if (index == 2) ...[
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        'You can calculate it by this way : \nweight in kilograms / square height in meters',
+                        style: TextStyles.font14JetBlackMedium.copyWith(color: ColorsManager.lighterBlack),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
+                  verticalSpace(30),
                   Row(
                     children: [
                       if (_currentStep > 0)
