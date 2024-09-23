@@ -74,7 +74,7 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 ## 📱 Tranquilo App Screens 
 
 ## Splash & OnBoarding 
->>>>>>> master
+
 <img width="409" alt="Screenshot 2024-09-23 at 4 03 10 AM" src="https://github.com/user-attachments/assets/a394333d-497a-4148-b3a6-cff89bf3213a">
 
 <img width="408" alt="Screenshot 2024-09-23 at 4 03 48 AM" src="https://github.com/user-attachments/assets/3929d175-b8dd-4798-a074-21cb7f7f7605">
