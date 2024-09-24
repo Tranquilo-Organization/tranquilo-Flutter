@@ -69,11 +69,11 @@ The project utilizes various dependencies to enhance functionality and streamlin
 
 ## 📸 Tranquilo App Demo 
 
-https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
+https://github.com/user-attachments/assets/47dc8535-e06d-4b47-b321-c4f0a08081f1
 
 ## 📱 Tranquilo App Screens 
 
-## Splash & OnBoarding 
+## 🌠 Splash & OnBoarding 
 
 <img width="409" alt="Screenshot 2024-09-23 at 4 03 10 AM" src="https://github.com/user-attachments/assets/a394333d-497a-4148-b3a6-cff89bf3213a">
 
@@ -83,7 +83,7 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 
 <img width="411" alt="Screenshot 2024-09-23 at 4 05 09 AM" src="https://github.com/user-attachments/assets/ed699706-1b23-46fb-a5cb-63329f1b1c6e">
 
-## Authentication
+## 🔐 Authentication
 
 <img width="419" alt="Screenshot 2024-09-23 at 4 05 34 AM" src="https://github.com/user-attachments/assets/3a59ee38-aa92-4d78-8642-c8399350751d">
 
@@ -95,7 +95,7 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 
 <img width="421" alt="Screenshot 2024-09-23 at 4 38 04 AM" src="https://github.com/user-attachments/assets/b2ec6bc1-6526-4960-90a1-0918e1183c20">
 
-## Survey
+## ⁉️ Survey
 
 <img width="428" alt="Screenshot 2024-09-23 at 4 38 53 AM" src="https://github.com/user-attachments/assets/b25b382b-40e9-4f4e-89e2-58bcc2dc4b5c">
 
@@ -112,7 +112,7 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 
 <img width="419" alt="Screenshot 2024-09-23 at 4 41 34 AM" src="https://github.com/user-attachments/assets/6ad2e2b2-8a68-452e-9164-784f32551b91">
 
-## Home & Routines
+## 🏠 Home & 🧘 Routines
 
 <img width="424" alt="Screenshot 2024-09-23 at 4 42 01 AM" src="https://github.com/user-attachments/assets/4d059176-8aeb-4c69-a193-90eda7bb799e">
 
@@ -122,17 +122,17 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 
 <img width="427" alt="Screenshot 2024-09-23 at 4 42 59 AM" src="https://github.com/user-attachments/assets/4d2fdb10-5226-4b8a-b923-5e20d716954c">
 
-## ChatBot
+## 🤖 ChatBot
 
 <img width="419" alt="Screenshot 2024-09-23 at 4 43 29 AM" src="https://github.com/user-attachments/assets/55f0d0b2-ea98-414b-bc26-cd8932ee1989">
 
 <img width="421" alt="Screenshot 2024-09-23 at 4 43 50 AM" src="https://github.com/user-attachments/assets/a85f4521-891c-46fd-9c32-5acd58a984a4">
 
-## DashBoard
+## 📊 DashBoard
 
 <img width="420" alt="Screenshot 2024-09-23 at 4 44 10 AM" src="https://github.com/user-attachments/assets/b4c0975e-e603-40b5-9d41-62c2de3ea91b">
 
-## Community
+## 🌐 Community
 
 
 <img width="417" alt="Screenshot 2024-09-23 at 4 44 34 AM" src="https://github.com/user-attachments/assets/5948e8e1-be97-4e91-b2fb-c2b63d7326a3">
@@ -143,7 +143,7 @@ https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
 
 <img width="426" alt="Screenshot 2024-09-23 at 4 46 05 AM" src="https://github.com/user-attachments/assets/3052666f-5f19-496e-8a24-f7413c0cc53b">
 
-## Profile & Settings
+## 👤 Profile & ⚙️ Settings
 
 <img width="419" alt="Screenshot 2024-09-23 at 4 46 26 AM" src="https://github.com/user-attachments/assets/4c83aefa-da91-4101-bc3b-e0479c855b7b">
 
