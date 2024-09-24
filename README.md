@@ -73,6 +73,8 @@ https://github.com/user-attachments/assets/47dc8535-e06d-4b47-b321-c4f0a08081f1
 
 ## 📱 Tranquilo App Screens 
 
+Tranquilo App offers a seamless user experience across various screens, providing tools for managing anxiety. The splash and onboarding screens guide users into the app, followed by secure authentication. The home and dashboard screens display personalized mental health insights, while the chatbot offers interactive support. Users can participate in surveys to track anxiety levels, engage with a supportive community, and manage their profiles easily.
+
 ## 🌠 Splash & OnBoarding 
 
 <img width="409" alt="Screenshot 2024-09-23 at 4 03 10 AM" src="https://github.com/user-attachments/assets/a394333d-497a-4148-b3a6-cff89bf3213a">
