@@ -69,11 +69,10 @@ The project utilizes various dependencies to enhance functionality and streamlin
 
 ## 📸 Tranquilo App Demo 
 
-https://github.com/user-attachments/assets/47dc8535-e06d-4b47-b321-c4f0a08081f1
+https://github.com/user-attachments/assets/16e7d704-596a-4bac-a052-c6dc6cb9455e
+
 
 ## 📱 Tranquilo App Screens 
-
-Tranquilo App offers a seamless user experience across various screens, providing tools for managing anxiety. The splash and onboarding screens guide users into the app, followed by secure authentication. The home and dashboard screens display personalized mental health insights, while the chatbot offers interactive support. Users can participate in surveys to track anxiety levels, engage with a supportive community, and manage their profiles easily.
 
 ## 🌠 Splash & OnBoarding 
 
@@ -124,7 +123,9 @@ Tranquilo App offers a seamless user experience across various screens, providin
 
 <img width="427" alt="Screenshot 2024-09-23 at 4 42 59 AM" src="https://github.com/user-attachments/assets/4d2fdb10-5226-4b8a-b923-5e20d716954c">
 
+
 ## 🤖 ChatBot
+
 
 <img width="419" alt="Screenshot 2024-09-23 at 4 43 29 AM" src="https://github.com/user-attachments/assets/55f0d0b2-ea98-414b-bc26-cd8932ee1989">
 

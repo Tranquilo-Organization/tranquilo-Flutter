@@ -69,9 +69,10 @@ class ChatbotScreen extends StatelessWidget {
                               orElse: () => false,
                             );
                             if (state is Loading) {
-                              context.read<ChatbotCubit>().messages.add(
-                    const CustomLoadingWidget()
-                                  );
+                              context
+                                  .read<ChatbotCubit>()
+                                  .messages
+                                  .add(const CustomLoadingWidget());
                             } else if (state is Success) {
                               context
                                   .read<ChatbotCubit>()
@@ -122,39 +123,15 @@ class ChatbotScreen extends StatelessWidget {
                             return Column(
                               children: [
                                 showSuggestions
-                                    ? Row(
+                                    ? const Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           ChatbotSuggestion(
-                                            text:
-                                                "Can you help me, please?",
-                                            onTap: () {
-                                              const suggestion =
-                                                  "Can you help me, please?";
-                                              context
-                                                  .read<ChatbotCubit>()
-                                                  .getChatbotResponse(
-                                                    ChatbotRequestModel(
-                                                      msg: suggestion,
-                                                    ),
-                                                  );
-                                            },
+                                            text: "Can you help me, please?",
                                           ),
                                           ChatbotSuggestion(
-                                            text:
-                                                "feeling anxious right now",
-                                            onTap: () {
-                                              const suggestion =
-                                                  "feeling anxious right now";
-                                              context
-                                                  .read<ChatbotCubit>()
-                                                  .getChatbotResponse(
-                                                    ChatbotRequestModel(
-                                                      msg: suggestion,
-                                                    ),
-                                                  );
-                                            },
+                                            text: "feeling anxious right now",
                                           ),
                                         ],
                                       )
