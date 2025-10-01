@@ -33,11 +33,11 @@ import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
-import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
+
 
 class AppRouter {
   PostsCubit? _postsCubit;
@@ -55,10 +55,7 @@ class AppRouter {
         );
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignUpCubit>(),
-            child: const SignUpScreen(),
-          ),
+          builder: (_) => const SignUpScreen(),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(

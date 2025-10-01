@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/helpers/spacing.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../../core/widgets/app_text_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/widgets/terms_and_condition.dart';
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/widgets/app_text_button.dart';
+import 'package:tranquilo_app/features/auth/sign_up/logic/providers/sign_up_api_provider.dart';
+import 'package:tranquilo_app/features/auth/sign_up/logic/providers/sign_up_form_provider.dart';
 
-class SignUpFormWithButton extends StatefulWidget {
+
+class SignUpFormWithButton extends ConsumerStatefulWidget {
   const SignUpFormWithButton({super.key});
 
   @override
-  State<SignUpFormWithButton> createState() => _SignUpFormWithButtonState();
+  ConsumerState<SignUpFormWithButton> createState() => _SignUpFormWithButtonState();
 }
 
-class _SignUpFormWithButtonState extends State<SignUpFormWithButton> {
-
+class _SignUpFormWithButtonState extends ConsumerState<SignUpFormWithButton> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
-
-  bool _isTermsChecked = false;
+  
   bool _isTermsValid = true;
 
   @override
@@ -35,23 +35,19 @@ class _SignUpFormWithButtonState extends State<SignUpFormWithButton> {
   }
 
   void _submitForm() {
+    final isTermsAccepted = ref.read(signUpFormProvider).isTermsAccepted;
+    
     setState(() {
-      _isTermsValid = _isTermsChecked;
+      _isTermsValid = isTermsAccepted;
     });
 
-    if (_formKey.currentState!.validate() && _isTermsChecked) {
-      final String name = _nameController.text;
-      final String email = _emailController.text;
-      final String password = _passwordController.text;
-      final String confirmPassword = _confirmPasswordController.text;
-
-      context.read<SignUpCubit>().emitSignupStates(
-        name: name,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
+    if (_formKey.currentState!.validate() && isTermsAccepted) {
+      ref.read(signUpProvider.notifier).signUp(
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        confirmPassword: _confirmPasswordController.text,
       );
-
     }
   }
 
@@ -67,13 +63,7 @@ class _SignUpFormWithButtonState extends State<SignUpFormWithButton> {
           confirmPasswordController: _confirmPasswordController,
         ),
         verticalSpace(6),
-        TermsAndCondition(
-          onChanged: (bool isChecked) {
-            setState(() {
-              _isTermsChecked = isChecked;
-            });
-          },
-        ),
+        const TermsAndCondition(),
         if (!_isTermsValid)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 28.w),
@@ -86,10 +76,11 @@ class _SignUpFormWithButtonState extends State<SignUpFormWithButton> {
             ),
           ),
         verticalSpace(16),
-        AppTextButton(onPressed: _submitForm, textButton: 'Sign Up'),
+        AppTextButton(
+          onPressed: _submitForm,
+          textButton: 'Sign Up',
+        ),
       ],
     );
   }
 }
-
-

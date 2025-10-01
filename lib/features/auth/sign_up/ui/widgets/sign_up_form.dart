@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter/material.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
-
-import '../../../../../core/helpers/app_validation.dart';
 import '../../../../../core/theming/colors_manger.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import '../../../../../core/helpers/app_validation.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
 
 class SignUpForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
