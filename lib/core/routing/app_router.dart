@@ -10,12 +10,10 @@ import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/home/ui/night_routine.dart';
 import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
-import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/home/ui/notifications_screen.dart';
-import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
@@ -37,7 +35,6 @@ import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_s
 import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
-
 
 class AppRouter {
   PostsCubit? _postsCubit;
@@ -97,11 +94,7 @@ class AppRouter {
         );
       case Routes.surveyScreens:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
-            child: const SurveyScreen(),
-          ),
+          builder: (_) => const SurveyScreen(),
         );
       case Routes.surveyCompleted:
         return MaterialPageRoute(
@@ -109,11 +102,7 @@ class AppRouter {
         );
       case Routes.surveyResult:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
-            child: const SurveyResult(),
-          ),
+          builder: (_) => const SurveyResult(),
         );
       case Routes.appLayout:
         _initializePostCubit();

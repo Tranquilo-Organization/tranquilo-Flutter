@@ -6,7 +6,7 @@ import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_response.
 import 'package:tranquilo_app/features/auth/sign_up/data/model/sign_up_request_body.dart';
 
 /// AsyncNotifier for handling sign-up API operations
-/// Separation: Only handles API calls and persistence, no form logic
+
 class SignUpNotifier extends AsyncNotifier<SignupResponse?> {
   @override
   Future<SignupResponse?> build() async {
@@ -20,7 +20,7 @@ class SignUpNotifier extends AsyncNotifier<SignupResponse?> {
     required String confirmPassword,
   }) async {
     state = const AsyncValue.loading();
-
+      
     final repo = ref.read(signupRepoProvider);
 
     state = await AsyncValue.guard(() async {

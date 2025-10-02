@@ -3,11 +3,9 @@ import 'package:get_it/get_it.dart';
 import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
-import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/chatbot/logic/chatbot_cubit.dart';
-import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/repo/chatbot_repo.dart';
@@ -26,7 +24,6 @@ import 'package:tranquilo_app/features/auth/forget_password/data/repo/forget_pas
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 
-
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
@@ -39,7 +36,7 @@ Future<void> setupGetIt() async {
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
-  
+
   // forget password
   getIt.registerLazySingleton<ForgetPasswordRepo>(
       () => ForgetPasswordRepo(getIt()));
@@ -60,9 +57,7 @@ Future<void> setupGetIt() async {
   // Posts
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerFactory<PostsCubit>(() => PostsCubit(getIt()));
-  //survey
-  getIt.registerLazySingleton<SurveyRepo>(() => SurveyRepo(getIt()));
-  getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt()));
+
 //routine
   getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
   getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));

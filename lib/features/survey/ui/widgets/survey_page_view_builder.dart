@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
@@ -9,43 +9,45 @@ import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/helpers/show_snack_bar.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
 import 'package:tranquilo_app/core/widgets/app_text_form_field.dart';
-import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
-import 'package:tranquilo_app/features/survey/logic/survey_state.dart';
-import 'package:tranquilo_app/features/survey/data/model/survey_request_model.dart';
-import '../../../../core/helpers/shared_pref_helper.dart';
+import 'package:tranquilo_app/features/survey/logic/providers/survey_api_provider.dart';
+import 'package:tranquilo_app/features/survey/logic/providers/survey_form_provider.dart';
 
-class SurveyPageViewBuilder extends StatefulWidget {
+class SurveyPageViewBuilder extends ConsumerStatefulWidget {
   const SurveyPageViewBuilder({super.key});
 
   @override
-  State<SurveyPageViewBuilder> createState() => _SurveyPageViewBuilderState();
+  ConsumerState<SurveyPageViewBuilder> createState() =>
+      _SurveyPageViewBuilderState();
 }
 
-class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
-  int _currentStep = 0;
+class _SurveyPageViewBuilderState extends ConsumerState<SurveyPageViewBuilder> {
   final PageController _controller = PageController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _bmiController = TextEditingController();
-  final List<Map<String, dynamic>> _surveyData = [
+
+  final List<Map<String, dynamic>> _surveyQuestions = [
     {
       'question': 'What is your age?',
       'type': 'input',
-      'controller': null, // this will use _ageController later
+      'field': 'age',
     },
     {
       'question': 'What is your gender?',
       'type': 'mcq',
+      'field': 'gender',
       'answers': ['Male', 'Female', 'Other'],
-      'selectedAnswer': null,
     },
     {
       'question': 'What is your BMI?',
       'type': 'input',
-      'controller': null, // this will use _bmiController later
+      'field': 'bmi',
+      'hint':
+          'You can calculate it by this way:\nweight in kilograms / square height in meters',
     },
     {
       'question': 'WHO BMI classification',
       'type': 'mcq',
+      'field': 'whoBmi',
       'answers': [
         'Normal if BMI 18.5–25',
         'Overweight if BMI 25–30',
@@ -54,106 +56,144 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
         'Class II Obesity if BMI 35–40',
         'Class III Obesity if BMI > 40'
       ],
-      'selectedAnswer': null,
     },
     {
       'question': 'How often do you feel depressed?',
       'type': 'mcq',
+      'field': 'depressiveness',
       'answers': ['1', '2', '3', '4', '5'],
-      'selectedAnswer': null,
     },
     {
       'question': 'Have you ever been diagnosed with depression?',
       'type': 'mcq',
+      'field': 'depressionDiagnosis',
       'answers': ['Yes', 'No'],
-      'selectedAnswer': null,
     },
     {
       'question': 'Are you currently receiving treatment for depression?',
       'type': 'mcq',
+      'field': 'depressionTreatment',
       'answers': ['Yes', 'No'],
-      'selectedAnswer': null,
     },
     {
       'question': 'How often do you feel anxious?',
       'type': 'mcq',
+      'field': 'anxiousness',
       'answers': ['1', '2', '3', '4', '5'],
-      'selectedAnswer': null,
     },
     {
       'question': 'Have you ever been diagnosed with anxiety?',
       'type': 'mcq',
+      'field': 'anxietyDiagnosis',
       'answers': ['Yes', 'No'],
-      'selectedAnswer': null,
     },
     {
       'question': 'Are you currently receiving treatment for anxiety?',
       'type': 'mcq',
-      'answers': [
-        'Yes',
-        'No',
-      ],
-      'selectedAnswer': null,
+      'field': 'anxietyTreatment',
+      'answers': ['Yes', 'No'],
     },
     {
       'question': 'Do you suffer from sleep problems?',
       'type': 'mcq',
-      'answers': [
-        'Yes',
-        'No',
-      ],
-      'selectedAnswer': null,
+      'field': 'sleepiness',
+      'answers': ['Yes', 'No'],
     },
   ];
 
   @override
-  void initState() {
-    super.initState();
-    // Assign controllers for the text input questions
-    _surveyData[0]['controller'] = _ageController;
-    _surveyData[2]['controller'] = _bmiController;
+  void dispose() {
+    _ageController.dispose();
+    _bmiController.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 
-  SurveyRequestModel _buildSurveyRequest() {
-    return SurveyRequestModel(
-      age: int.parse(_ageController.text),
-      gender: _surveyData[1]['selectedAnswer'],
-      bmi: double.parse(_bmiController.text),
-      whoBmi: _surveyData[3]['selectedAnswer'],
-      depressiveness: int.parse(_surveyData[4]['selectedAnswer']),
-      depressionDiagnosis: _surveyData[5]['selectedAnswer'] == 'Yes' ? 1 : 0,
-      depressionTreatment: _surveyData[6]['selectedAnswer'] == 'Yes' ? 1 : 0,
-      anxiousness: int.parse(_surveyData[7]['selectedAnswer']),
-      anxietyDiagnosis: _surveyData[8]['selectedAnswer'] == 'Yes' ? 1 : 0,
-      anxietyTreatment: _surveyData[9]['selectedAnswer'] == 'Yes' ? 1 : 0,
-      sleepiness: _surveyData[10]['selectedAnswer'] == 'Yes' ? 1 : 0,
-    );
+  void _updateFormState(String field, String value) {
+    final notifier = ref.read(surveyFormProvider.notifier);
+    switch (field) {
+      case 'age':
+        notifier.updateAge(value);
+        break;
+      case 'gender':
+        notifier.updateGender(value);
+        break;
+      case 'bmi':
+        notifier.updateBmi(value);
+        break;
+      case 'whoBmi':
+        notifier.updateWhoBmi(value);
+        break;
+      case 'depressiveness':
+        notifier.updateDepressiveness(value);
+        break;
+      case 'depressionDiagnosis':
+        notifier.updateDepressionDiagnosis(value);
+        break;
+      case 'depressionTreatment':
+        notifier.updateDepressionTreatment(value);
+        break;
+      case 'anxiousness':
+        notifier.updateAnxiousness(value);
+        break;
+      case 'anxietyDiagnosis':
+        notifier.updateAnxietyDiagnosis(value);
+        break;
+      case 'anxietyTreatment':
+        notifier.updateAnxietyTreatment(value);
+        break;
+      case 'sleepiness':
+        notifier.updateSleepiness(value);
+        break;
+    }
+  }
+
+  String? _getFieldValue(String field) {
+    // FIX 1: Watch the entire form state to trigger rebuilds
+    final formState = ref.watch(surveyFormProvider);
+    switch (field) {
+      case 'age':
+        return formState.age;
+      case 'gender':
+        return formState.gender;
+      case 'bmi':
+        return formState.bmi;
+      case 'whoBmi':
+        return formState.whoBmi;
+      case 'depressiveness':
+        return formState.depressiveness;
+      case 'depressionDiagnosis':
+        return formState.depressionDiagnosis;
+      case 'depressionTreatment':
+        return formState.depressionTreatment;
+      case 'anxiousness':
+        return formState.anxiousness;
+      case 'anxietyDiagnosis':
+        return formState.anxietyDiagnosis;
+      case 'anxietyTreatment':
+        return formState.anxietyTreatment;
+      case 'sleepiness':
+        return formState.sleepiness;
+      default:
+        return null;
+    }
   }
 
   void _nextPage() {
-    // Get the current question type (either 'mcq' or 'input')
-    String questionType = _surveyData[_currentStep]['type'];
+    final isValid = ref.read(isCurrentStepValidProvider);
+    final currentStep = ref.read(surveyFormProvider).currentStep;
 
-    // If the current question is a multiple-choice question and no answer has been selected
-    if (questionType == 'mcq' &&
-        _surveyData[_currentStep]['selectedAnswer'] == null) {
+    if (!isValid) {
       showSnackBar(
         context,
-        'Please select an answer before proceeding',
+        'Please complete this step before proceeding',
         ColorsManager.oceanBlue,
       );
+      return;
     }
-    // If the current question is an input question and the text field is empty
-    else if (questionType == 'input' &&
-        _surveyData[_currentStep]['controller'].text.isEmpty) {
-      showSnackBar(
-        context,
-        'Please fill in the required field',
-        ColorsManager.oceanBlue,
-      );
-    }
-    // If all validation checks pass and it's not the last step, proceed to the next page
-    else if (_currentStep < _surveyData.length - 1) {
+
+    if (currentStep < _surveyQuestions.length - 1) {
+      ref.read(surveyFormProvider.notifier).nextStep();
       _controller.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -162,7 +202,9 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
   }
 
   void _prevPage() {
-    if (_currentStep > 0) {
+    final currentStep = ref.read(surveyFormProvider).currentStep;
+    if (currentStep > 0) {
+      ref.read(surveyFormProvider.notifier).previousStep();
       _controller.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -172,156 +214,189 @@ class _SurveyPageViewBuilderState extends State<SurveyPageViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SurveyCubit, SurveyState>(
-      listener: (context, state) {
-        if (state is Error) {
-          showSnackBar(context, state.error.message, Colors.red);
-        } else if (state is Success) {
-          context.pushNamed(Routes.surveyCompleted);
-        }
-      },
-      builder: (context, state) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child: PageView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _controller,
-            onPageChanged: (index) {
-              setState(() {
-                _currentStep = index;
-              });
-            },
-            itemCount: _surveyData.length,
-            itemBuilder: (context, index) {
-              final questionType = _surveyData[index]['type'];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  verticalSpace(40),
-                  Text(
-                    'Step ${index + 1} of ${_surveyData.length}',
-                    style: TextStyles.font20OceanBlueSemiBold
-                        .copyWith(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                  verticalSpace(32),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: Text(
-                      _surveyData[index]['question'],
-                      style: TextStyles.font18JetBlackMedium,
-                    ),
-                  ),
-                  verticalSpace(16),
-                  if (questionType == 'mcq') ...[
-                    ..._surveyData[index]['answers'].map((answer) {
-                      return RadioListTile(
-                        fillColor: const WidgetStatePropertyAll<Color>(
-                            ColorsManager.oceanBlue),
-                        title: Text(
-                          answer,
-                          style: TextStyles.font14JetBlackMedium,
-                        ),
-                        visualDensity:
-                            const VisualDensity(horizontal: -4, vertical: -4),
-                        dense: true,
-                        value: answer,
-                        groupValue: _surveyData[index]['selectedAnswer'],
-                        onChanged: (value) {
-                          setState(() {
-                            _surveyData[index]['selectedAnswer'] = value;
-                          });
-                        },
-                      );
-                    }).toList(),
-                    verticalSpace(24),
-                  ],
-                  if (questionType == 'input') ...[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: AppTextFormField(
-                        controller: _surveyData[index]['controller'],
-                        hintText: 'Enter your answer',
-                        keyboardType: TextInputType.text,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w, vertical: 16.h),
-                      ),
-                    ),
-                    verticalSpace(48),
-                  ],
-                  if (index == 2) ...[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text(
-                        'You can calculate it by this way : \nweight in kilograms / square height in meters',
-                        style: TextStyles.font14JetBlackMedium
-                            .copyWith(color: ColorsManager.lighterBlack),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
-                  verticalSpace(30),
-                  Row(
-                    children: [
-                      if (_currentStep > 0)
-                        Expanded(
-                          child: AppTextButton(
-                            onPressed: _prevPage,
-                            textButton: 'Back',
-                            backgroundColor: ColorsManager.white,
-                            textColor: ColorsManager.oceanBlue,
-                            borderColor: ColorsManager.oceanBlue,
-                          ),
-                        ),
-                      Expanded(
-                        child: AppTextButton(
-                          onPressed: () async {
-                            if (_currentStep == _surveyData.length - 1) {
-                              // Before navigating, validate the last step (check if it's MCQ or input)
-                              if (_surveyData[_currentStep]['type'] == 'mcq' &&
-                                  _surveyData[_currentStep]['selectedAnswer'] ==
-                                      null) {
-                                showSnackBar(
-                                  context,
-                                  'Please select an answer before finishing',
-                                  ColorsManager.oceanBlue,
-                                );
-                              } else if (_surveyData[_currentStep]['type'] ==
-                                      'input' &&
-                                  _surveyData[_currentStep]['controller']
-                                      .text
-                                      .isEmpty) {
-                                showSnackBar(
-                                  context,
-                                  'Please fill in the required field before finishing',
-                                  ColorsManager.oceanBlue,
-                                );
-                              } else {
-                                // All validation passed, now submit the survey
-                                final request = _buildSurveyRequest();
-                                context
-                                    .read<SurveyCubit>()
-                                    .submitSurvey(request);
-                                await SharedPrefHelper.setSurveyCompleted(true);
-                              }
-                            } else {
-                              // If not the last step, proceed to the next page
-                              _nextPage();
-                            }
-                          },
-                          textButton: _currentStep == _surveyData.length - 1
-                              ? 'Finish'
-                              : 'Next',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
-          ),
+    final currentStep =
+        ref.watch(surveyFormProvider.select((s) => s.currentStep));
+
+    // FIX 2: Watch submission state to show loading/error
+    final submissionState = ref.watch(surveySubmissionProvider);
+
+    // Listen to submission state for navigation
+    ref.listen<AsyncValue>(
+      surveySubmissionProvider,
+      (previous, next) {
+        next.when(
+          data: (response) {
+            if (response != null) {
+              // Dismiss any loading dialog
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
+              context.pushNamed(Routes.surveyCompleted);
+            }
+          },
+          loading: () {
+            // Show loading dialog
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+          error: (error, stackTrace) {
+            // Dismiss loading dialog
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+            showSnackBar(context, error.toString(), Colors.red);
+          },
         );
       },
+    );
+
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _controller,
+        itemCount: _surveyQuestions.length,
+        itemBuilder: (context, index) {
+          final question = _surveyQuestions[index];
+          final questionType = question['type'];
+          final field = question['field'];
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              verticalSpace(40),
+              Text(
+                'Step ${index + 1} of ${_surveyQuestions.length}',
+                style:
+                    TextStyles.font20OceanBlueSemiBold.copyWith(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              verticalSpace(32),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Text(
+                  question['question'],
+                  style: TextStyles.font18JetBlackMedium,
+                ),
+              ),
+              verticalSpace(16),
+
+              // MCQ Type
+              if (questionType == 'mcq') ...[
+                ...question['answers'].map<Widget>((answer) {
+                  final selectedValue = _getFieldValue(field);
+                  return RadioListTile<String>(
+                    fillColor: const WidgetStatePropertyAll<Color>(
+                        ColorsManager.oceanBlue),
+                    title: Text(
+                      answer,
+                      style: TextStyles.font14JetBlackMedium,
+                    ),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                    dense: true,
+                    value: answer,
+                    groupValue: selectedValue,
+                    onChanged: (value) {
+                      if (value != null) {
+                        _updateFormState(field, value);
+                      }
+                    },
+                  );
+                }).toList(),
+                verticalSpace(24),
+              ],
+
+              // Input Type
+              if (questionType == 'input') ...[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: AppTextFormField(
+                    controller:
+                        field == 'age' ? _ageController : _bmiController,
+                    hintText: 'Enter your answer',
+                    keyboardType: TextInputType.number,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                    onChanged: (value) {
+                      _updateFormState(field, value);
+                    },
+                  ),
+                ),
+                verticalSpace(24),
+              ],
+
+              // Hint text for BMI
+              if (question['hint'] != null) ...[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Text(
+                    question['hint'],
+                    style: TextStyles.font14JetBlackMedium
+                        .copyWith(color: ColorsManager.lighterBlack),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                verticalSpace(24),
+              ],
+
+              verticalSpace(30),
+
+              // Navigation Buttons
+              Row(
+                children: [
+                  if (currentStep > 0)
+                    Expanded(
+                      child: AppTextButton(
+                        onPressed: _prevPage,
+                        textButton: 'Back',
+                        backgroundColor: ColorsManager.white,
+                        textColor: ColorsManager.oceanBlue,
+                        borderColor: ColorsManager.oceanBlue,
+                      ),
+                    ),
+                  Expanded(
+                    child: AppTextButton(
+                      onPressed: submissionState.isLoading
+                          ? null // Disable button while loading
+                          : () {
+                              if (index == _surveyQuestions.length - 1) {
+                                final isValid =
+                                    ref.read(isCurrentStepValidProvider);
+                                if (!isValid) {
+                                  showSnackBar(
+                                    context,
+                                    'Please complete this step before finishing',
+                                    ColorsManager.oceanBlue,
+                                  );
+                                } else {
+                                  // Submit survey
+                                  ref
+                                      .read(surveySubmissionProvider.notifier)
+                                      .submitSurvey();
+                                }
+                              } else {
+                                _nextPage();
+                              }
+                            },
+                      textButton: index == _surveyQuestions.length - 1
+                          ? (submissionState.isLoading
+                              ? 'Submitting...'
+                              : 'Finish')
+                          : 'Next',
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
