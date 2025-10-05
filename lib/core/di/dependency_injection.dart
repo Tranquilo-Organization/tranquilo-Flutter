@@ -23,7 +23,6 @@ import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_passw
 import 'package:tranquilo_app/features/auth/forget_password/data/repo/forget_password_repo.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
-
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
@@ -58,9 +57,6 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<PostRepo>(() => PostRepo(getIt()));
   getIt.registerFactory<PostsCubit>(() => PostsCubit(getIt()));
 
-//routine
-  getIt.registerLazySingleton<RoutineRepo>(() => RoutineRepo(getIt()));
-  getIt.registerFactory<RoutineCubit>(() => RoutineCubit(getIt()));
 //comment
   getIt.registerLazySingleton<CommentRepo>(() => CommentRepo(getIt()));
   getIt.registerFactory<CommentsCubit>(() => CommentsCubit(getIt()));

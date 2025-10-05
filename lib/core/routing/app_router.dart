@@ -114,24 +114,15 @@ class AppRouter {
         );
       case Routes.morningScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => RoutineCubit(RoutineRepo(getIt<ApiService>())),
-            child: const MorningRoutine(),
-          ),
+          builder: (_) => const MorningRoutine(),
         );
       case Routes.afternoonScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => RoutineCubit(RoutineRepo(getIt<ApiService>())),
-            child: const AfternoonRoutine(),
-          ),
+          builder: (_) => const AfternoonRoutine(),
         );
       case Routes.nightScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => RoutineCubit(RoutineRepo(getIt<ApiService>())),
-            child: const NightRoutine(),
-          ),
+          builder: (_) => const NightRoutine(),
         );
       case Routes.createPostScreen:
         _initializePostCubit();

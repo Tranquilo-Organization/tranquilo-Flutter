@@ -1,14 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
+import '../../../../core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/notifications/notification_helper.dart';
 
-import '../../../../core/helpers/spacing.dart';
 
 class CongratsDialog extends StatelessWidget {
-  const CongratsDialog({super.key});
+  final String routineType;
+
+  const CongratsDialog({
+    super.key,
+    required this.routineType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +44,18 @@ class CongratsDialog extends StatelessWidget {
           ),
           verticalSpace(16),
           Text(
-            '"Well done! You’ve completed your\nroutine and made progress today!"',
+            '"Well done! You\'ve completed your\nroutine and made progress today!"',
             style: TextStyles.font14JetBlackMedium,
             textAlign: TextAlign.center,
           ),
           verticalSpace(13),
           const Divider(),
           TextButton(
-            onPressed: () {
-              context.pop();
+            onPressed: () async {
+              await NotificationHelper.notifyRoutineCompletion(routineType);
+              if (Navigator.of(context).canPop()) {
+                context.pop();
+              }
             },
             child: Text(
               'Ok',
@@ -61,11 +70,11 @@ class CongratsDialog extends StatelessWidget {
   }
 }
 
-void showCongratsDialog(BuildContext context) {
+void showCongratsDialog(BuildContext context, String routineType) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return const CongratsDialog();
+      return CongratsDialog(routineType: routineType);
     },
   );
 }
