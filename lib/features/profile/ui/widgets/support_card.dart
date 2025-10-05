@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
-import 'package:tranquilo_app/features/profile/ui/widgets/delete_account_dialog.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/settings_list_tile.dart';
+import 'package:tranquilo_app/features/profile/ui/widgets/delete_account_dialog.dart';
 
 class SupportCard extends StatelessWidget {
-  final UserProfileCubit userProfileCubit;
-  const SupportCard({super.key, required this.userProfileCubit});
+  const SupportCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,7 @@ class SupportCard extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return DeleteAccountDialog(
-          userProfileCubit: userProfileCubit,
-        );
+        return const DeleteAccountDialog();
       },
     );
   }

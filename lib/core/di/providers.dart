@@ -4,6 +4,7 @@ import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
+import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
 import 'package:tranquilo_app/features/community/data/repos/comment_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/api/chat_bot_api_call.dart';
@@ -55,4 +56,9 @@ final postRepoProvider = Provider<PostRepo>((ref) {
 final commentRepoProvider = Provider<CommentRepo>((ref) {
   final apiService = ref.watch(apiServiceProvider);
   return CommentRepo(apiService);
+});
+
+final userProfileRepoProvider = Provider<UserProfileRepo>((ref) {
+  final apiService = ref.watch(apiServiceProvider);
+  return UserProfileRepo(apiService);
 });

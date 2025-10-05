@@ -24,17 +24,11 @@ class AppLayout extends StatefulWidget {
 class _AppLayoutState extends State<AppLayout> {
   int selectedIndex = 0;
   List<Widget> screens = [
-    BlocProvider(
-      create: (context) => getIt<RoutineCubit>()..fetchRoutines(),
-      child: const HomeScreen(),
-    ),
+    const HomeScreen(),
     const ChatbotScreen(),
     const DashboardScreen(),
     const CommunityPostScreen(),
-    BlocProvider(
-      create: (context) => getIt<UserProfileCubit>()..fetchUserProfile(),
-      child: const ProfileScreen(),
-    ),
+    const ProfileScreen(),
   ];
   PageController pageController = PageController();
 

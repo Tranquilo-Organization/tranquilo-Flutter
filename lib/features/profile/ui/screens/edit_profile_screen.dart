@@ -1,47 +1,56 @@
 import 'dart:io';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/widgets/app_text_button.dart';
-import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
-import 'package:tranquilo_app/features/profile/logic/profile_state.dart';
 import 'package:tranquilo_app/core/animations/custom_loading_widget.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/edit_profile_info.dart';
+import 'package:tranquilo_app/features/profile/logic/providers/profile_provider.dart';
 import 'package:tranquilo_app/features/profile/data/model/profile_response_model.dart';
 import 'package:tranquilo_app/features/profile/ui/widgets/app_bar_profile_screens.dart';
 
-class EditProfileScreen extends StatefulWidget {
+class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  ConsumerState<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
 
   @override
+  void initState() {
+    super.initState();
+    // Fetch profile when screen loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(userProfileProvider.notifier).fetchUserProfile();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final profileAsync = ref.watch(userProfileProvider);
+
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<UserProfileCubit, UserProfileState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => const CustomLoadingWidget(),
-              success: (profile) => buildProfileScreen(context, profile.model),
-              failure: (error) {
-                return Center(child: Text(error.message));
-              },
-              orElse: () => const Center(child: Text('Failed to load profile')),
-            );
+        child: profileAsync.when(
+          data: (profile) {
+            if (profile == null) {
+              return const Center(child: Text('Failed to load profile'));
+            }
+            return buildProfileScreen(context, profile.model);
           },
+          loading: () => const CustomLoadingWidget(),
+          error: (error, stackTrace) => Center(
+            child: Text(error.toString()),
+          ),
         ),
       ),
     );

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/helpers/show_dialog.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
-import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
-import 'package:tranquilo_app/features/profile/ui/widgets/app_bar_profile_screens.dart';
-import 'package:tranquilo_app/features/profile/ui/widgets/interface_card.dart';
-import 'package:tranquilo_app/features/profile/ui/widgets/language_card.dart';
-import 'package:tranquilo_app/features/profile/ui/widgets/support_card.dart';
-
 import '../../../../core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/features/profile/ui/widgets/support_card.dart';
+import 'package:tranquilo_app/features/profile/ui/widgets/language_card.dart';
+import 'package:tranquilo_app/features/profile/ui/widgets/interface_card.dart';
+import 'package:tranquilo_app/features/profile/ui/widgets/app_bar_profile_screens.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -38,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                     const InterfaceCard(),
                     verticalSpace(32),
                     Text(
-                      'Language & regoin',
+                      'Language & region',
                       style: TextStyles.font16JetBlackMedium,
                       textAlign: TextAlign.start,
                     ),
@@ -51,10 +47,7 @@ class SettingsScreen extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                     verticalSpace(6),
-                    SupportCard(
-                      userProfileCubit:
-                          context.read<UserProfileCubit>(),
-                    ),
+                    const SupportCard(),
                   ],
                 ),
               ),
