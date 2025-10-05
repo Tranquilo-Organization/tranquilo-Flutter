@@ -1,27 +1,27 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tranquilo_app/core/helpers/constants.dart';
-import 'package:tranquilo_app/core/helpers/extensions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:tranquilo_app/core/helpers/constants.dart';
+import 'package:tranquilo_app/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/theming/colors_manger.dart';
 import 'package:tranquilo_app/core/widgets/switch_widget.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
-import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
+import 'package:tranquilo_app/features/community/logic/providers/posts_provider.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_app_bar.dart';
 import 'package:tranquilo_app/features/community/data/models/post_models/create_post_request_model.dart';
+import 'package:tranquilo_app/features/community/data/models/post_models/create_post_response_model.dart';
 
-class CreatePostScreen extends StatefulWidget {
+class CreatePostScreen extends ConsumerStatefulWidget {
   const CreatePostScreen({super.key});
 
   @override
-  State<CreatePostScreen> createState() => _CreatePostScreenState();
+  ConsumerState<CreatePostScreen> createState() => _CreatePostScreenState();
 }
 
-class _CreatePostScreenState extends State<CreatePostScreen> {
-
+class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
   final TextEditingController _postController = TextEditingController();
   bool isAnonymous = false;
   String? userEmail = 'guest@example.com';
@@ -38,6 +38,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     userEmail = await SharedPrefHelper.getEmail();
     setState(() {});
   }
+
   Future<void> _fetchUserName() async {
     userName = await SharedPrefHelper.getString(SharedPrefKeys.userName);
     setState(() {});
@@ -46,10 +47,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   void _createPost() async {
     final postContent = _postController.text;
     if (postContent.isNotEmpty) {
-      final email =
-      isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
+      final email = isAnonymous ? 'anonymous' : userEmail ?? 'guest@example.com';
 
-      context.read<PostsCubit>().createPost(
+      ref.read(createPostProvider.notifier).createPost(
         CreatePostRequestModel(
           postText: postContent,
           userEmail: email,
@@ -65,6 +65,41 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to create post state
+    ref.listen<AsyncValue<CreatePostResponseModel?>>(
+      createPostProvider,
+      (previous, next) {
+        next.when(
+          data: (response) {
+            if (response != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: ColorsManager.green,
+                  content: Text(
+                    'Post created successfully!',
+                    style: TextStyles.font14JetBlackMedium.copyWith(
+                      color: ColorsManager.white,
+                    ),
+                  ),
+                ),
+              );
+              context.pop();
+            }
+          },
+          loading: () {},
+          error: (error, stackTrace) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Failed to create post: $error'),
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    final createPostState = ref.watch(createPostProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -121,9 +156,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   ),
                   horizontalSpace(12),
                   Text(
-                    isAnonymous
-                        ? 'Anonymous'
-                        : (userName!),
+                    isAnonymous ? 'Anonymous' : (userName!),
                     style: TextStyles.font16JetBlackMedium,
                   ),
                 ],
@@ -145,41 +178,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ),
             ),
             verticalSpace(20),
-            BlocConsumer<PostsCubit, PostsState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  createPostSuccess: (response) {
-                    SharedPrefHelper.setData('post_id', response.postId);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: ColorsManager.green,
-                        content: Text(
-                          'Post created successfully!',
-                          style: TextStyles.font14JetBlackMedium.copyWith(
-                            color: ColorsManager.white,
-                          ),
-                        ),
-                      ),
-                    );
-                    context.pop();
-                  },
-                  createPostError: (error) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content:
-                        Text('Failed to create post: ${error.message}'),
-                      ),
-                    );
-                  },
-                  orElse: () {},
-                );
-              },
-              builder: (context, state) {
-                return state.maybeWhen(
-                  createPostLoading: () => const CircularProgressIndicator(),
-                  orElse: () => const SizedBox.shrink(),
-                );
-              },
+            createPostState.when(
+              data: (_) => const SizedBox.shrink(),
+              loading: () => const CircularProgressIndicator(),
+              error: (_, __) => const SizedBox.shrink(),
             ),
           ],
         ),
@@ -193,4 +195,3 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     super.dispose();
   }
 }
-

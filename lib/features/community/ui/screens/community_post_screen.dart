@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tranquilo_app/core/theming/styles.dart';
 import 'package:tranquilo_app/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/features/community/logic/posts_cubit/posts_cubit.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/filter_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/create_post_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/posts_bloc_builder.dart';
+import 'package:tranquilo_app/features/community/logic/providers/posts_provider.dart';
 
-
-class CommunityPostScreen extends StatefulWidget {
+class CommunityPostScreen extends ConsumerWidget {
   const CommunityPostScreen({super.key});
 
   @override
-  State<CommunityPostScreen> createState() => _CommunityPostScreenState();
-}
-
-class _CommunityPostScreenState extends State<CommunityPostScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () => context.read<PostsCubit>().fetchPosts(),
+          onRefresh: () => ref.read(postsProvider.notifier).refreshPosts(),
           child: CustomScrollView(
             slivers: [
               SliverPadding(
@@ -64,4 +58,3 @@ class _CommunityPostScreenState extends State<CommunityPostScreen> {
     );
   }
 }
-

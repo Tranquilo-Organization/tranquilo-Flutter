@@ -4,6 +4,8 @@ import 'package:tranquilo_app/core/network/api_service.dart';
 import 'package:tranquilo_app/core/network/dio_factory.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
+import 'package:tranquilo_app/features/community/data/repos/post_repo.dart';
+import 'package:tranquilo_app/features/community/data/repos/comment_repo.dart';
 import 'package:tranquilo_app/features/chatbot/data/api/chat_bot_api_call.dart';
 import 'package:tranquilo_app/features/auth/sign_up/data/repo/sign_up_repo.dart';
 import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
@@ -43,4 +45,14 @@ final surveyRepoProvider = Provider<SurveyRepo>((ref) {
 final routineRepoProvider = Provider<RoutineRepo>((ref) {
   final apiService = ref.watch(apiServiceProvider);
   return RoutineRepo(apiService);
+});
+
+final postRepoProvider = Provider<PostRepo>((ref) {
+  final apiService = ref.watch(apiServiceProvider);
+  return PostRepo(apiService);
+});
+
+final commentRepoProvider = Provider<CommentRepo>((ref) {
+  final apiService = ref.watch(apiServiceProvider);
+  return CommentRepo(apiService);
 });

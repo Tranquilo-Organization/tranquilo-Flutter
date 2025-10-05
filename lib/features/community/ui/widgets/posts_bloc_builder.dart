@@ -1,77 +1,50 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theming/styles.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../logic/posts_cubit/posts_cubit.dart';
+import '../../logic/providers/posts_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tranquilo_app/core/animations/custom_loading_widget.dart';
 import 'package:tranquilo_app/features/community/ui/widgets/post_widget.dart';
 
-class PostsBlocBuilder extends StatelessWidget {
+class PostsBlocBuilder extends ConsumerWidget {
   const PostsBlocBuilder({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<PostsCubit, PostsState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          createPostSuccess: (_) {
-            debugPrint("============================= \nlisten");
-            context.read<PostsCubit>().fetchPosts();
-          },
-          orElse: () {},
-        );
-      },
-      builder: (context, state) {
-        return state.maybeWhen(
-          initial: () => SliverToBoxAdapter(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postsAsync = ref.watch(postsProvider);
+
+    return postsAsync.when(
+      data: (posts) {
+        if (posts.isEmpty) {
+          return SliverToBoxAdapter(
             child: Center(
               child: Text(
                 'No posts yet',
                 style: TextStyles.font14JetBlackMedium,
               ),
             ),
+          );
+        }
+        
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return PostWidget(post: posts[index]);
+            },
+            childCount: posts.length,
           ),
-          postsLoading: () => const SliverToBoxAdapter(
-            child: CustomLoadingWidget(),
+        );
+      },
+      loading: () => const SliverToBoxAdapter(
+        child: CustomLoadingWidget(),
+      ),
+      error: (error, stackTrace) {
+        return SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              error.toString(),
+              style: TextStyles.font14JetBlackMedium,
+            ),
           ),
-          postsSuccess: (posts) {
-            debugPrint("================================\nbuild");
-            return SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  return PostWidget(post: posts[index]);
-                },
-                childCount: posts.length,
-              ),
-            );
-          },
-          postsError: (error) {
-            return SliverToBoxAdapter(
-              child: Text(
-                error.message,
-                style: TextStyles.font14JetBlackMedium,
-              ),
-            );
-          },
-          createPostLoading: () => const SliverToBoxAdapter(
-            child: CustomLoadingWidget(),
-          ),
-          createPostSuccess: (response) {
-            return SliverToBoxAdapter(
-              child: Text(
-                'Post created successfully!',
-                style: TextStyles.font14JetBlackMedium,
-              ),
-            );
-          },
-          createPostError: (error) {
-            return SliverToBoxAdapter(
-              child: Text(
-                error.message,
-                style: TextStyles.font14JetBlackMedium,
-              ),
-            );
-          },
-          orElse: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
         );
       },
     );

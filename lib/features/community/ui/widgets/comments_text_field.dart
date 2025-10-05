@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/colors_manger.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tranquilo_app/core/helpers/shared_pref_helper.dart';
-import 'package:tranquilo_app/features/community/logic/comments_cubit/comments_cubit.dart';
+import 'package:tranquilo_app/features/community/logic/providers/comments_provider.dart';
 import 'package:tranquilo_app/features/community/data/models/comment_models/create_comment_request_model.dart';
 
-import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/theming/styles.dart';
+class CommentsTextField extends ConsumerStatefulWidget {
+  final int postId;
 
-class CommentsTextField extends StatefulWidget {
-
-  const CommentsTextField({super.key});
+  const CommentsTextField({super.key, required this.postId});
 
   @override
-  State<CommentsTextField> createState() => _CommentsTextFieldState();
+  ConsumerState<CommentsTextField> createState() => _CommentsTextFieldState();
 }
 
-class _CommentsTextFieldState extends State<CommentsTextField> {
+class _CommentsTextFieldState extends ConsumerState<CommentsTextField> {
   final TextEditingController _controller = TextEditingController();
 
-  Future<void> _submitComment(BuildContext context) async {
+  Future<void> _submitComment() async {
     if (_controller.text.isEmpty) return;
 
     try {
       String email = await SharedPrefHelper.getEmail();
 
-      if (email.isEmpty || context.read<CommentsCubit>().post.id == 0) {
+      if (email.isEmpty || widget.postId == 0) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Error: Unable to retrieve saved data')),
         );
@@ -36,10 +36,12 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
       CreateCommentRequestModel requestModel = CreateCommentRequestModel(
         commentText: _controller.text,
         userEmail: email,
-        postID: context.read<CommentsCubit>().post.id,
+        postID: widget.postId,
       );
 
-      context.read<CommentsCubit>().createComment(requestModel);
+      await ref
+          .read(createCommentProvider.notifier)
+          .createComment(requestModel);
       _controller.clear();
     } catch (e) {
       debugPrint('Error while submitting comment: $e');
@@ -53,7 +55,7 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      margin: EdgeInsets.symmetric(horizontal: 12.w,vertical: 15.h),
+      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 15.h),
       decoration: BoxDecoration(
         color: ColorsManager.white,
         borderRadius: BorderRadius.circular(24.r),
@@ -74,7 +76,7 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText:  'Type your comment here...',
+                  hintText: 'Type your comment here...',
                   border: InputBorder.none,
                   hintStyle: TextStyles.font12JetBlackMedium,
                 ),
@@ -82,9 +84,7 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              _submitComment(context);
-            },
+            onTap: _submitComment,
             child: SvgPicture.asset(
               'assets/svgs/chatbot_sending_button.svg',
               height: 32.h,
@@ -94,6 +94,10 @@ class _CommentsTextFieldState extends State<CommentsTextField> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
-
-
