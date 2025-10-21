@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/otp/ui/otp_screen.dart';
 import 'package:tranquilo_app/core/routing/routes.dart';
@@ -10,12 +11,10 @@ import 'package:tranquilo_app/core/di/dependency_injection.dart';
 import 'package:tranquilo_app/features/home/ui/night_routine.dart';
 import 'package:tranquilo_app/features/home/ui/morning_routine.dart';
 import 'package:tranquilo_app/features/home/logic/routine_cubit.dart';
-import 'package:tranquilo_app/features/survey/logic/survey_cubit.dart';
 import 'package:tranquilo_app/features/home/ui/afternoon_routine.dart';
 import 'package:tranquilo_app/features/profile/logic/profile_cubit.dart';
 import 'package:tranquilo_app/features/home/data/repo/routine_repo.dart';
 import 'package:tranquilo_app/features/home/ui/notifications_screen.dart';
-import 'package:tranquilo_app/features/survey/data/repo/survey_repo.dart';
 import 'package:tranquilo_app/features/onboarding/onboarding_screen.dart';
 import 'package:tranquilo_app/features/profile/data/repo/profile_repo.dart';
 import 'package:tranquilo_app/features/auth/sign_up/ui/sign_up_screen.dart';
@@ -31,12 +30,13 @@ import 'package:tranquilo_app/features/community/ui/screens/create_post_screen.d
 import 'package:tranquilo_app/features/profile/ui/screens/privacy_policy_screen.dart';
 import 'package:tranquilo_app/features/auth/login/logic/login_cubit/login_cubit.dart';
 import 'package:tranquilo_app/features/auth/reset_password/ui/reset_password_screen.dart';
-import 'package:tranquilo_app/features/survey/data/api/classification_model_api_call.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_provider/survey_provider.dart';
 import 'package:tranquilo_app/features/auth/reset_password/logic/reset_password_cubit.dart';
-import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:tranquilo_app/features/auth/forget_password/ui/forget_password_screen.dart';
 import 'package:tranquilo_app/features/profile/ui/screens/notifications_settings_screen.dart';
 import 'package:tranquilo_app/features/auth/reset_password/data/repo/reset_password_repo.dart';
+import 'package:tranquilo_app/features/auth/sign_up/logic/sign_up_provider/sign_up_provider.dart';
+import 'package:tranquilo_app/features/survey/logic/survey_form_provider/survey_form_provider.dart';
 import 'package:tranquilo_app/features/auth/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 
 class AppRouter {
@@ -48,18 +48,21 @@ class AppRouter {
 
   Route generateRoute(RouteSettings settings) {
     final arguments = settings.arguments;
+
     switch (settings.name) {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
+
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignUpCubit>(),
+          builder: (_) => ChangeNotifierProvider(
+            create: (context) => getIt<SignUpProvider>(),
             child: const SignUpScreen(),
           ),
         );
+
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -67,6 +70,7 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
+
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -74,6 +78,7 @@ class AppRouter {
             child: const ForgetPasswordScreen(),
           ),
         );
+
       case Routes.otpScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -81,6 +86,7 @@ class AppRouter {
             child: const OtpScreen(),
           ),
         );
+
       case Routes.resetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -90,34 +96,45 @@ class AppRouter {
             child: const ResetPasswordScreen(),
           ),
         );
+
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
         );
+
       case Routes.surveyStarting:
         return MaterialPageRoute(
           builder: (_) => const SurveyStarting(),
         );
+
       case Routes.surveyScreens:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => getIt<SurveyProvider>(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => getIt<SurveyFormProvider>(),
+              ),
+            ],
             child: const SurveyScreen(),
           ),
         );
+
       case Routes.surveyCompleted:
         return MaterialPageRoute(
           builder: (_) => const SurveyCompleted(),
         );
+
       case Routes.surveyResult:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) =>
-                SurveyCubit(SurveyRepo(getIt<ClassificationModelApiService>())),
+          builder: (_) => ChangeNotifierProvider(
+            create: (context) => getIt<SurveyProvider>(),
             child: const SurveyResult(),
           ),
         );
+
       case Routes.appLayout:
         _initializePostCubit();
         return MaterialPageRoute(
@@ -126,6 +143,7 @@ class AppRouter {
             child: const AppLayout(),
           ),
         );
+
       case Routes.morningScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -133,6 +151,7 @@ class AppRouter {
             child: const MorningRoutine(),
           ),
         );
+
       case Routes.afternoonScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -140,6 +159,7 @@ class AppRouter {
             child: const AfternoonRoutine(),
           ),
         );
+
       case Routes.nightScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -147,6 +167,7 @@ class AppRouter {
             child: const NightRoutine(),
           ),
         );
+
       case Routes.createPostScreen:
         _initializePostCubit();
         return MaterialPageRoute(
@@ -155,6 +176,7 @@ class AppRouter {
             child: const CreatePostScreen(),
           ),
         );
+
       case Routes.editProfileScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -164,6 +186,7 @@ class AppRouter {
             child: const EditProfileScreen(),
           ),
         );
+
       case Routes.settingsProfileScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -171,18 +194,22 @@ class AppRouter {
             child: const SettingsScreen(),
           ),
         );
+
       case Routes.privacyPolicyScreen:
         return MaterialPageRoute(
           builder: (_) => const PrivacyPolicyScreen(),
         );
+
       case Routes.notificationsSettingsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationsSettingsScreen(),
         );
+
       case Routes.notificationsScreen:
         return MaterialPageRoute(
           builder: (_) => const NotificationsScreen(),
         );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

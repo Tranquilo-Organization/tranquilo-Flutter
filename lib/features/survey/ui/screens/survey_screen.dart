@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tranquilo_app/core/helpers/spacing.dart';
-import 'package:tranquilo_app/core/theming/colors_manger.dart';
-import 'package:tranquilo_app/core/theming/styles.dart';
-
 import '../widgets/survey_page_view_builder.dart';
+import 'package:tranquilo_app/core/theming/styles.dart';
+import 'package:tranquilo_app/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tranquilo_app/core/theming/colors_manger.dart';
+
+
 
 class SurveyScreen extends StatelessWidget {
   const SurveyScreen({super.key});
@@ -25,7 +26,7 @@ class SurveyScreen extends StatelessWidget {
               ),
               verticalSpace(32),
               Text(
-                'Answer the following questions to\nhelp us understand yor anxiety levels',
+                'Answer the following questions to\nhelp us understand your anxiety levels',
                 style: TextStyles.font14JetBlackLight,
                 textAlign: TextAlign.center,
               ),
@@ -48,4 +49,3 @@ class SurveyScreen extends StatelessWidget {
     );
   }
 }
-
